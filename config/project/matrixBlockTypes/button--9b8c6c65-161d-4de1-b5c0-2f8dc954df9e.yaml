@@ -1,0 +1,73 @@
+field: 85957093-f7ea-4029-a94b-b1a4da04c318
+fieldLayouts:
+  a85bb40c-407b-45bc-a262-af7d2279d1e6:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: e4f36dd9-d500-4ca9-8e3a-52e4db8d58c6 # Button Text
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0f427bb3-7297-41e3-88aa-6a8f0beab117
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 0c17af3e-bce7-4bba-9377-45c13f662fac # Button Link
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c7ef6bda-c6f7-4a8a-b645-8f8e9a67a318
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 3e59face-2b27-4f9b-817b-18a45a4dec17
+        userCondition: null
+fields:
+  0c17af3e-bce7-4bba-9377-45c13f662fac: # Button Link
+    columnSuffix: jhdsvjvy
+    contentColumnType: string(255)
+    fieldGroup: null
+    handle: buttonLink
+    instructions: null
+    name: 'Button Link'
+    searchable: false
+    settings:
+      maxLength: 255
+      types:
+        - url
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url
+  e4f36dd9-d500-4ca9-8e3a-52e4db8d58c6: # Button Text
+    columnSuffix: orukodiv
+    contentColumnType: text
+    fieldGroup: null
+    handle: buttonText
+    instructions: null
+    name: 'Button Text'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: null
+      initialRows: 4
+      multiline: false
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: button
+name: Button
+sortOrder: 3

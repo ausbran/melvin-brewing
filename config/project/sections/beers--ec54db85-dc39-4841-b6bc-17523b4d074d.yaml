@@ -1,0 +1,27 @@
+defaultPlacement: end
+enableVersioning: true
+handle: beers
+name: Beers
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  35d5050e-3d8c-448a-8ed5-1a9eaba13e13: # Melvin Brewing
+    enabledByDefault: true
+    hasUrls: true
+    template: _beers/_entry
+    uriFormat: '{parent.uri}/{slug}'
+structure:
+  maxLevels: null
+  uid: ee29db01-334d-40e4-9b4d-10bc553a57c2
+type: structure

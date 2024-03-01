@@ -1,0 +1,11 @@
+{% extends "index" %}
+
+{% if entry.slug == 'our-story' %}
+    {% set bodyClass = 'dark' %}
+{% endif %}
+
+{% block content %}
+    {% include [
+        '_about/' ~ entry.slug
+    ] %}
+{% endblock %}

@@ -1,0 +1,18 @@
+<footer>
+		<a href="{{ currentSite.baseUrl }}" class="logo">
+			<img src="" alt="{{ siteName }} Logo"/>
+		</a>
+
+		<div class="footer-links">
+			{{ craft.navigation.render('footer') }}
+		</div>
+		
+		<ul class="social-links">
+			<li><a class="social-link" href="" target="_blank" rel="noopener noreferrer"><img alt="Instagram" src="/images/icons/instagram.svg" title="Instagram"></a></li>
+		  <li><a class="social-link" href="" target="_blank" rel="noopener noreferrer"><img alt="Facebook" src="/images/icons/facebook.svg" title="Facebook"></a></li>
+		  <li><a class="social-link linkedin" href="" target="_blank" rel="noopener noreferrer"><img alt="Linkedin" src="/images/icons/linkedin.svg" title="Linkedin"></a></li>
+		  <li><a class="social-link" href="" target="_blank" rel="noopener noreferrer"><img alt="Spotify" src="/images/icons/spotify.svg" title="Twitter"></a></li>
+		</ul>
+
+		<p class="copyright">&copy;{{ 'now' | date('Y') }} {{ siteName }}. All Rights Reserved.</p>
+</footer>

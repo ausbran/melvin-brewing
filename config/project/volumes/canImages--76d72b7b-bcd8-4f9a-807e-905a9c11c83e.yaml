@@ -1,0 +1,56 @@
+fieldLayouts:
+  6d8ae274-0963-4259-95ae-3b3686a610d1:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\assets\AssetTitleField
+            uid: ae853975-7052-43eb-9d55-820a286ff5a2
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: ad02cc6a-65c1-461f-a44b-2675bdcd2625 # Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b8aa2046-4b6f-4366-a584-b8ebea96bf9a
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: c24eb7b1-cfcd-437a-be0c-53997826e707
+        userCondition: null
+fs: canImages
+handle: canImages
+name: 'Can Images'
+sortOrder: 5
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+transformFs: canImages
+transformSubpath: ''

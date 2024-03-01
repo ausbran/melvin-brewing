@@ -1,0 +1,31 @@
+footer {
+  text-align: center;
+  @include flex-center;
+  flex-direction: column;
+  gap: $gap-large;
+  width: calc(100vw - 100px);
+  margin: 50px auto;
+  background: $dark-blue;
+  color: $white;
+  padding: 5vw;
+  border-radius: $box-radius;
+  .footer-links ul,
+  .social-links {
+    list-style: none;
+    display: flex;
+    gap: $gap-large;
+  }
+  .social-links {
+    .social-link {
+      height: 20px;
+      display: inline-block;
+      transition: $transition;
+      img {
+        height: 100%;
+      }
+      &:hover {
+        opacity: .6;
+      }
+    }
+  }
+}

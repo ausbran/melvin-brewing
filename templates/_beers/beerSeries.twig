@@ -1,0 +1,57 @@
+{% block content %}
+
+	{% include "_includes/seriesLanding" %}
+
+	<div class="outer series">
+
+		{% set beerCount = entry.getDescendants()|length %}
+	  <h3 class="grid-header">{{ beerCount }} Beer{{ beerCount != 1 ? 's' : '' }}</h3>
+
+		<section class="grid">
+			{# display all beers #}
+			{% for beer in entry.getDescendants() %}
+				<article class="grid-item" style="background-color: {{ beer.lightColor }};">
+					<div class="grid-item-inner">
+						<div class="text">
+							{% include '_includes/can' with {'block': beer} %}
+							<div class="text-inner">
+								<h3>{{ beer.title }}</h3>
+								<div class="stats">
+									{% if beer.style %}
+										<span>{{ beer.style }}</span>
+									{% endif %}
+									{% if beer.alcohol %}
+										<span>{{ beer.alcohol }}% ALC/VOL</span>
+									{% endif %}
+								</div>
+								{% set words = beer.description|split(' ') %}
+								{% set truncatedDescription = words|slice(0, 20)|join(' ') ~ (words|length > 20 ? '...' : '') %}
+								<p>{{ truncatedDescription }}</p>
+							</div>
+						</div>
+						<a href="{{ beer.url }}" class="beer-link" style="background-color: {{ beer.darkColor }};">
+							Explore
+							<img src="/images/icons/arrow.svg" alt="Arrow Icon">
+						</a>
+					</div>
+					<div class="dark-color" style="background-color: {{ beer.darkColor }};"></div>
+				</article>
+
+		    {# Insert random photo grid-item every 4th item #}
+		    {% if loop.index is divisible by 3 %}
+			    {% set myAssetQuery = craft.assets()
+			              .volume('backgroundImages')
+			              .kind('image') %}
+			    {% set images = myAssetQuery.all() %}
+			    {% set randomIndex = random(0, images|length - 1) %}
+			    {% set randomImage = images[randomIndex] %}
+			    <article class="grid-item random">
+		        <div class="inner" style="background: center / cover url(/images/background-images/{{ randomImage.url }}) no-repeat"></div>
+			    </article>
+				{% endif %}
+
+			{% endfor %}
+		</section>
+	</div>
+
+{% endblock %}

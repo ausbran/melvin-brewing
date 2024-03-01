@@ -1,0 +1,17 @@
+{
+  "name": "melvin-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile-scss": "sass scss/main.scss:web/assets/css/main.css --style compressed",
+    "watch-scss": "npm run compile-scss -- --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.70.0"
+  }
+}

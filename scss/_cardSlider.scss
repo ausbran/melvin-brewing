@@ -1,0 +1,130 @@
+
+$colsBigDesktop: 4;
+$colsSmallDesktop: 3;
+
+::-webkit-scrollbar { /* Webkit */
+  width: 0;
+  height: 0;
+}
+
+.dark {
+  .card-slider {
+    .header * {
+      color: $white;
+    }
+  }
+}
+
+.card-slider {
+  margin: $margin auto;
+  .slider-inner {
+    display: flex;
+    overflow-x: scroll;
+    justify-content: space-between;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    gap: $gap;
+  }
+  .header {
+    margin-left: $margin;
+    display: flex;
+    align-items: baseline;
+    gap: $gap;
+    margin-bottom: $margin-medium;
+    @media screen and (min-width: 1551px) {
+      margin-left: $scroll-padding-left;
+    }
+    * {
+      color: $dark-blue;
+    }
+  }
+  .slide {
+    border: 1px solid $white; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    position: relative;
+    user-select: none;
+    background: $dark-blue;
+    border-radius: $box-radius;
+    flex-grow: 1;
+    flex-shrink: 0;
+    max-height: 600px;
+    max-width: $max-width;
+    width: $max-width;
+    overflow: hidden;
+    h4 {
+      @include small-headers;
+    }
+    .text,
+    .background {
+      flex: 50%;
+    }
+    .text {
+      display: flex;
+      flex-direction: column;
+      gap: $gap;
+      padding: $padding-large $padding-large calc($padding-large / 2) $padding-large;
+      height: 100%;
+      overflow: scroll;
+      *:not(.btn) {
+        color: $white;
+      }
+      .social-links {
+        display: flex;
+        gap: $gap;
+      }
+      img {
+        max-width: 200px;
+        max-height: 150px;
+        object-fit: contain;
+        object-position: left;
+      }
+    }
+    .background {
+      height: 100%;
+      display: flex;
+      img {
+        object-position: right;
+        margin: auto;
+      }
+    }
+    &:last-child {
+      margin-right: $margin;
+    }
+    &:first-child {
+      margin-left: $margin;
+    }
+    @media screen and (min-width: 1551px) {
+      &:last-child {
+        margin-right: calc($scroll-padding-left / 2);
+      }
+      &:first-child {
+        margin-left: $scroll-padding-left;
+      }
+    }
+    &.no-background {
+      max-width: calc(#{$max-width} / 2 - 10px);
+    }
+    &.no-description {
+      max-width: calc(#{$max-width} / 3);
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        flex: 100%;
+        img {
+          object-position: center;
+        }
+      }
+    }
+  }
+}
+.slider-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

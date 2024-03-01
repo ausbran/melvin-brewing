@@ -1,0 +1,20 @@
+columnSuffix: ctcoiaug
+contentColumnType: 'decimal(3,1)'
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: alcohol
+instructions: 'What is the ALC/VOL of the beer?'
+name: 'Alcohol Content'
+searchable: false
+settings:
+  decimals: 1
+  defaultValue: 5
+  max: 30
+  min: 0
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  suffix: '% ALC/VOL'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

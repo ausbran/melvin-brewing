@@ -1,0 +1,112 @@
+childBlocks: null
+conditions: null
+description: 'Create an entry'
+enabled: true
+field: 5626309f-5327-4844-a153-344a113be872 # Location Toggle
+fieldLayouts:
+  df375697-8feb-40e7-b2a1-769535845fe0:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: dbe83280-d2a8-44af-8699-24516dc89a1f # Entry
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b0dae588-a9be-4bca-bd2f-073b07a4688d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 917f53fa-1fa1-47af-8866-5b042d19b183 # Text Alignment
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2323a4a7-71bd-48e9-bdf1-dfcac4d1c52e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: ef7ef68b-2072-4b19-835b-e2429a536f4f # Image
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f4903ad6-e558-4906-9e82-2e64acf95510
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: ad02cc6a-65c1-461f-a44b-2675bdcd2625 # Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 592d3782-567c-480b-8074-b767143158b6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 021dc031-5726-4bf4-808e-53a9d3c50ab2 # Buttons
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6c4b887b-a4f6-43c8-bee5-86afe702b29b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: bffc7c3c-02c7-46d1-9835-a9096a16f727 # Background Image
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 69f31275-b2fb-4c5d-baea-f375002a0fe0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: a11615b2-853a-4fe3-9dd7-99901084d23e # Background Video
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3645fc38-e98b-44f6-9eb7-83dd2bb61446
+            userCondition: null
+            warning: null
+            width: 100
+        name: Entry
+        uid: 107fedf1-4a17-439a-b371-858b2d1ae14f
+        userCondition: null
+group: null
+groupChildBlockTypes: true
+handle: entryField
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 0
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: 'Entry Field'
+topLevel: true

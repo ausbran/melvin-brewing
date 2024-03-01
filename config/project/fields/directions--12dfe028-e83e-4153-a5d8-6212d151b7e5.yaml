@@ -1,0 +1,14 @@
+columnSuffix: dqkrqbsl
+contentColumnType: string(255)
+fieldGroup: 33cf5f76-e7a1-4bf0-9540-9df537e093bf # Location Fields
+handle: directions
+instructions: 'Add the google directions link.'
+name: Directions
+searchable: false
+settings:
+  maxLength: 255
+  types:
+    - url
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Url

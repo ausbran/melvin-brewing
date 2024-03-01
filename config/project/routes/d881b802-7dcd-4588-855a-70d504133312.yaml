@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 9
+template: _pages/_entry
+uriParts:
+  - '*'
+uriPattern: '*'

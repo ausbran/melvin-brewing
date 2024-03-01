@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 8
+template: _events/_entry
+uriParts:
+  - 'events/*'
+uriPattern: 'events/*'

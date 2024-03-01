@@ -1,0 +1,46 @@
+field: d65d412c-37d7-40cd-b379-d7b6d0a20a45 # Tasting Notes
+fieldLayouts:
+  e29ca005-ed6a-42c6-839b-88c0d153b5b9:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 1b1ff12a-eac3-4d7f-b1c6-5544ec614eea # Tasting Note
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 99285a5f-af58-4da3-99d4-8665517c7ffa
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: a73d967b-1615-469d-94bc-9f643cd6eda4
+        userCondition: null
+fields:
+  1b1ff12a-eac3-4d7f-b1c6-5544ec614eea: # Tasting Note
+    columnSuffix: mbdfvqtw
+    contentColumnType: text
+    fieldGroup: null
+    handle: note
+    instructions: null
+    name: 'Tasting Note'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: null
+      initialRows: 4
+      multiline: false
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: tastingNote
+name: 'Tasting Notes'
+sortOrder: 1

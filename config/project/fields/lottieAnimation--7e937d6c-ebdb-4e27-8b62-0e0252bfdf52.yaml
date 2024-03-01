@@ -1,0 +1,19 @@
+columnSuffix: sshpemis
+contentColumnType: text
+fieldGroup: 2123b6aa-6742-448c-95ac-70a91f1dfcef # General Fields
+handle: lottieAnimation
+instructions: null
+name: 'Lottie Animation'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  columnType: null
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -1,0 +1,52 @@
+childBlocks: null
+conditions: null
+description: 'Select a can to display.'
+enabled: true
+field: 537b387e-676e-45bc-8784-94ab111fecb8 # Series Landing Section
+fieldLayouts:
+  0d4b7b6c-3597-4fe6-8c41-06888346e5d0:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 7a9cb2ec-51b4-4eb8-821c-a1c35cdc2434 # Can Image
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9f05649d-3258-4816-9efe-24c7f332b157
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 49ddd7e6-e7c8-4daa-9efc-c76341c5f129 # Can Video
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2e695b8c-42eb-4711-b589-2d48a6ac546a
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: d6f5aa63-da62-4463-862c-b8d8e4271358
+        userCondition: null
+group: null
+groupChildBlockTypes: true
+handle: can
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 0
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: Can
+topLevel: true

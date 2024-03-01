@@ -1,0 +1,43 @@
+{# Set the variable to be used based on context #}
+{% set awardsToLoop = block.awards ?? entry.awards ?? null %}
+
+{% if awardsToLoop is not null %}
+    <div class="slider">
+        <ul class="awards slider-inner">
+            {% for award in awardsToLoop %}
+                {% if award.type == 'goldAward' %}
+                    <li class="award gold slide">
+                        {% include '_includes/_svg/award-gold.svg' %}
+                        <span class="year">{{ award.awardYear }} Gold</span>
+                        <div class="name">
+                            {{ award.awardName }}
+                        </div>
+                    </li>
+                {% elseif award.type == 'silverAward' %}
+                     <li class="award silver slide">
+                        {% include '_includes/_svg/award-silver.svg' %}
+                        <span class="year">{{ award.awardYear }} Silver</span>
+                        <div class="name">
+                            {{ award.awardName }}
+                        </div>
+                    </li> 
+                {% elseif award.type == 'bronzeAward' %}
+                     <li class="award bronze slide">
+                        {% include '_includes/_svg/award-bronze.svg' %}
+                        <span class="year">{{ award.awardYear }} Bronze</span>
+                        <div class="name">
+                            {{ award.awardName }}
+                        </div>
+                    </li>  
+                {% else %}
+                    {{ award.description }}
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <div class="slider-nav">
+            {% if awardsToLoop | length > 4 %}
+                {% include "_includes/arrowsDark" %}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

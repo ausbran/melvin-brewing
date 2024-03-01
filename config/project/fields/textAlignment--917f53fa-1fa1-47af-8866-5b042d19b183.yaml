@@ -1,0 +1,112 @@
+columnSuffix: hqbgypka
+contentColumnType: string(13)
+fieldGroup: 7376a32e-bb38-4467-b1b4-6e6db135167e # CSS Fields
+handle: textAlignment
+instructions: 'Choose where you would like text to align in the box.'
+name: 'Text Alignment'
+searchable: false
+settings:
+  columnType: null
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Top Left'
+        -
+          - value
+          - top-left
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Top Center'
+        -
+          - value
+          - top-center
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Top Right'
+        -
+          - value
+          - top-right
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Center Left'
+        -
+          - value
+          - center-left
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Center Center'
+        -
+          - value
+          - center-center
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - 'Center Right'
+        -
+          - value
+          - center-right
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Bottom Left'
+        -
+          - value
+          - bottom-left
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Bottom Center'
+        -
+          - value
+          - bottom-center
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Bottom Right'
+        -
+          - value
+          - bottom-right
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

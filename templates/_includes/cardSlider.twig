@@ -1,0 +1,70 @@
+{% for block in entry.cardSlider.level(1).all() %}
+    <div class="card-slider slider">
+        {% switch block.type.handle %}
+            {% case 'cardSliderInner' %}
+            {% if block.children.all() is not empty %}
+                {% for child in block.children %}
+                    {% switch child.type.handle %}
+                        {% case 'description' %}
+                            <div class="header">
+                                {{ child.description }}
+                            </div>
+                    {% endswitch %}
+                {% endfor %}
+            {% endif %}
+                <ul class="slider-inner">
+                    {% if block.children.all() is not empty %}
+                        {% for child in block.children %}
+                            {% switch child.type.handle %}
+                                {% case 'slide' %}
+                                    <li class="slide {% if not child.children | filter(grandChild => grandChild.type.handle == 'background') %}no-background{% endif %} {% if not child.children | filter(grandChild => grandChild.type.handle == 'description') %}no-description{% endif %}" {% if block.backgroundColor %}style="background-color:{{ block.backgroundColor }}"{% endif %}>
+                                        <div class="text">
+                                            {% if child.children.all() is not empty %}
+                                                {% for grandChild in child.children %}
+                                                    {% switch grandChild.type.handle %}
+                                                        {% case 'description' %}
+                                                            {{ grandChild.description }}
+                                                        {% case 'buttons' %}
+                                                            <div class="buttons">
+                                                                {% for button in grandChild.buttons.all() %}
+                                                                    <a class="btn white" href="{{ button.buttonLink }}">{{ button.buttonText }}</a>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% case 'socialLinks' %}
+                                                            <div class="social-links">
+                                                                {% for link in grandChild.socialLink.all() %}
+                                                                    <a class="social-link" href="{{ link.linkUrl }}">{{ link.channel }}</a>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% case 'image' %}
+                                                            {% set image = grandChild.image.one() %}
+                                                                <img src="/images/general-images/{{ image.url }}" alt="An image for {{ block.title }}">
+                                                     {% endswitch %}
+                                                 {% endfor %}
+                                             {% endif %}
+                                         </div>
+                                         {% if child.children.all() is not empty %}
+                                            {% for grandChild in child.children %}
+                                                {% switch grandChild.type.handle %}
+                                                    {% case 'background' %}
+                                                        {% include "_includes/background" with {'block': grandChild, class: 'slide-bg', height: grandChild.height} %}
+                                                {% endswitch %}
+                                            {% endfor %}
+                                         {% endif %}
+                                    </li>
+                                {% endswitch %}
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+                <div class="slider-nav">
+                    {{ block.description }}
+                    {% if block.children | length > 1 %}
+                        {% include "_includes/arrows" %}
+                    {% endif %}
+                </div>
+        {% endswitch %}
+    </div>
+{% endfor %}
+
+
+

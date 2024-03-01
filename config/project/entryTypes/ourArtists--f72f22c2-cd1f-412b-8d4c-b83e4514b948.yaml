@@ -1,0 +1,71 @@
+fieldLayouts:
+  58843a03-ddae-486a-afa7-0fdf8872d0a1:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 1506c862-787c-4509-8307-608bed4cbd4d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 612bfd79-519c-4db3-9ad9-3df56af2b354 # Landing Section
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ca26d20b-7399-4011-9d4d-3c9d242180fe
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 1d42debc-f311-4702-b75a-37951c101737 # Card Slider
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4302fd4a-909c-4155-801e-b8d8ca6dba89
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e39164b5-3d29-4026-95b1-3cfbd0d4e29b
+        userCondition: null
+handle: ourArtists
+hasTitleField: true
+name: 'Our Artists'
+section: 76a1851c-73ea-4eb1-8e0d-a7501be656b0 # About
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+sortOrder: 4
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

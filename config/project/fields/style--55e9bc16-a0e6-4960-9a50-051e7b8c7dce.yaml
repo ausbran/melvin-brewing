@@ -1,0 +1,19 @@
+columnSuffix: qxwlofrm
+contentColumnType: text
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: style
+instructions: 'What kind of beer is this?'
+name: Style
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  columnType: null
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

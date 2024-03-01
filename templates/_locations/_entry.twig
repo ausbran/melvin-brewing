@@ -1,0 +1,51 @@
+{% extends "index" %}
+
+{% block content %}
+	{% include "_includes/landing" %}
+	<div class="outer">
+		<div class="locations-grid">
+	    {% if entry.menu %}
+	    	<div class="grid-item">
+	    		<p>Looking for beer and food? See what we’re serving up for dinner and lunch.</p>
+			    <a href="{{ entry.menu.one().url }}" target="_blank">View Menu PDF</a>
+		    </div>
+	    {% endif %}
+
+	    {% if entry.tapList %}
+	    	<div class="grid-item">
+			    <a href="{{ entry.tapList }}" target="_blank">View Tap List on Tappd</a>
+		    </div>
+	    {% endif %}
+
+	    {% if entry.lifestyleImages %}
+		    {% for image in entry.lifestyleImages %}
+	        {% if loop.first %}
+	        	<div class="grid-item" style="background: center / cover url(/images/background-images/{{ image.url }}) no-repeat;"></div>
+	        {% endif %}
+		    {% endfor %}
+			{% endif %}
+
+	    {% if entry.hours %}
+	    	<div class="grid-item">
+			    {{ entry.hours }}
+		    </div>
+		  {% endif %}
+
+	    {% if entry.directions %}
+	    	<div class="grid-item">
+			    <a href="{{ entry.directions }}" target="_blank">Get Directions</a>
+		    </div>
+	    {% endif %}
+
+	    <a class="grid-item" href="#">Contact Us</a>
+
+	    {% if entry.lifestyleImages %}
+		    {% for image in entry.lifestyleImages %}
+	        {% if loop.index == 2 %}
+	        	<div class="grid-item" style="background: center / cover url(/images/background-images/{{ image.url }}) no-repeat;"></div>
+	        {% endif %}
+		    {% endfor %}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

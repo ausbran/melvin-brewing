@@ -1,0 +1,40 @@
+.awards {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  gap: $gap;
+  margin-top: $margin-large;
+  margin-bottom: $margin-medium;
+  overflow: scroll;
+  width: 100vw;
+  padding-left: $scroll-padding-left;
+  .award {
+    border: 1px solid $white;
+    border-radius: $box-radius;
+    padding: $padding;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    min-width: 375px;
+    * {
+      font-size: 1em;
+      font-weight: 600;
+    }
+    .year {
+      font-size: 1.5em;
+      font-weight: 900;
+      margin: 15px 0;
+    }
+    .name {
+      // max-width: 150px;
+      text-align: left;
+      :not(:last-child) {
+        margin-bottom: 10px;
+      }
+      p {
+        line-height: 1.25em;
+      }
+    }
+  }
+}

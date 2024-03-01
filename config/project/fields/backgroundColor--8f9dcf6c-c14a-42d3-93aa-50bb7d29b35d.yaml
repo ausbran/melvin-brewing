@@ -1,0 +1,16 @@
+columnSuffix: tumzrmaj
+contentColumnType: char(7)
+fieldGroup: 7376a32e-bb38-4467-b1b4-6e6db135167e # CSS Fields
+handle: backgroundColor
+instructions: 'Choose a background color.'
+name: 'Background Color'
+searchable: false
+settings:
+  defaultColor: '#32373a'
+  presets:
+    - '#292f32'
+    - '#32373a'
+    - '#e9e9e9'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Color

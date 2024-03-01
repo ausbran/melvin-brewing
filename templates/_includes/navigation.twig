@@ -1,0 +1,48 @@
+{% set nodes = craft.navigation.nodes('header').level(1).with(['children.children']).all() %}
+
+<ul class="primary-links">
+    {% for node in nodes %}
+        <li class="link">
+            {{ node.link }}
+            <ul class="secondary-links {% if node.children|length < 3 %}no-scroll{% endif %} {% if node.children|length == 1 %}one{% endif %}">
+                <div class="description">
+	                {% include '_includes/close' %}
+                  {{ node.description }}
+                  {% if node.children|length > 3 %}
+                      {% include '_includes/arrowsDark' %}
+                  {% endif %}
+                </div>
+		              <ul class="secondary-link slider-inner">
+		                  {% if node.children %}
+		                      {% for subnode in node.children %}
+		                          <li class="inner slide">
+		                              {% if subnode.backgroundImage %}
+		                                  <a class="gradient" href="{{ subnode.url }}">
+		                                      <img src="/images/background-images/{{ subnode.backgroundImage.one().url }}" alt="">
+		                                      <span class="link-title" >{{ subnode.title }}</span>
+		                                  </a>
+		                              {% else %}
+		                                <a class="link-title" href="{{ subnode.url }}">{{ subnode.title }}</a>
+		                              {% endif %}
+		                          </li>
+		                      {% endfor %}
+		                  {% endif %}
+		              </ul>
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+<div class="secondary-container"></div>
+
+{# <div class="slider">
+    <ul class="slider-inner">
+        <li class="slide"></li>
+    </ul>
+    <div class="slider-nav">
+        {{ block.description }}
+        {% if block.children | length > 1 %}
+            {% include "_includes/arrows" %}
+        {% endif %}
+    </div>
+</div> #}

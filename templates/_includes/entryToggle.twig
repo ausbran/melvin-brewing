@@ -1,0 +1,102 @@
+<div class="entry-toggle outer" data-toggle-id="{{ entry.id }}">
+    {% set hasDescription = false %}
+    {% set firstEntryField = null %}
+    {% set entryFieldFound = false %}
+
+    {% for block in entry.all() %}
+        {% if block.type.handle == 'description' and block.description is not empty %}
+            {% set hasDescription = true %}
+        {% endif %}
+
+        {% if block.type.handle == 'entryField' and not entryFieldFound %}
+            {% set firstEntryField = block %}
+            {% set entryFieldFound = true %}
+        {% endif %}
+    {% endfor %}
+
+    {% if hasDescription %}
+        <div class="entry-head">
+            {% for block in entry.all() %}
+                {% if block.type.handle == 'description' %}
+                    {{ block.description }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% set textAlignmentClass = '' %}
+    {% if firstEntryField is not null and firstEntryField.textAlignment is not empty %}
+        {% set textAlignmentClass = firstEntryField.textAlignment %}
+    {% endif %}
+
+    {% set entryFieldBlocks = entry.all() | filter(block => block.type.handle == 'entryField') %}
+    {% if entryFieldBlocks | length > 1 %}
+        <div class="entry-nav">
+            {% for block in entry.all() %}
+                {% if block.type.handle == 'entryField' %}
+                    <h4 class="entry-title{% if block.id == firstEntryField.id %} active{% endif %}" data-entry-id="{{ block.id }}">{{ block.entry.one().title }}</h4>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="entry-body">
+        {% for block in entry.all() %}
+            <div class="inner {{ textAlignmentClass }} {% if block.type.handle == 'entryField' and block.id == firstEntryField.id %} visible{% endif %}" data-entry-id="{{ block.id }}">
+                {% switch block.type.handle %}
+                    {% case 'entryField' %}
+                        <div class="text">
+                            {% set image = block.image.one() %}
+                            <img src="/images/general-images/{{ image.url }}" alt="An image for {{ block.title }}">
+                            {{ block.description }}
+                            <div class="buttons">
+                                {% for button in block.buttons.all() %}
+                                    <a class="btn border" href="{{ button.buttonLink }}" class="button">{{ button.buttonText }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="background">
+                            {% set video = block.backgroundVideo.one() %}
+                            {% if video %}
+                                <video autoplay loop muted preload="metadata" playsinline webkit-playsinline>
+                                    <source src="/videos/background-videos/{{ video.url }}#t=0.1" type="video/mp4">
+                                </video>
+                            {% elseif block.backgroundImage.one() %}
+                                {% set bg = block.backgroundImage.one() %}
+                                <img src="/images/background-images/{{ bg.url }}" alt="The background image for {{ block.title }}">
+                            {% endif %}
+                        </div>
+                {% endswitch %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    {% if firstEntryField is not null %}
+        var toggleContainer = document.querySelector('.entry-toggle[data-toggle-id="{{ entry.id }}"]');
+
+        toggleContainer.querySelector('.entry-title[data-entry-id="{{ firstEntryField.id }}"]').classList.add('active');
+        toggleContainer.querySelector('.inner[data-entry-id="{{ firstEntryField.id }}"]').classList.add('visible');
+
+        toggleContainer.querySelectorAll('.entry-title').forEach(function(title) {
+            title.addEventListener('click', function() {
+                var entryId = this.getAttribute('data-entry-id');
+
+                toggleContainer.querySelectorAll('.inner[data-entry-id]').forEach(function(block) {
+                    block.classList.remove('visible');
+                });
+
+                toggleContainer.querySelector('.inner[data-entry-id="'+ entryId +'"]').classList.add('visible');
+
+                toggleContainer.querySelectorAll('.entry-title').forEach(function(entryTitle) {
+                    entryTitle.classList.remove('active');
+                });
+
+                this.classList.add('active');
+            });
+        });
+    {% endif %}
+});
+</script>

@@ -1,0 +1,87 @@
+field: a5788732-8476-446d-b6ed-04f8cc7d9c00 # Awards
+fieldLayouts:
+  53533afe-fa87-42f2-a291-14fab5ee2457:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 0719e0bc-b265-44ef-a609-0f532d8f91ed # Award Year
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 795e1e8c-95ec-4d9a-a39c-5a326e38d938
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 5fbe9456-92e8-4281-af03-cd8dc1435b6b # Award Name
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 88f4ad5f-baf6-4c03-963f-a89090db603d
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 3f03998a-3cfb-433c-a306-92720b0b8029
+        userCondition: null
+fields:
+  5fbe9456-92e8-4281-af03-cd8dc1435b6b: # Award Name
+    columnSuffix: kqflteoh
+    contentColumnType: text
+    fieldGroup: null
+    handle: awardName
+    instructions: 'What is the name of the award?'
+    name: 'Award Name'
+    searchable: false
+    settings:
+      availableTransforms: '*'
+      availableVolumes: ''
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  0719e0bc-b265-44ef-a609-0f532d8f91ed: # Award Year
+    columnSuffix: iqcnongx
+    contentColumnType: integer(10)
+    fieldGroup: null
+    handle: awardYear
+    instructions: 'What year was this award won?'
+    name: 'Award Year'
+    searchable: false
+    settings:
+      decimals: 0
+      defaultValue: null
+      max: null
+      min: null
+      prefix: null
+      previewCurrency: null
+      previewFormat: decimal
+      size: null
+      suffix: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Number
+handle: goldAward
+name: 'Gold Award'
+sortOrder: 1

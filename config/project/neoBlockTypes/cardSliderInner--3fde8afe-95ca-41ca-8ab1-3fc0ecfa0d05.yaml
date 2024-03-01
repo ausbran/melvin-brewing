@@ -1,0 +1,21 @@
+childBlocks:
+  - description
+  - slide
+conditions: null
+description: 'Add a header and cards to the slider.'
+enabled: true
+field: 1d42debc-f311-4702-b75a-37951c101737 # Card Slider
+group: null
+groupChildBlockTypes: true
+handle: cardSliderInner
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 0
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: 'Card Slider'
+topLevel: true

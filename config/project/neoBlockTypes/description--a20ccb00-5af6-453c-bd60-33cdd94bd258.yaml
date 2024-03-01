@@ -1,0 +1,40 @@
+childBlocks: null
+conditions: null
+description: ''
+enabled: true
+field: 25c6a98b-d119-4ae1-8d5f-e0a804ac1448 # Series Toggle
+fieldLayouts:
+  0d6b39f8-f093-4606-95d7-f41f2b23d7c7:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: ad02cc6a-65c1-461f-a44b-2675bdcd2625 # Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0331ed20-d6b7-425f-9341-33982e2ff6eb
+            userCondition: null
+            warning: null
+            width: 100
+        name: Description
+        uid: d08836a1-e234-4225-8b42-40e9356f3c86
+        userCondition: null
+group: null
+groupChildBlockTypes: true
+handle: description
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 0
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: Description
+topLevel: true

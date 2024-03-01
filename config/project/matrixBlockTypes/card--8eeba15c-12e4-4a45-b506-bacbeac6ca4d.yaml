@@ -1,0 +1,12 @@
+field: 1d42debc-f311-4702-b75a-37951c101737 # Card Slider
+fieldLayouts:
+  dadb4a80-8ab5-4423-ae90-01928fa0d8ed:
+    tabs:
+      -
+        elementCondition: null
+        name: Content
+        uid: 013fe847-286a-44c4-b4c5-563afbcb9940
+        userCondition: null
+handle: card
+name: Card
+sortOrder: 2

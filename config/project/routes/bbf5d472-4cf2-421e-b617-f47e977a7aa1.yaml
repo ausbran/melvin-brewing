@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 3
+template: _locations/_entry
+uriParts:
+  - 'locations/*'
+uriPattern: 'locations/*'

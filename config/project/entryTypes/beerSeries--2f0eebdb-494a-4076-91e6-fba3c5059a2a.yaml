@@ -1,0 +1,59 @@
+fieldLayouts:
+  ac1b44c3-5ad2-494e-9fff-d47376cb4e93:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: a3db48f5-8b26-4010-ae40-d24a25d089bb
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 537b387e-676e-45bc-8784-94ab111fecb8 # Series Landing Section
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7845a367-6b23-40c4-ab10-179fe29d00ce
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: cef49f27-93bd-401f-b6ce-46832b317e6d
+        userCondition: null
+handle: beerSeries
+hasTitleField: true
+name: 'Beer Series'
+section: ec54db85-dc39-4841-b6bc-17523b4d074d # Beers
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+sortOrder: 1
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

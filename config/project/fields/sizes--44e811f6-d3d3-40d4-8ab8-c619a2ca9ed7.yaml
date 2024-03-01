@@ -1,0 +1,111 @@
+columnSuffix: tnulewxr
+contentColumnType: string
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: sizes
+instructions: 'What size is the beer available in?'
+name: Sizes
+searchable: false
+settings:
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 12oz
+        -
+          - value
+          - 12oz
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 16oz
+        -
+          - value
+          - 16oz
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 19.2oz
+        -
+          - value
+          - 192oz
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '4 Pack'
+        -
+          - value
+          - 4Pack
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '6 Pack'
+        -
+          - value
+          - 6Pack
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '12 Pack'
+        -
+          - value
+          - 12Pack
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '5.2 Gallon'
+        -
+          - value
+          - 52Gal
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '15.5 Gallon'
+        -
+          - value
+          - 155Gal
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Bottle
+        -
+          - value
+          - bottle
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\MultiSelect

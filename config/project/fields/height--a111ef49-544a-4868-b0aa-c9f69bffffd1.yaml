@@ -1,0 +1,20 @@
+columnSuffix: lsgbunos
+contentColumnType: integer(10)
+fieldGroup: 7376a32e-bb38-4467-b1b4-6e6db135167e # CSS Fields
+handle: height
+instructions: 'Input a height in percentage'
+name: Height
+searchable: false
+settings:
+  decimals: 0
+  defaultValue: null
+  max: null
+  min: 0
+  prefix: '%'
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

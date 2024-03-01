@@ -1,0 +1,27 @@
+columnSuffix: fquxwbxk
+contentColumnType: text
+fieldGroup: 33cf5f76-e7a1-4bf0-9540-9df537e093bf # Location Fields
+handle: hours
+instructions: 'Add the hours for the location.'
+name: Hours
+searchable: false
+settings:
+  availableTransforms: '*'
+  availableVolumes: ''
+  columnType: text
+  configSelectionMode: choose
+  defaultTransform: ''
+  manualConfig: ''
+  purifierConfig: null
+  purifyHtml: true
+  redactorConfig: null
+  removeEmptyTags: true
+  removeInlineStyles: false
+  removeNbsp: false
+  showHtmlButtonForNonAdmins: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\redactor\Field

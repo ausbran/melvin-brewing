@@ -1,0 +1,297 @@
+dateModified: 1709329252
+elementSources:
+  craft\elements\Entry:
+    -
+      defaultSort:
+        - postDate
+        - desc
+      disabled: false
+      key: '*'
+      tableAttributes:
+        - section
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      heading: Channels
+      type: heading
+    -
+      heading: Pages
+      type: heading
+    -
+      defaultSort:
+        - structure
+        - asc
+      disabled: false
+      key: 'section:ec54db85-dc39-4841-b6bc-17523b4d074d' # Beers
+      tableAttributes:
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      defaultSort:
+        - postDate
+        - desc
+      disabled: false
+      key: 'section:76a1851c-73ea-4eb1-8e0d-a7501be656b0' # About
+      tableAttributes:
+        - postDate
+        - expiryDate
+        - author
+        - link
+      type: native
+    -
+      key: 'section:98a60530-1347-4020-a302-a11e470b343d' # Events
+      type: native
+    -
+      key: 'section:1f34453a-cacc-4c27-a515-05b3a89f5b76' # Locations
+      type: native
+    -
+      key: 'section:68810252-e0a1-46b8-9e77-0e47a057261b' # Pages
+      type: native
+email:
+  fromEmail: ausbranham@gmail.com
+  fromName: 'Melvin Brewing'
+  transportType: craft\mail\transportadapters\Sendmail
+fs:
+  artistArt:
+    hasUrls: false
+    name: 'Artist Art'
+    settings:
+      path: /images/artist-art
+    type: craft\fs\Local
+    url: null
+  backgroundImages:
+    hasUrls: false
+    name: 'Background Images'
+    settings:
+      path: images/background-images
+    type: craft\fs\Local
+    url: null
+  backgroundVideos:
+    hasUrls: false
+    name: 'Background Videos'
+    settings:
+      path: videos/background-videos
+    type: craft\fs\Local
+    url: null
+  canImages:
+    hasUrls: false
+    name: 'Can Images'
+    settings:
+      path: images/cans
+    type: craft\fs\Local
+    url: null
+  canVideos:
+    hasUrls: false
+    name: 'Can Videos'
+    settings:
+      path: videos/cans
+    type: craft\fs\Local
+    url: null
+  characterArt:
+    hasUrls: false
+    name: 'Character Art'
+    settings:
+      path: images/character-art
+    type: craft\fs\Local
+    url: null
+  generalImages:
+    hasUrls: false
+    name: 'General Images'
+    settings:
+      path: images/general-images
+    type: craft\fs\Local
+    url: null
+  menus:
+    hasUrls: false
+    name: Menus
+    settings:
+      path: images/menus
+    type: craft\fs\Local
+    url: null
+  sixPacks:
+    hasUrls: false
+    name: 'Six Packs'
+    settings:
+      path: images/six-packs
+    type: craft\fs\Local
+    url: null
+meta:
+  __names__:
+    0c17af3e-bce7-4bba-9377-45c13f662fac: 'Button Link' # Button Link
+    0fc8e255-72f1-47b9-bd76-88e28f794c33: Tagline # Tagline
+    0fe7b501-d81b-44ac-9f5d-e7e3ba23600b: 'Max Width' # Max Width
+    1b1ff12a-eac3-4d7f-b1c6-5544ec614eea: 'Tasting Note' # Tasting Note
+    1d42debc-f311-4702-b75a-37951c101737: 'Card Slider' # Card Slider
+    1d8616ad-fda3-4645-9d5b-93be8019d3fc: Background # Background
+    1f5c806d-338d-4b1f-bf82-3680d1d7fbaf: 'Award Year' # Award Year
+    1f34453a-cacc-4c27-a515-05b3a89f5b76: Locations # Locations
+    2a4d8edf-d2ca-4850-8d05-8dec0e8715ba: 'Dark Color' # Dark Color
+    2a66e961-61be-482a-b5c4-bd49a3747ea5: Link # Link
+    2f0eebdb-494a-4076-91e6-fba3c5059a2a: 'Beer Series' # Beer Series
+    2f7552c2-f172-4dbb-b4f0-ff54cbff985d: Menu # Menu
+    3c09f8e7-d651-4b43-9478-d543321de483: 'Background Size' # Background Size
+    3fde8afe-95ca-41ca-8ab1-3fc0ecfa0d05: 'Card Slider' # Card Slider
+    4abd99d6-2584-457d-b7c4-40f7b995e1c0: IBUs # IBUs
+    4b4eed56-e5a2-41f4-b65c-26a8e0339e06: Hours # Hours
+    4facb534-a572-4967-8327-912a5e564fb1: Description # Description
+    05b48984-41ff-4f9b-8a00-3a041f5d5bea: 'Silver Award' # Silver Award
+    5bde54d0-f163-4aff-82a7-fb8f3d0066a5: 'Background Images' # Background Images
+    5f624c64-0bdb-4809-bbc7-8159ac90b16b: Home # Home
+    5fbe9456-92e8-4281-af03-cd8dc1435b6b: 'Award Name' # Award Name
+    6b38e3b8-9668-4a06-9898-2904d065930d: Headline # Headline
+    6b810e20-091f-4ba9-a515-86143511bd1a: 'Release Date' # Release Date
+    06f905a7-02ce-42c2-a7cc-ef21cf0c7559: 'Entry Field' # Entry Field
+    6f946d78-01c5-4036-b1bc-c43719d7b8de: Button # Button
+    7a9cb2ec-51b4-4eb8-821c-a1c35cdc2434: 'Can Image' # Can Image
+    7b03dfd1-415d-4f52-abcc-c4d80fdf3331: 'Our Awards' # Our Awards
+    07c79531-04c5-402e-bbb8-d65dd4e43599: Background # Background
+    7e937d6c-ebdb-4e27-8b62-0e0252bfdf52: 'Lottie Animation' # Lottie Animation
+    7f08e263-a49f-4714-a5af-252c205d57c1: 'Background Video' # Background Video
+    8c7ca72d-2bc1-4123-975e-84d0829fb82e: 'Artist Art' # Artist Art
+    8dbf61b7-8e71-4013-8e45-0e1e3f0d5922: 'Social Link' # Social Link
+    8eeba15c-12e4-4a45-b506-bacbeac6ca4d: Card # Card
+    8f9dcf6c-c14a-42d3-93aa-50bb7d29b35d: 'Background Color' # Background Color
+    9b8c6c65-161d-4de1-b5c0-2f8dc954df9e: Button # Button
+    9c713e83-f0c5-4a2d-b111-e0ae67fa8153: Simple # Simple
+    9f07dd88-6f43-4077-bdb0-cd92afabd6ad: 'Tap List' # Tap List
+    12dfe028-e83e-4153-a5d8-6212d151b7e5: Directions # Directions
+    021dc031-5726-4bf4-808e-53a9d3c50ab2: Buttons # Buttons
+    23ac335b-6422-49a1-b854-c74e5cf4e66f: Description # Description
+    25c6a98b-d119-4ae1-8d5f-e0a804ac1448: 'Series Toggle' # Series Toggle
+    33cf5f76-e7a1-4bf0-9540-9df537e093bf: 'Location Fields' # Location Fields
+    35d5050e-3d8c-448a-8ed5-1a9eaba13e13: 'Melvin Brewing' # Melvin Brewing
+    43f9dbe1-a2b3-47e3-92df-7be878d7367c: 'Background Image' # Background Image
+    44e811f6-d3d3-40d4-8ab8-c619a2ca9ed7: Sizes # Sizes
+    46a0b265-f7ea-4e70-91d4-ef6fb8cde9f8: 'Link URL' # Link URL
+    47a2a87b-81e2-4dc8-8c48-9fe1c88ef5b2: Default # Default
+    49ddd7e6-e7c8-4daa-9efc-c76341c5f129: 'Can Video' # Can Video
+    55e9bc16-a0e6-4960-9a50-051e7b8c7dce: Style # Style
+    68fb41e9-d36b-46dd-810d-92794e451db6: Image # Image
+    76a1851c-73ea-4eb1-8e0d-a7501be656b0: About # About
+    76d72b7b-bcd8-4f9a-807e-905a9c11c83e: 'Can Images' # Can Images
+    77d817c2-40ef-410d-9997-31f71fac9df5: 'Bronze Award' # Bronze Award
+    78a4c7b4-e76d-4060-910a-b557917fffcd: Image # Image
+    81a24339-11e3-4828-9bb5-f5db1693d5a4: 'Individual Beer' # Individual Beer
+    86e3ad6e-0ef5-493d-a6da-40829476cdf8: Description # Description
+    98a60530-1347-4020-a302-a11e470b343d: Events # Events
+    164cf5ba-20a0-4835-aada-5d84eb1661b8: 'Award Name' # Award Name
+    369ec072-926c-46a5-96b3-e6f2c9241548: 'Gold Award' # Gold Award
+    459bad13-5ca0-488e-9e0a-8e78783dceaf: 'Button Text' # Button Text
+    537b387e-676e-45bc-8784-94ab111fecb8: 'Series Landing Section' # Series Landing Section
+    612bfd79-519c-4db3-9ad9-3df56af2b354: 'Landing Section' # Landing Section
+    0719e0bc-b265-44ef-a609-0f532d8f91ed: 'Award Year' # Award Year
+    833c438e-369e-4416-a40b-84853d98be36: Channel # Channel
+    917f53fa-1fa1-47af-8866-5b042d19b183: 'Text Alignment' # Text Alignment
+    1777ecad-74d3-487a-bfa0-01bcdbb8654a: Footer # Footer
+    2123b6aa-6742-448c-95ac-70a91f1dfcef: 'General Fields' # General Fields
+    2382eb8f-094b-419b-9d10-9646b6a08d24: 'Lifestyle Images' # Lifestyle Images
+    4169ea13-b47e-4db2-a7bc-7c20b7a9a017: Description # Description
+    5203aa15-48e5-4e8f-9881-a8551a8593e3: Description # Description
+    7376a32e-bb38-4467-b1b4-6e6db135167e: 'CSS Fields' # CSS Fields
+    31803f1b-64e4-4e43-84c2-e2b426caa398: 'Our Approach' # Our Approach
+    33276f80-27b6-498b-af0c-9b2fecae98db: 'Entry Field' # Entry Field
+    43882e81-bc87-43ff-9313-d303783fa479: Default # Default
+    79759d1d-2122-469e-b071-f35ad6a27d0b: 'Tasting Notes' # Tasting Notes
+    91292bbe-c31e-4eec-ab7b-920070a37071: Background # Background
+    958171f2-eff1-4ea5-a3c8-227de99ce18c: 'Entry Field' # Entry Field
+    5626309f-5327-4844-a153-344a113be872: 'Location Toggle' # Location Toggle
+    7106060e-2428-41c0-86c7-cd3cc951b8d5: Menus # Menus
+    7834810e-5c24-45f4-a020-d738de7d7f03: 'Button Link' # Button Link
+    13504266-15af-46cc-abf9-80c9136fa83b: 'Background Overlay' # Background Overlay
+    19428820-5a56-496c-a33a-d04ff9dac689: 'Artist Fields' # Artist Fields
+    56292139-df69-4ba6-9471-83d0004f69ff: 'Entry Field inner' # Entry Field inner
+    68810252-e0a1-46b8-9e77-0e47a057261b: Pages # Pages
+    98806770-54d6-40e5-a88c-d8c5af972ee9: Description # Description
+    a0d37d8d-0a19-49ba-ba60-cf035bf5ec1a: Channel # Channel
+    a0e2932d-3a0e-4a02-9de4-5fa39cb44f8d: 'Social Links' # Social Links
+    a2b39e67-8244-49b2-9f7c-6b185bd3042f: 'Award Year' # Award Year
+    a20ccb00-5af6-453c-bd60-33cdd94bd258: Description # Description
+    a111ef49-544a-4868-b0aa-c9f69bffffd1: Height # Height
+    a170e21e-70f6-4e9c-81d8-75c1f5a49066: Description # Description
+    a11615b2-853a-4fe3-9dd7-99901084d23e: 'Background Video' # Background Video
+    a5788732-8476-446d-b6ed-04f8cc7d9c00: Awards # Awards
+    ac4f95fb-77d2-4d0d-a44b-104b552f1bad: Description # Description
+    ac680e75-157c-41d1-b786-05df1c99bac0: Can # Can
+    ad02cc6a-65c1-461f-a44b-2675bdcd2625: Description # Description
+    afd17e50-c6f1-47bd-8ad8-f4068ebf9493: 'Social Link' # Social Link
+    b06f7d5b-f09a-4ddf-b77f-dc89f56a7419: 'Background Videos' # Background Videos
+    b4c79cb8-ccbb-4128-9ff2-1b1976233aab: Background # Background
+    b51eebcc-49ce-435f-aaae-9ee29609d1cd: 'Character Art' # Character Art
+    b798574d-735a-46db-ac3d-6297fa12658d: 'Beer Fields' # Beer Fields
+    b4618125-57d2-42f8-baa9-39c59d55e4b9: Buttons # Buttons
+    bffc7c3c-02c7-46d1-9835-a9096a16f727: 'Background Image' # Background Image
+    c002a262-f5da-4752-8558-84317e52ce18: 'Featured Beer' # Featured Beer
+    c0486f15-08b3-4340-85af-cc6145d544fb: Image # Image
+    c2f5ba54-6f0f-4515-834e-b0493bd71103: Image # Image
+    c6c82bf8-710d-48b2-bc83-0c05ed4fc4f3: Buttons # Buttons
+    c489ee54-b601-4a10-b8c9-2819a6d179e3: Header # Header
+    c9620a61-2a69-4ddd-8b01-516081a2cf0f: Description # Description
+    cde561fa-f273-48e3-ba47-db9fc49ecbe8: 'Award Name' # Award Name
+    cfc8675b-6656-4bc0-8889-b63d80b4c1d9: Image # Image
+    d0b7ca56-f372-41c3-90fa-dddc29006740: Buttons # Buttons
+    d65d412c-37d7-40cd-b379-d7b6d0a20a45: 'Tasting Notes' # Tasting Notes
+    d576e14e-afd8-482e-9c41-2c24b7f4c69b: 'Lottie Animation' # Lottie Animation
+    d9712e97-c935-48f3-8b44-f3ce6e52d842: 'Melvin Brewing' # Melvin Brewing
+    d16669bc-8ed5-462f-9d01-7d54f2d6bf4b: 'Twelve oz Can' # Twelve oz Can
+    d80269be-c6b2-4b02-80a3-0debca223b2e: Description # Description
+    db8abdd9-1020-4ad6-ae82-52f60e337a94: 'Alcohol Content' # Alcohol Content
+    db9d70f0-8392-4fbe-801f-9deeb6f7a968: 'General Images' # General Images
+    dbe83280-d2a8-44af-8699-24516dc89a1f: Entry # Entry
+    dca70112-408c-40db-980b-dbdbbee87ca8: 'Can Videos' # Can Videos
+    dee2939b-bc5f-4150-9d53-4c6cfd58cc02: Awards # Awards
+    e2c0d4de-9225-40c7-8a32-f7de10a7aaa8: 'Link URL' # Link URL
+    e4f36dd9-d500-4ca9-8e3a-52e4db8d58c6: 'Button Text' # Button Text
+    e9dbc6a8-c947-4769-887a-b8e7d205a8d7: 'Character Art' # Character Art
+    eb65a6c5-a692-4ead-997b-adef82b174cd: 'Light Color' # Light Color
+    ec54db85-dc39-4841-b6bc-17523b4d074d: Beers # Beers
+    edf1bec9-a1e3-47ea-beab-3c17e1cc133e: 'Accent Color' # Accent Color
+    ef7ef68b-2072-4b19-835b-e2429a536f4f: Image # Image
+    ef14b30a-e09c-44a2-abf7-37e5265430f3: Image # Image
+    f72f22c2-cd1f-412b-8d4c-b83e4514b948: 'Our Artists' # Our Artists
+    f8978819-a636-4960-bbd5-f042fb766bbb: Image # Image
+    fab91d94-7ec6-4694-80f5-f8da8ac5a47d: 'Public Schema' # Public Schema
+    fcbd9c21-4ebd-4557-a8a2-f02bf5c32767: Slide # Slide
+    fdb4b497-cc54-40da-b81e-d107903c5bc6: 'Our Story' # Our Story
+plugins:
+  field-manager:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+    settings:
+      cpSectionEnabled: true
+  image-toolbox:
+    edition: pro
+    enabled: true
+    licenseKey: 0GYYCQN4XZPF0OB7HS3ANP1H
+    schemaVersion: 1.0.0
+  navigation:
+    edition: standard
+    enabled: true
+    licenseKey: SJ2E01DJNYRYJIR1016SZOBQ
+    schemaVersion: 2.0.7
+  neo:
+    edition: standard
+    enabled: true
+    licenseKey: 8R7J6CL3XMZ72TGUTKMGT3VS
+    schemaVersion: 4.0.0
+  redactor:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.3.0
+system:
+  edition: pro
+  live: true
+  name: 'Melvin Brewing'
+  retryDuration: null
+  schemaVersion: 4.5.3.0
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  requireEmailVerification: true

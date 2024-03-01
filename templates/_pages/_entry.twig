@@ -1,0 +1,11 @@
+{% extends "index" %}
+
+{% block content %}
+    {% if entry.type == 'home' %}
+        {% include '_pages/home.twig' %}
+    {% else %}
+        {% include [
+            '_pages/' ~ entry.slug
+        ] %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+columnSuffix: xijoanfl
+contentColumnType: text
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: tagline
+instructions: 'What is the beer tagline on the top lip of the can?'
+name: Tagline
+searchable: false
+settings:
+  availableTransforms: '*'
+  availableVolumes: ''
+  columnType: text
+  configSelectionMode: choose
+  defaultTransform: ''
+  manualConfig: ''
+  purifierConfig: null
+  purifyHtml: true
+  redactorConfig: null
+  removeEmptyTags: true
+  removeInlineStyles: false
+  removeNbsp: false
+  showHtmlButtonForNonAdmins: false
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\redactor\Field

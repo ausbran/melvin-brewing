@@ -1,0 +1,38 @@
+defaultPlacement: end
+enableVersioning: true
+handle: pages
+name: Pages
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+  -
+    __assoc__:
+      -
+        - label
+        - Home
+      -
+        - urlFormat
+        - /
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  35d5050e-3d8c-448a-8ed5-1a9eaba13e13: # Melvin Brewing
+    enabledByDefault: true
+    hasUrls: true
+    template: _pages/_entry
+    uriFormat: '{slug}'
+structure:
+  maxLevels: null
+  uid: a00259c4-1b71-4e1f-b531-332f10727944
+type: structure

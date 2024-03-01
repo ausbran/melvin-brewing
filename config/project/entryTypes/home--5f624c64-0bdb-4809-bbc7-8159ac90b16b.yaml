@@ -1,0 +1,83 @@
+fieldLayouts:
+  f2fee5d3-6a45-4889-9cf2-db387e941c90:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: abfc4d61-d655-4640-b6ce-b1dafd0de3a7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: c002a262-f5da-4752-8558-84317e52ce18 # Featured Beer
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9dffc767-63a4-4847-a6a1-86e4c1d948c0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 25c6a98b-d119-4ae1-8d5f-e0a804ac1448 # Series Toggle
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 37ada692-e0dd-4fba-8009-924b846d498f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 5626309f-5327-4844-a153-344a113be872 # Location Toggle
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0d0528a5-5f87-40a5-8310-76fddbd131e5
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: b5e475f4-7564-485a-ad04-ccc1a822c89d
+        userCondition: null
+handle: home
+hasTitleField: true
+name: Home
+section: 68810252-e0a1-46b8-9e77-0e47a057261b # Pages
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+sortOrder: 2
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

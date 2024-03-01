@@ -1,0 +1,57 @@
+columnSuffix: izbvksms
+contentColumnType: string(7)
+fieldGroup: 7376a32e-bb38-4467-b1b4-6e6db135167e # CSS Fields
+handle: backgroundSize
+instructions: 'Choose a background-size rule for the image.'
+name: 'Background Size'
+searchable: false
+settings:
+  columnType: null
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Contain
+        -
+          - value
+          - contain
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Cover
+        -
+          - value
+          - cover
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - Auto
+        -
+          - value
+          - auto
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 90%
+        -
+          - value
+          - 90%
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

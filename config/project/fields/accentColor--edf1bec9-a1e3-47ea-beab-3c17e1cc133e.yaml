@@ -1,0 +1,12 @@
+columnSuffix: livmsrlr
+contentColumnType: char(7)
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: accentColor
+instructions: 'This is a small accent color found on many of our cans.'
+name: 'Accent Color'
+searchable: false
+settings:
+  defaultColor: '#ffffff'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Color

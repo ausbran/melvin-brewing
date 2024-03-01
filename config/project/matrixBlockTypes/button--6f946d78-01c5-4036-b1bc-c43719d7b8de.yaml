@@ -1,0 +1,75 @@
+field: 021dc031-5726-4bf4-808e-53a9d3c50ab2 # Buttons
+fieldLayouts:
+  fa308689-7fd1-4324-80a2-051eb10cf1e0:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 459bad13-5ca0-488e-9e0a-8e78783dceaf # Button Text
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d05e8cae-59b7-46bd-b498-f7b0bc6419f7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 7834810e-5c24-45f4-a020-d738de7d7f03 # Button Link
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5901e939-fde1-4c84-b39f-d014abdf6472
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: b79c3790-c98a-4222-97b3-ceb10eeed581
+        userCondition: null
+fields:
+  459bad13-5ca0-488e-9e0a-8e78783dceaf: # Button Text
+    columnSuffix: nqxjvatg
+    contentColumnType: text
+    fieldGroup: null
+    handle: buttonText
+    instructions: 'Add text to the button.'
+    name: 'Button Text'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: null
+      initialRows: 4
+      multiline: false
+      placeholder: Button
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  7834810e-5c24-45f4-a020-d738de7d7f03: # Button Link
+    columnSuffix: eukqdbzx
+    contentColumnType: string(255)
+    fieldGroup: null
+    handle: buttonLink
+    instructions: 'Add a URL to the button.'
+    name: 'Button Link'
+    searchable: false
+    settings:
+      maxLength: 255
+      types:
+        - url
+        - tel
+        - email
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url
+handle: button
+name: Button
+sortOrder: 1

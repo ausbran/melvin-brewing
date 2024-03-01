@@ -1,0 +1,68 @@
+{% block content %}
+{% set beer = entry.featuredBeer.one() %}
+{% if beer %}
+    <style type="text/css">
+        .title:after,
+        .title:before {
+            content: '{{ beer.title }}';
+        }
+        .title:after {
+            color: {{ beer.lightColor }};
+        }
+        .tagline-container span {
+            color: {{ beer.darkColor }};
+        }
+        .text-container .btn,
+        .tagline-container,
+        .background {
+            background-color: {{  beer.lightColor }};
+        }
+    </style>
+    <div class="home-landing-section" style="background-color: {{ beer.darkColor }};">
+        <div class="content">
+            <div class="series-container">
+                <span class="series-style">{{ beer.style }}</span>
+                {% set parent = beer.getAncestors().one() %}
+                {% if parent %}
+                    <span class="series-title btn border">{{ parent.title }}</span>
+                {% endif %}
+            </div>
+            <div class="title-container">
+                <div class="title noselect">
+                    {{ beer.title }}
+                </div>
+            </div>
+            <div class="text-container">
+                <div class="inner">
+                    <p>{{ beer.description }}</p>
+                    <a class="btn" href="{{ beer.url }}">Explore</a>
+                </div>
+                {% include '_includes/can' with {'block': beer} %}
+                <div class="background">
+                    {% set bgVid = beer.backgroundVideo.one() %}
+                    {% if bgVid %}
+                        <video autoplay loop muted preload="metadata" playsinline webkit-playsinline>
+                            <source src="/videos/background-videos/{{ bgVid.url }}" type="video/mp4">
+                        </video>
+                    {% elseif beer.backgroundImage.one() %}
+                        {% set bgImg = beer.backgroundImage.one() %}
+                        <img src="/images/background-images/{{ bgImg.url }}" alt="The background image for {{ beer.title }}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="tagline-container">
+            <span>Join the Madness</span>
+            <span>{{ beer.tagline }}</span>
+            <span>Comin&apos; at you live from Alpine, Wyoming</span>
+            <span>Join the Madness</span>
+            <span>{{ beer.tagline }}</span>
+        </div>
+    </div>
+{% endif %}
+
+{% include '_includes/entryToggle' with {'entry': entry.seriesToggle} %}
+
+{% include '_includes/entryToggle' with {'entry': entry.locationToggle} %}
+
+{% endblock %}

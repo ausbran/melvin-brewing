@@ -1,0 +1,16 @@
+<div class="can-container shadow">
+    {% set canVid = block.canVideo.one() %}
+    {% if canVid %}
+        <video class="can" autoplay loop muted playsinline webkit-playsinline>
+            <source 
+            src="/videos/cans/{{ canVid.url }}"
+            type="video/webm">
+            <source 
+            src="/videos/cans/{{ canVid.url }}"
+            type='video/mp4; codecs="hvc1"'>
+        </video>
+    {% elseif block.canImage.one() %}
+        {% set canImg = block.canImage.one() %}
+        <img class="can" src="/images/cans/{{ canImg.url }}" alt="The can for {{ block.title }}">
+    {% endif %}
+</div>

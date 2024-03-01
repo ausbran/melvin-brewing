@@ -1,0 +1,122 @@
+field: 85957093-f7ea-4029-a94b-b1a4da04c318
+fieldLayouts:
+  acb2c108-f203-41c4-bf2b-595a705b69cf:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 46a0b265-f7ea-4e70-91d4-ef6fb8cde9f8 # Link URL
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7495219e-7a9e-44b0-9239-c9c7338f0169
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 833c438e-369e-4416-a40b-84853d98be36 # Channel
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: db378590-18e5-4550-b82f-ff00a60b1276
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e7560773-2e6d-493d-85a9-89e3f3843079
+        userCondition: null
+fields:
+  46a0b265-f7ea-4e70-91d4-ef6fb8cde9f8: # Link URL
+    columnSuffix: dxovyozp
+    contentColumnType: string(255)
+    fieldGroup: null
+    handle: linkUrl
+    instructions: null
+    name: 'Link URL'
+    searchable: false
+    settings:
+      maxLength: 255
+      types:
+        - url
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url
+  833c438e-369e-4416-a40b-84853d98be36: # Channel
+    columnSuffix: owqmmflq
+    contentColumnType: string(9)
+    fieldGroup: null
+    handle: channel
+    instructions: null
+    name: Channel
+    searchable: false
+    settings:
+      columnType: null
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Facebook
+            -
+              - value
+              - facebook
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Instagram
+            -
+              - value
+              - instagram
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - X
+            -
+              - value
+              - x
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - LinkedIn
+            -
+              - value
+              - linkedin
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Spotify
+            -
+              - value
+              - spotify
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+handle: socialLink
+name: 'Social Link'
+sortOrder: 5

@@ -1,0 +1,119 @@
+fieldLayouts:
+  9f4a64cb-a22c-4f67-86f5-0b71dd55ecea:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 27175c04-f25f-4030-8eab-862af1a3bf77
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 612bfd79-519c-4db3-9ad9-3df56af2b354 # Landing Section
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 58d11b40-8abe-4c59-84cd-315ced69b479
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 2f7552c2-f172-4dbb-b4f0-ff54cbff985d # Menu
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: dea508cc-50e0-4dbe-bdc9-d7b183ca2851
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 9f07dd88-6f43-4077-bdb0-cd92afabd6ad # Tap List
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c0725c8d-0e4e-44e8-bf91-dd217fe4fe75
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 4b4eed56-e5a2-41f4-b65c-26a8e0339e06 # Hours
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d2186cd7-56db-4ec4-84ee-c617f6a084aa
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 12dfe028-e83e-4153-a5d8-6212d151b7e5 # Directions
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 53511046-2ff2-45eb-8bc5-1714c81ab392
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 2382eb8f-094b-419b-9d10-9646b6a08d24 # Lifestyle Images
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2ffe339f-017e-4399-b172-fa060d7202b6
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e8bd9b4c-8c20-4a1a-9425-82a6fb281614
+        userCondition: null
+handle: default
+hasTitleField: true
+name: Default
+section: 1f34453a-cacc-4c27-a515-05b3a89f5b76 # Locations
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+sortOrder: 1
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

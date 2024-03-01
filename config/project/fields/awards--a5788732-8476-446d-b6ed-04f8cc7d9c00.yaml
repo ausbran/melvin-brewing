@@ -1,0 +1,16 @@
+columnSuffix: ameplgdw
+contentColumnType: string
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: awards
+instructions: 'What awards has the beer won?'
+name: Awards
+searchable: false
+settings:
+  contentTable: '{{%matrixcontent_awards}}'
+  maxBlocks: null
+  minBlocks: null
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

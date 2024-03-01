@@ -1,0 +1,17 @@
+columnSuffix: zmdwxbsb
+contentColumnType: datetime
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: releaseDate
+instructions: 'When was the beer released?'
+name: 'Release Date'
+searchable: false
+settings:
+  max: null
+  min: null
+  minuteIncrement: 30
+  showDate: true
+  showTime: false
+  showTimeZone: false
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Date

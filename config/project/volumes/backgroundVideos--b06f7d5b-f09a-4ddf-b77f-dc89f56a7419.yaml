@@ -1,0 +1,44 @@
+fieldLayouts:
+  e028ae6f-5a94-4212-a5af-176a7c317bb5:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\assets\AssetTitleField
+            uid: 004b4e47-2d61-4573-b899-a6efd2ba966e
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: aeb78159-aebc-41af-8db7-101d1af1a824
+        userCondition: null
+fs: backgroundVideos
+handle: backgroundVideos
+name: 'Background Videos'
+sortOrder: 8
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+transformFs: ''
+transformSubpath: ''

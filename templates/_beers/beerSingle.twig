@@ -1,0 +1,87 @@
+{% block content %}
+    <div class="beer-block main">
+        {% if entry.tagline %}
+            <p>{{ entry.tagline }}</p>
+        {% endif %}
+
+        {% set canImg = entry.canImage.one() %}
+        {% if canImg %}
+            <div class="can-container shadow">
+                <img src="/images/cans/{{ canImg.url }}" alt="Transformed Image for can">
+            </div>
+        {% endif %}
+
+        <div class="text">
+            {% if entry.title %}
+                <h1>{{ entry.title }}</h1>
+            {% endif %}
+
+            {% if entry.style %}
+                <h2>{{ entry.style }}</h2>
+            {% endif %}
+
+            {% set parent = entry.getAncestors().one() %}
+            {% if parent %}
+                <span class="series-title">{{ parent.title }}</span>
+            {% endif %}
+
+            {% if entry.description %}
+                <p>{{ entry.description }}</p>
+            {% endif %}
+
+            <a class="btn" href="#">Explore</a>
+            <a class="btn" href="#">Find it</a>
+            <a class="btn" href="#">Shop</a>
+
+            {% set characterImage = entry.characterArt.one() %}
+            {% if characterImage %}
+                <img src="/images/character-art/{{ characterImage.url }}" alt="">
+            {% endif %}
+        </div>
+
+        <div class="text-secondary">
+            {% if entry.alcohol %}
+                <p>Alcohol Content: {{ entry.alcohol }}</p>
+            {% endif %}
+
+            {% if entry.ibus %}
+                <p>IBUs: {{ entry.ibus }}</p>
+            {% endif %}
+
+            {% if entry.tastingNotes %}
+                <h3>Tasting Notes</h3>
+                <ul>
+                    {% for note in entry.tastingNotes %}
+                        <li>{{ note.note }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if entry.awards %}
+        <h3>Awards</h3>
+        {% include '_includes/awards' %}
+    {% endif %}
+
+    {% if entry.releaseDate %}
+        <p>Release: {{ entry.releaseDate }}</p>
+    {% endif %}
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var beerBlock = document.querySelector('.beer-block.main');
+
+      beerBlock.addEventListener('wheel', function (event) {
+        // Check if the user is scrolling horizontally
+        if (event.deltaY === 0) {
+          // Prevent vertical scrolling
+          event.preventDefault();
+
+          // Adjust the horizontal scroll position
+          beerBlock.scrollLeft += event.deltaX;
+        }
+      });
+    });
+  </script>
+{% endblock %}

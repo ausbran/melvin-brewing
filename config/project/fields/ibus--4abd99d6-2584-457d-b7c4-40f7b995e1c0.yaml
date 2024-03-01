@@ -1,0 +1,20 @@
+columnSuffix: vbffaplc
+contentColumnType: integer(10)
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: ibus
+instructions: 'What is the IBU content of the beer?'
+name: IBUs
+searchable: false
+settings:
+  decimals: 0
+  defaultValue: null
+  max: null
+  min: 0
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

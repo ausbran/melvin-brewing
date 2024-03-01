@@ -1,0 +1,20 @@
+columnSuffix: mitpcvrq
+contentColumnType: smallint(2)
+fieldGroup: 2123b6aa-6742-448c-95ac-70a91f1dfcef # General Fields
+handle: backgroundOverlay
+instructions: 'Choose a number from 0 to 10 for overlay opacity.'
+name: 'Background Overlay'
+searchable: false
+settings:
+  decimals: 0
+  defaultValue: null
+  max: 10
+  min: 0
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

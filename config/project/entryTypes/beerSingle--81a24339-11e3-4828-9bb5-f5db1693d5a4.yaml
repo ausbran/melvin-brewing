@@ -1,0 +1,239 @@
+fieldLayouts:
+  e47d5e5e-0c3e-4608-8654-9b81d5cf27f2:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            elementCondition: null
+            id: null
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 2a8a8730-fe04-4c67-8f13-d4234341494c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: ad02cc6a-65c1-461f-a44b-2675bdcd2625 # Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0fef6a4e-134a-4b68-b80a-caf1a927c7e0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: eb65a6c5-a692-4ead-997b-adef82b174cd # Light Color
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8511d775-55d7-4bca-8729-8e6002e294f6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 2a4d8edf-d2ca-4850-8d05-8dec0e8715ba # Dark Color
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e811880e-0e79-40c1-9f64-36ec9ddd7114
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: edf1bec9-a1e3-47ea-beab-3c17e1cc133e # Accent Color
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f155b5f3-a27a-465b-9d26-534faff1c05f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 7a9cb2ec-51b4-4eb8-821c-a1c35cdc2434 # Can Image
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9ef1f87f-67fc-4408-9483-6d323011776d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 49ddd7e6-e7c8-4daa-9efc-c76341c5f129 # Can Video
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5c66db22-0c00-4c90-96ed-1cf8db66d28d
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: b51eebcc-49ce-435f-aaae-9ee29609d1cd # Character Art
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d439b11a-44b4-4efc-a5a1-1ac6f5055fb8
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 55e9bc16-a0e6-4960-9a50-051e7b8c7dce # Style
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 39074fd6-8595-4a19-be47-ce86454d8aa6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: db8abdd9-1020-4ad6-ae82-52f60e337a94 # Alcohol Content
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9a304fdc-3a7e-4449-a77a-28f482a5451c
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 0fc8e255-72f1-47b9-bd76-88e28f794c33 # Tagline
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6cce5b78-3ef6-4e4f-b5bd-07c0402f2e0e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 4abd99d6-2584-457d-b7c4-40f7b995e1c0 # IBUs
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f6105b2e-e9a6-4a96-8751-422e9dc82558
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 44e811f6-d3d3-40d4-8ab8-c619a2ca9ed7 # Sizes
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3bc4f9d4-f9dd-4377-bf60-cf9deb810287
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: bffc7c3c-02c7-46d1-9835-a9096a16f727 # Background Image
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cc1d1caa-140e-4a7c-bdf2-23190b7aebde
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: a11615b2-853a-4fe3-9dd7-99901084d23e # Background Video
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8581d8c3-edcf-4e97-9b07-d8ac013f2d47
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: d65d412c-37d7-40cd-b379-d7b6d0a20a45 # Tasting Notes
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: aa4fb543-f061-4c0d-90b0-c1a610e33cbe
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: a5788732-8476-446d-b6ed-04f8cc7d9c00 # Awards
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3674ad92-c845-429e-87a0-2849f75ea890
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e0d1e5d4-fa08-455a-9bb5-ec03784c4635
+        userCondition: null
+handle: beerSingle
+hasTitleField: true
+name: 'Individual Beer'
+section: ec54db85-dc39-4841-b6bc-17523b4d074d # Beers
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+sortOrder: 2
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
