@@ -1,0 +1,4 @@
+{% set characterImage = entry.characterArt.one() %}
+{% if characterImage %}
+    <img class="character" src="/images/character-art/{{ characterImage.url }}" alt="The character artwork for {{ entry.title }}">
+{% endif %}

@@ -13,7 +13,9 @@
 				<article class="grid-item" style="background-color: {{ beer.lightColor }};">
 					<div class="grid-item-inner">
 						<div class="text">
-							{% include '_includes/can' with {'block': beer} %}
+							<a href="{{ beer.url }}">
+								{% include '_includes/can' with {'block': beer} %}
+							</a>
 							<div class="text-inner">
 								<h3>{{ beer.title }}</h3>
 								<div class="stats">

@@ -1,0 +1,133 @@
+.top-bar {
+  position: fixed;
+  width: 100vw;
+  height: 300px;
+  z-index: 0;
+}
+.beer-blocks {
+  box-sizing: content-box;
+  padding: $padding-large 0;
+  height: calc(100vh - $margin-large - $margin-large);
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  overflow: scroll;
+  gap: $gap;
+}
+.beer-block {
+  border-radius: $box-radius;
+  position: relative;
+  z-index: 2;
+  &.main {
+    padding-top: $padding-large;
+    width: $width;
+    min-width: $max-width;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 170px;
+    .can-container {
+      flex:20%;
+      max-width: 280px;
+      max-height: 575px;
+      position: relative;
+      left: -100px;
+      .can {
+        object-fit: contain;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+    .text {
+      display: flex;
+      align-items: center;
+      flex: 80%;
+      p {
+        max-width: 600px;
+        margin-bottom: $margin-small;
+      }
+      .inner {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 75%;
+      }
+      h1, h2, p, .style-container .btn {
+        color: $white;
+      }
+      h1 {
+        font-size: 5em;
+      }
+      h2 {
+        font-size: 3em;
+      }
+      h1,
+      h2,
+      .series-title {
+        font-weight: 900;
+      }
+      .style-container,
+      .buttons {
+        display: flex;
+        align-items: center;
+        gap: $gap;
+      }
+      .buttons {
+        .btn {
+          background: $white;
+        }
+      }
+      .character {
+        position: absolute;
+        right: 0;
+        z-index: -1;
+        bottom: 0;
+        max-width: 370px;
+        object-fit: contain;
+      }
+    }
+    .tagline-container,
+    .text-secondary {
+      flex: 100%;
+    }
+    .tagline-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      top: $margin-medium;
+      left: $margin-medium;
+      width: calc(100% - #{$margin-medium} * 2);
+      .tagline {
+        @include small-headers;
+        font-size: .6em;
+      }
+    }
+    .text-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $gap-large;
+      width: 100%;
+      padding: $padding;
+      h4 {
+        @include small-headers;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: $gap;
+      }
+      ul {
+        list-style: none;
+      }
+      li,
+      span {
+        font-weight: 900;
+        color: $white;
+      }
+    }
+  }
+  .award * {
+    color: $white;
+  }
+}

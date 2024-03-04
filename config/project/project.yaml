@@ -1,4 +1,4 @@
-dateModified: 1709329252
+dateModified: 1709518520
 elementSources:
   craft\elements\Entry:
     -
@@ -172,6 +172,7 @@ meta:
     55e9bc16-a0e6-4960-9a50-051e7b8c7dce: Style # Style
     68fb41e9-d36b-46dd-810d-92794e451db6: Image # Image
     76a1851c-73ea-4eb1-8e0d-a7501be656b0: About # About
+    76d8c99d-22ff-41b1-a339-bcd4431c4457: 'Six Packs' # Six Packs
     76d72b7b-bcd8-4f9a-807e-905a9c11c83e: 'Can Images' # Can Images
     77d817c2-40ef-410d-9997-31f71fac9df5: 'Bronze Award' # Bronze Award
     78a4c7b4-e76d-4060-910a-b557917fffcd: Image # Image
@@ -252,6 +253,7 @@ meta:
     ef7ef68b-2072-4b19-835b-e2429a536f4f: Image # Image
     ef14b30a-e09c-44a2-abf7-37e5265430f3: Image # Image
     f72f22c2-cd1f-412b-8d4c-b83e4514b948: 'Our Artists' # Our Artists
+    f649f3ae-9db1-4aeb-a850-3977f5bc45ff: 'Six Pack' # Six Pack
     f8978819-a636-4960-bbd5-f042fb766bbb: Image # Image
     fab91d94-7ec6-4694-80f5-f8da8ac5a47d: 'Public Schema' # Public Schema
     fcbd9c21-4ebd-4557-a8a2-f02bf5c32767: Slide # Slide

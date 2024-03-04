@@ -1,0 +1,37 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: sixPack
+instructions: 'Upload a transparent image of the six pack.'
+name: 'Six Pack'
+searchable: false
+settings:
+  allowSelfRelations: false
+  allowSubfolders: false
+  allowUploads: true
+  allowedKinds:
+    - image
+  branchLimit: null
+  defaultUploadLocationSource: 'volume:76d8c99d-22ff-41b1-a339-bcd4431c4457' # Six Packs
+  defaultUploadLocationSubpath: null
+  localizeRelations: false
+  maintainHierarchy: false
+  maxRelations: null
+  minRelations: null
+  previewMode: full
+  restrictFiles: true
+  restrictLocation: false
+  restrictedDefaultUploadSubpath: null
+  restrictedLocationSource: 'volume:76d72b7b-bcd8-4f9a-807e-905a9c11c83e' # Can Images
+  restrictedLocationSubpath: null
+  selectionLabel: null
+  showSiteMenu: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: large
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Assets

@@ -1,87 +1,161 @@
 {% block content %}
-    <div class="beer-block main">
+<style type="text/css">
+    .text-secondary h4 {
+        color: {{ entry.accentColor }};
+    }
+    .sizes span,
+    .tagline,
+    a.btn,
+    .style-container h2 {
+        color: {{ entry.darkColor }};
+    }
+    .beer-block {
+        background-color: {{ entry.lightColor }};
+    }
+    .top-bar,
+    .text-secondary,
+    .series-title {
+        background-color: {{ entry.darkColor }};
+    }
+    .award svg * {
+        fill: {{ entry.accentColor }};
+    }
+</style>
+<div class="top-bar"></div>
+<article class="beer-blocks">
+    <section class="beer-block main">
         {% if entry.tagline %}
-            <p>{{ entry.tagline }}</p>
-        {% endif %}
-
-        {% set canImg = entry.canImage.one() %}
-        {% if canImg %}
-            <div class="can-container shadow">
-                <img src="/images/cans/{{ canImg.url }}" alt="Transformed Image for can">
+            <div class="tagline-container">
+                <span class="tagline">{{ entry.tagline }}</span>
+                <span class="tagline">Comin’ at you live from Alpine, Wyoming</span>
+                <span class="tagline">{{ entry.tagline }}</span>
+                <span class="tagline">Comin’ at you live from Alpine, Wyoming</span>
             </div>
         {% endif %}
 
+        {% include '_includes/can' with {'block': entry} %}
+
         <div class="text">
-            {% if entry.title %}
-                <h1>{{ entry.title }}</h1>
-            {% endif %}
+            <div class="inner">
+                {% if entry.title %}
+                    <h1>{{ entry.title }}</h1>
+                {% endif %}
 
-            {% if entry.style %}
-                <h2>{{ entry.style }}</h2>
-            {% endif %}
+                <div class="style-container">
+                    {% if entry.style %}
+                        <h2>{{ entry.style }}</h2>
+                    {% endif %}
 
-            {% set parent = entry.getAncestors().one() %}
-            {% if parent %}
-                <span class="series-title">{{ parent.title }}</span>
-            {% endif %}
+                    {% set parent = entry.getAncestors().one() %}
+                    {% if parent %}
+                        <span class="series-title btn">{{ parent.title }}</span>
+                    {% endif %}
+                </div>
 
-            {% if entry.description %}
-                <p>{{ entry.description }}</p>
-            {% endif %}
+                {% if entry.description %}
+                    <p>{{ entry.description }}</p>
+                {% endif %}
 
-            <a class="btn" href="#">Explore</a>
-            <a class="btn" href="#">Find it</a>
-            <a class="btn" href="#">Shop</a>
-
-            {% set characterImage = entry.characterArt.one() %}
-            {% if characterImage %}
-                <img src="/images/character-art/{{ characterImage.url }}" alt="">
-            {% endif %}
+                <div class="buttons">
+                    <a class="btn" href="#">Explore</a>
+                    <a class="btn" href="#">Find it</a>
+                    <a class="btn" href="#">Shop</a>
+                </div>
+            </div>
+            {% include '_includes/characterArt' %}
         </div>
 
         <div class="text-secondary">
             {% if entry.alcohol %}
-                <p>Alcohol Content: {{ entry.alcohol }}</p>
+            <div>
+                <h4>ALC/VOL</h4>
+                <span>{{ entry.alcohol }}</span>
+            </div>
             {% endif %}
 
             {% if entry.ibus %}
-                <p>IBUs: {{ entry.ibus }}</p>
+            <div>
+                <h4>IBUs</h4>
+                <span>{{ entry.ibus }}</span>
+            </div>
             {% endif %}
 
             {% if entry.tastingNotes %}
-                <h3>Tasting Notes</h3>
+            <div>
+                <h4>Tasting Notes</h4>
                 <ul>
                     {% for note in entry.tastingNotes %}
                         <li>{{ note.note }}</li>
                     {% endfor %}
                 </ul>
+            </div>
             {% endif %}
         </div>
-    </div>
+    </section>
+
+    {% if entry.sizes %}
+        {# <div class="beer-block sizes">
+            <h4>Available in these sizes</h4>
+            <ul>
+                {% for size in entry.sizes %}
+                    <li>{{ size.size }}</li><span>+</span>
+                {% endfor %}
+            </ul>
+            {% include '_includes/can' with {'block': entry} %}
+        </div> #}
+    {% endif %}
+
+    <section class="beer-block">
+        {# image block #}
+    </section>
+
+    {% set sixPack = entry.sixPack.one() %}
+    {% if sixPack %}
+        <section class="beer-block">
+            <img class="six-pack" src="/images/six-packs/{{ sixPack.url }}" alt="The six pack for {{ entry.title }}">
+        </section>
+    {% endif %}
+
+    <section class="beer-block">
+        <img src="" alt="Lifestyle image for {{ entry.title }}">
+        <div class="text">
+            <h4>About the Character</h4>
+            <h2>{{ entry.tagline }}</h2>
+            {# <p>{{ entry.story }}</p> #}
+        </div>
+    </section>
+
+    <section class="beer-block">
+        {# image block #}
+    </section>
+
+    <section class="beer-block">
+        {# image block #}
+    </section>
 
     {% if entry.awards %}
-        <h3>Awards</h3>
+    <section class="beer-block">
+        <h4>Awards</h4>
         {% include '_includes/awards' %}
+    </section>
     {% endif %}
 
-    {% if entry.releaseDate %}
-        <p>Release: {{ entry.releaseDate }}</p>
-    {% endif %}
+    <section class="beer-block">
+        {# image block #}
+    </section>
+</article>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var beerBlock = document.querySelector('.beer-block.main');
+<script>
+  gsap.to('.beer-blocks', {
+    x: -window.innerWidth * 5, // Adjust the multiplier based on the number of sections
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.beer-blocks',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+    },
+  });
+</script>
 
-      beerBlock.addEventListener('wheel', function (event) {
-        // Check if the user is scrolling horizontally
-        if (event.deltaY === 0) {
-          // Prevent vertical scrolling
-          event.preventDefault();
-
-          // Adjust the horizontal scroll position
-          beerBlock.scrollLeft += event.deltaX;
-        }
-      });
-    });
-  </script>
 {% endblock %}

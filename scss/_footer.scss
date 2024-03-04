@@ -9,6 +9,9 @@ footer {
   color: $white;
   padding: 5vw;
   border-radius: $box-radius;
+  .logo {
+    max-width: 150px;
+  }
   .footer-links ul,
   .social-links {
     list-style: none;

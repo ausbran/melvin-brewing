@@ -17,6 +17,7 @@ nav {
     position: relative;
   }
   .logo {
+    width: 115px;
     z-index: 2;
     position: absolute;
     left: 0;
@@ -24,6 +25,9 @@ nav {
     bottom: 0;
     margin: auto;
     transition: $transition-medium;
+    img {
+      width: 100%;
+    }
     &:hover {
       opacity: .6;
     }

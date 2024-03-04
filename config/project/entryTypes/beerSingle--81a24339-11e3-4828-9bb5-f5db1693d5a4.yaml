@@ -117,6 +117,18 @@ fieldLayouts:
             width: 100
           -
             elementCondition: null
+            fieldUid: f649f3ae-9db1-4aeb-a850-3977f5bc45ff # Six Pack
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 360f1629-a8b9-42f6-bd5a-de24463b82a5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
             fieldUid: 55e9bc16-a0e6-4960-9a50-051e7b8c7dce # Style
             instructions: null
             label: null

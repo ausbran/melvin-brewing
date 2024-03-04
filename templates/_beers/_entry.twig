@@ -1,5 +1,9 @@
 {% extends "index" %}
 
+{% if entry.type == 'beerSingle' %}
+    {% set bodyClass = 'no-footer' %}
+{% endif %}
+
 {% block content %}
     {% include [
         '_beers/' ~ entry.type

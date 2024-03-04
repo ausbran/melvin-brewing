@@ -3,7 +3,7 @@
   margin-top: calc($margin-large * -1);
   z-index: 1;
   position: relative;
-}
+
 .grid-header {
   margin-bottom: $margin-small;
   color: $white;
@@ -37,7 +37,7 @@
       padding: $padding;
       .can-container {
         max-width: 280px;
-        max-height: 575px;
+        max-height: 525px;
         .can {
           object-fit: contain;
           max-width: 100%;
@@ -91,4 +91,5 @@
       @include translate(3px,0,0);
     }
   }
+}
 }
