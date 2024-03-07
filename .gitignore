@@ -1,6 +1,6 @@
 /.env
 /.idea
-/vendor
+# /vendor
 .DS_Store
 /node_modules/
-/storage
+# /storage
