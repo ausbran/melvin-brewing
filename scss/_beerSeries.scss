@@ -1,95 +1,138 @@
 .outer.series {
-  padding-top: 0;
-  margin-top: calc($margin-large * -1);
-  z-index: 1;
-  position: relative;
-
-.grid-header {
-  margin-bottom: $margin-small;
-  color: $white;
-  text-transform: uppercase;
-}
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $gap;
-}
-.grid-item {
-  border-radius: $box-radius;
-  flex: 32%;
-  max-width: 470px;
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
-  @include flex-center;
-  flex-direction: column;
-  .grid-item-inner {
-    height: 100%;
-    width: 100%;
+    padding-top: 0;
+    margin-top: calc($margin-large * -1);
     z-index: 1;
+    position: relative;
+
+  .grid-header {
+    margin-bottom: $margin-small;
+    color: $white;
+    text-transform: uppercase;
+  }
+  .grid {
     display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+  }
+  .grid-item {
+    border-radius: $box-radius;
+    flex: calc(33% - 10px);
+    max-width: 470px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    @include flex-center;
     flex-direction: column;
-    justify-content: space-between;
-    * {
-      color: $white;
+    .grid-item-inner {
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      * {
+        color: $white;
+      }
+      .text {
+        padding: $padding;
+        .can-container {
+          max-width: 280px;
+          max-height: 525px;
+          .can {
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+        .text-inner {
+          margin-top: calc($padding / 1.25);
+          display: grid;
+          gap: $gap-small 0;
+          h3, span {
+            font-weight: 900;
+          }
+          span {
+            display: inline-block;
+          }
+          .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 $gap;
+          }
+        }
+      }
     }
-    .text {
-      padding: $padding;
-      .can-container {
-        max-width: 280px;
-        max-height: 525px;
-        .can {
-          object-fit: contain;
-          max-width: 100%;
-          max-height: 100%;
-        }
-      }
-      .text-inner {
-        margin-top: calc($padding / 1.25);
-        display: grid;
-        gap: $gap-small 0;
-        h3, span {
-          font-weight: 900;
-        }
-        span {
-          display: inline-block;
-        }
-        .stats {
-          display: flex;
-          gap: 0 $gap;
-        }
-      }
+    &.random .inner {
+      height: 100%;
+      width: 100%;
     }
   }
-  &.random .inner {
-    height: 100%;
+  .dark-color {
+    position: absolute;
     width: 100%;
+    height: 60%;
+    bottom: 0;
+    z-index: 0;
   }
-}
-.dark-color {
-  position: absolute;
-  width: 100%;
-  height: 60%;
-  bottom: 0;
-  z-index: 0;
-}
-.beer-link {
-  @include small-headers;
-  padding: 35px $padding;
-  border-top: 1px solid #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: $transition;
-  cursor: pointer;
-  img {
+  .beer-link {
+    @include small-headers;
+    padding: 35px $padding;
+    border-top: 1px solid #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     transition: $transition;
-  }
-  &:hover {
-    filter: brightness(1.2);
+    cursor: pointer;
     img {
-      @include translate(3px,0,0);
+      transition: $transition;
+    }
+    &:hover {
+      filter: brightness(1.2);
+      img {
+        @include translate(3px,0,0);
+      }
     }
   }
-}
+  @include respond-to-max($desktop-large) {
+    .grid-item {
+      flex: calc(50% - 10px);
+      max-width: 540px;
+    }
+  }
+  @include respond-to-max($desktop) {
+    .grid-item {
+      .grid-item-inner .text,
+      .beer-link {
+          padding: $padding-medium;
+      }
+    }
+  }
+  @include respond-to-max($tablet) {
+    .grid-item {
+      flex: 100%;
+      max-width: unset;
+      .grid-item-inner .text,
+      .beer-link {
+          padding: $padding;
+      }
+      .grid-item-inner p {
+        max-width: 400px;
+      }
+    }
+  }
+  @include respond-to-max($mobile) {
+    margin-top: $margin-medium;
+    .grid-header {
+      color: $dark-blue;
+    }
+    .grid-item .grid-item-inner .text .can-container {
+      max-width: 85%;
+    }
+    .grid-item {
+      .grid-item-inner .text,
+      .beer-link {
+          padding: $padding-medium;
+      }
+    }
+  }
 }

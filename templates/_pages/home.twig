@@ -24,7 +24,7 @@
                 <span class="series-style">{{ beer.style }}</span>
                 {% set parent = beer.getAncestors().one() %}
                 {% if parent %}
-                    <span class="series-title btn border">{{ parent.title }}</span>
+                    <a href="{{parent.url}}"><span class="series-title btn border">{{ parent.title }}</span></a>
                 {% endif %}
             </div>
             <div class="title-container">
@@ -39,14 +39,23 @@
                 </div>
                 {% include '_includes/can' with {'block': beer} %}
                 <div class="background">
-                    {% set bgVid = beer.backgroundVideo.one() %}
+                    {% set bgVid = null %}
+                    {% set bgImg = null %}
+
+                    {% for asset in beer.beerAssets %}
+                        {% if asset.kind == 'video' and not bgVid %}
+                            {% set bgVid = asset %}
+                        {% elseif asset.kind == 'image' and not bgImg %}
+                            {% set bgImg = asset %}
+                        {% endif %}
+                    {% endfor %}
+
                     {% if bgVid %}
                         <video autoplay loop muted preload="metadata" playsinline webkit-playsinline>
-                            <source src="/videos/background-videos/{{ bgVid.url }}" type="video/mp4">
+                            <source src="{{ bgVid.url }}" type="video/mp4">
                         </video>
-                    {% elseif beer.backgroundImage.one() %}
-                        {% set bgImg = beer.backgroundImage.one() %}
-                        <img src="/images/background-images/{{ bgImg.url }}" alt="The background image for {{ beer.title }}">
+                    {% elseif bgImg %}
+                        <img src="{{ bgImg.url }}" alt="Background Image">
                     {% endif %}
                 </div>
             </div>

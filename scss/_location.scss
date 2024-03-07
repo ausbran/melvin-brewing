@@ -1,7 +1,6 @@
 :root {
   --min-height: 250px;
 }
-
 .outer {
   z-index: 1;
   position: relative;
@@ -17,27 +16,71 @@
   grid-gap: $gap;
   flex-wrap: wrap;
   .grid-item {
+    gap: $gap;
     padding: $padding;
     min-height: var(--min-height);
-    background: $dark-blue;
+    background: $gray;
+    color: $dark-blue;
     border-radius: $box-radius;
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    @include flex-center;
+    display: flex;
+    justify-content: space-between;
     flex-direction: column;
     * {
-      color: $white;
+      font-weight: 700;
     }
-    .text {
-
+    p {
+      max-width: 250px;
+      line-height: 1.5em;
+    }
+    h4 {
+      @include small-headers;
+      margin-bottom: $margin-small;
     }
     &.random .inner {
       height: 100%;
       width: 100%;
     }
+    .arrow {
+      background: $white;
+      position: relative;
+      z-index: 1;
+      svg * {
+        fill: $dark-blue;
+      }
+    }
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(5) {
+      background: $dark-blue;
+      * {
+        color: $white;
+      }
+    }
     &:nth-child(1) {
-        grid-row: span 2;
+      grid-row: span 2;
+      img {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        flex: 50%;
+        min-height: 50%;
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+    &:nth-child(2) {
+      a {
+        display: flex;
+        gap: 8px;
+      }
+      img {
+        width: 80px;
+        display: inline-block;
+      }
     }
     &:nth-child(2),
     &:nth-child(3) {
@@ -48,9 +91,34 @@
     &:nth-child(5) {
         grid-row: span 1;
     }
+    &:nth-child(5) {
+      p {
+        max-width: 300px;
+      }
+    }
     &:nth-child(7) {
         grid-column: span 2;
         min-height: calc(var(--min-height) * 2);
+    }
+  }
+  @include respond-to-max($desktop-large) {
+    grid-template-columns: repeat(2, 1fr);
+    .grid-item{
+      &:nth-child(6) {
+        grid-column: span 2;
+      }
+    }
+  }
+  @include respond-to-max($tablet) {
+    grid-template-columns: 1fr;
+    .grid-item {
+      grid-column: span 2 !important;
+      &:nth-child(1) {
+        min-height: 400px;
+        img {
+          height: 50%;
+        }
+      }
     }
   }
 }

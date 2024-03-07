@@ -1,5 +1,5 @@
 {% for block in entry.cardSlider.level(1).all() %}
-    <div class="card-slider slider">
+    <div class="card-slider slider {{ entry.slug }}">
         {% switch block.type.handle %}
             {% case 'cardSliderInner' %}
             {% if block.children.all() is not empty %}
@@ -38,7 +38,7 @@
                                                             </div>
                                                         {% case 'image' %}
                                                             {% set image = grandChild.image.one() %}
-                                                                <img src="/images/general-images/{{ image.url }}" alt="An image for {{ block.title }}">
+                                                                <img src="{{ image.url }}" alt="An image for {{ block.title }}">
                                                      {% endswitch %}
                                                  {% endfor %}
                                              {% endif %}

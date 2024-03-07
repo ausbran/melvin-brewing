@@ -37,4 +37,14 @@
       }
     }
   }
+  .arrow {
+    background: $white !important;
+    svg * {
+      fill: $dark-blue !important;
+    }
+  }
+  @include respond-to-max($scroll-padding) {
+    padding-left: 50px;
+    margin-top: $margin;
+  }
 }

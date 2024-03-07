@@ -4,8 +4,6 @@
     {% if entry.type == 'home' %}
         {% include '_pages/home.twig' %}
     {% else %}
-        {% include [
-            '_pages/' ~ entry.slug
-        ] %}
+        {% include '_includes/landing' %}
     {% endif %}
 {% endblock %}

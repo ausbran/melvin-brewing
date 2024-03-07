@@ -1,0 +1,27 @@
+columnSuffix: xmkzetss
+contentColumnType: text
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: beerStory
+instructions: 'Include a story about the beer or character.'
+name: 'Beer Story'
+searchable: false
+settings:
+  availableTransforms: '*'
+  availableVolumes: '*'
+  columnType: text
+  configSelectionMode: choose
+  defaultTransform: 24191240-8b69-49ba-8827-7ce1b93a9d92 # Background
+  manualConfig: ''
+  purifierConfig: null
+  purifyHtml: true
+  redactorConfig: null
+  removeEmptyTags: true
+  removeInlineStyles: false
+  removeNbsp: false
+  showHtmlButtonForNonAdmins: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\redactor\Field

@@ -1,5 +1,6 @@
 {% set textAlignment = '' %}
 {% set maxWidth = null %}
+{% set class = '' %}
 
 {% for block in entry.landingSection.all() %}
     {% if block.type.handle == 'description' %}
@@ -8,7 +9,7 @@
     {% endif %}
 {% endfor %}
 
-<div class="landing-section">
+<div class="landing-section {{ entry.slug }}">
     <div class="inner {% if textAlignment%}{{ textAlignment }}{% endif %} ">
         <div class="text {% if entry.landingSection.type('lottieAnimation').count() > 0 %}lottie{% endif %}" {% if maxWidth %}style="max-width:{{ maxWidth }}px;"{% endif %}>
             {% for block in entry.landingSection.all() %}
@@ -25,7 +26,7 @@
                         </div>
                     {% case 'image' %}
                         {% set image = block.image.one() %}
-                        <img src="/images/general-images/{{ image.url }}" alt="An image for {{ block.title }}">
+                        <img src="{{ image.url }}" alt="An image for {{ block.title }}">
                     {% case 'awards' %}
                         {% include '_includes/awards' %}
                 {% endswitch %}

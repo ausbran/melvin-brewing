@@ -36,7 +36,7 @@ settings:
           - 19.2oz
         -
           - value
-          - 192oz
+          - 19.2oz
         -
           - default
           - ''
@@ -47,7 +47,7 @@ settings:
           - '4 Pack'
         -
           - value
-          - 4Pack
+          - '4 Pack'
         -
           - default
           - ''
@@ -58,7 +58,7 @@ settings:
           - '6 Pack'
         -
           - value
-          - 6Pack
+          - '6 Pack'
         -
           - default
           - ''
@@ -69,7 +69,7 @@ settings:
           - '12 Pack'
         -
           - value
-          - 12Pack
+          - '12 Pack'
         -
           - default
           - ''
@@ -80,7 +80,7 @@ settings:
           - '5.2 Gallon'
         -
           - value
-          - 52Gal
+          - 5.2Gal
         -
           - default
           - ''
@@ -91,7 +91,7 @@ settings:
           - '15.5 Gallon'
         -
           - value
-          - 155Gal
+          - 15.5Gal
         -
           - default
           - ''
@@ -102,7 +102,7 @@ settings:
           - Bottle
         -
           - value
-          - bottle
+          - Bottle
         -
           - default
           - ''

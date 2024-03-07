@@ -2,16 +2,12 @@
     {% set video = block.backgroundVideo.one() %}
     {% if video %}
         <video autoplay loop muted preload="metadata" playsinline webkit-playsinline>
-            <source src="/videos/background-videos/{{ video.url }}" type="video/mp4">
+            <source src="{{ video.url }}" type="video/mp4">
         </video>
     {% elseif block.backgroundImage.one() %}
         {% set bg = block.backgroundImage.one() %}
         {% if bg %}
-            {# Get the path dynamically based on the chosen volume #}
-            {% set folder = bg.getFolder() %}
-            {% set urlFix = folder | kebab %}
-            {% set url = '/images/' ~ urlFix ~ '/' ~ bg.filename %}
-            <img src="{{ url }}" alt="The background image for {{ block.title }}" style="{% if block.backgroundSize %}object-fit:{{ block.backgroundSize }};{% endif %}
+            <img src="{{ bg.getUrl('backgroundFit') }}" alt="The background image for {{ block.title }}" style="{% if block.backgroundSize %}object-fit:{{ block.backgroundSize }};{% endif %}
     {% if height is defined %}
         {% set dynamicHeight = height | default('100') %}
         {% if dynamicHeight | replace('px', '') != dynamicHeight %}

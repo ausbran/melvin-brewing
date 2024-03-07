@@ -33,7 +33,7 @@
 						</div>
 						<a href="{{ beer.url }}" class="beer-link" style="background-color: {{ beer.darkColor }};">
 							Explore
-							<img src="/images/icons/arrow.svg" alt="Arrow Icon">
+							{% include '_includes/_svg/arrow.svg' %}
 						</a>
 					</div>
 					<div class="dark-color" style="background-color: {{ beer.darkColor }};"></div>
@@ -48,7 +48,7 @@
 			    {% set randomIndex = random(0, images|length - 1) %}
 			    {% set randomImage = images[randomIndex] %}
 			    <article class="grid-item random">
-		        <div class="inner" style="background: center / cover url(/images/background-images/{{ randomImage.url }}) no-repeat"></div>
+		        <div class="inner" style="background: center / cover url({{ randomImage.url }}) no-repeat"></div>
 			    </article>
 				{% endif %}
 

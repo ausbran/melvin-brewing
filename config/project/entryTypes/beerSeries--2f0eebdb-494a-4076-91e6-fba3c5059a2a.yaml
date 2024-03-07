@@ -33,6 +33,18 @@ fieldLayouts:
             width: 100
           -
             elementCondition: null
+            fieldUid: 8f9dcf6c-c14a-42d3-93aa-50bb7d29b35d # Background Color
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: fe24bc2a-83d0-4241-ae2e-6bf1a4cebead
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
             fieldUid: 537b387e-676e-45bc-8784-94ab111fecb8 # Series Landing Section
             instructions: null
             label: null

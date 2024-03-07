@@ -1,16 +1,29 @@
 footer {
+  position: relative;
   text-align: center;
-  @include flex-center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
   flex-direction: column;
   gap: $gap-large;
-  width: calc(100vw - 100px);
-  margin: 50px auto;
+  width: $width;
+  margin: $margin auto;
   background: $dark-blue;
   color: $white;
-  padding: 5vw;
+  min-height: 400px;
+  padding: $padding-large;
   border-radius: $box-radius;
+  overflow: hidden;
   .logo {
-    max-width: 150px;
+    @include rotate(20);
+    min-width: 42%;
+    min-height: 125%;
+    opacity: .025;
+    position: absolute;
+    left: -1%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
   }
   .footer-links ul,
   .social-links {
@@ -18,17 +31,42 @@ footer {
     display: flex;
     gap: $gap-large;
   }
+  .footer-links {
+    li {
+      @include small-headers;
+    }
+  }
   .social-links {
     .social-link {
       height: 20px;
       display: inline-block;
-      transition: $transition;
       img {
         height: 100%;
       }
-      &:hover {
-        opacity: .6;
-      }
     }
+  }
+  .social-link,
+  .footer-links li {
+    transition: $transition;
+    &:hover {
+      opacity: .6;
+    }
+  }
+}
+@include respond-to-max($desktop) {
+  footer {
+    width: $width-medium;
+    margin: $margin-medium;
+  }
+}
+@include respond-to-max($tablet) {
+  footer {
+    align-items: center;
+  }
+}
+@include respond-to-max($mobile) {
+  footer {
+    width: $width-small;
+    margin: $margin-small;
   }
 }

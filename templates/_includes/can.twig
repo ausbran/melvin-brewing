@@ -1,16 +1,38 @@
 <div class="can-container shadow">
-    {% set canVid = block.canVideo.one() %}
-    {% if canVid %}
+    {% if block.canVideo.one() %}
+        {% set canVid = block.canVideo.one() %}
         <video class="can" autoplay loop muted playsinline webkit-playsinline>
             <source 
-            src="/videos/cans/{{ canVid.url }}"
+            src="{{ canVid.url }}"
             type="video/webm">
             <source 
-            src="/videos/cans/{{ canVid.url }}"
+            src="{{ canVid.url }}"
             type='video/mp4; codecs="hvc1"'>
         </video>
     {% elseif block.canImage.one() %}
-        {% set canImg = block.canImage.one() %}
-        <img class="can" src="/images/cans/{{ canImg.url }}" alt="The can for {{ block.title }}">
+        {% set can = block.canImage.one() %}
+        {% set transform = 
+            [
+                {
+                    asset: can,
+                    transform: {
+                        width: 300,
+                        height: 575,
+                        mode: 'fit',
+                        format: 'webp'
+                    }
+                }      
+            ]
+         %}
+
+        {% set class = {
+            class: 'can',
+        } %}
+
+        {% set attributes = {
+            quality: 90,
+        } %}
+
+        {{ craft.images.pictureMultiple(transform, class, attributes) }}
     {% endif %}
 </div>

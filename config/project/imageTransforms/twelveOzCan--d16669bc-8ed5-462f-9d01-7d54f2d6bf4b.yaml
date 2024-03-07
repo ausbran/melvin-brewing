@@ -6,6 +6,6 @@ interlace: none
 mode: fit
 name: 'Twelve oz Can'
 position: center-center
-quality: 80
+quality: 100
 upscale: true
 width: 300

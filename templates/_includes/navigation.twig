@@ -9,6 +9,11 @@
 		{% else %}
 		    Not set.
 		{% endif %}
+		<div class="hamburger">
+		  <span></span>
+		  <span></span>
+		  <span></span>
+		</div>
 		<ul class="primary-links">
 		    {% for node in nodes %}
 		        <li class="link">
@@ -18,7 +23,7 @@
 			                {% include '_includes/close' %}
 		                  {{ node.description }}
 		                  {% if node.children|length > 3 %}
-		                      {% include '_includes/arrowsDark' %}
+		                      {% include '_includes/arrows' %}
 		                  {% endif %}
 		                </div>
 			            <ul class="secondary-link slider-inner">
@@ -27,7 +32,7 @@
 		                            <li class="inner slide">
 		                                {% if subnode.backgroundImage %}
 		                                    <a class="gradient" href="{{ subnode.url }}">
-		                                       <img src="/images/background-images/{{ subnode.backgroundImage.one().url }}" alt="">
+		                                       <img src="{{ subnode.backgroundImage.one().getUrl('backgroundNavigation') }}" alt="">
 		                                       <span class="link-title" >{{ subnode.title }}</span>
 		                                    </a>
 		                                {% else %}

@@ -39,10 +39,14 @@
       left: 0;
       height: 100%;
       width: inherit;
+      &:empty {
+        display: none !important;
+      }
       .text {
         gap: $gap;
         z-index: 1;
         position: relative;
+        width: 100%;
         max-width: 600px;
         color: $white;
         text-align: center;
@@ -60,6 +64,84 @@
         height: 100%;
         img {
           object-fit: cover;
+        }
+      }
+    }
+  }
+  @include respond-to-max($tablet) {
+    &.multiple {
+      &.outer {
+        overflow: scroll;
+        width: 100%;
+        margin: $margin 0 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: $gap;
+      }
+      .entry-head {
+        text-align: left;
+        margin: 0 $margin-medium;
+      }
+      .entry-nav {
+        display: none;
+      }
+      .entry-body {
+        min-height: 600px;
+        overflow: scroll;
+        display: flex !important;
+        gap: $gap;
+        border-radius: 0;
+        .inner {
+          opacity: 1 !important;
+          visibility: visible !important;
+          position: relative;
+          top: 0;
+          left: 0;
+          height: 70vh;
+          border-radius: 10px;
+          overflow: hidden;
+          min-width: calc(100vw - 80px);
+          padding: unset;
+          &:first-of-type {
+            margin-left: $margin-medium;
+          }
+          .text {
+            padding: $padding $padding-small;
+            img {
+              max-height: 90px;
+            }
+          }
+          &:last-of-type {
+            margin-right: $margin-medium;
+            &:before {
+              content: '';
+              position: absolute;
+              left: 100%;
+              width: $margin-medium;
+            }
+          }
+        }
+      }
+    } // wrap in .multiple if entryToggle has multiple children.
+  } // end $tablet
+  @include respond-to-max($mobile) {
+    &:not(.multiple) {
+      margin: $margin-small;
+    }
+    .entry-body {
+      min-height: 500px;
+    }
+    &.multiple {
+      .entry-head {
+        margin: 0 $margin-small;
+      }
+      .entry-body .inner {
+        min-width: calc(100vw - 60px);
+        &:first-of-type {
+          margin-left: $margin-small;
+        }
+        &:last-of-type {
+          margin-right: $margin-small;
         }
       }
     }

@@ -10,6 +10,8 @@ $gold: #F4C017;
 
 // sizing---------------------------------------
 $width: calc(100vw - 100px);
+$width-medium: calc(100vw - 60px);
+$width-small: calc(100vw - 40px);
 $max-width: 1450px;
 
 // shapes---------------------------------------
@@ -33,7 +35,7 @@ $box-shadow: 0px 15px 50px rgba($black, .2);
 // grid-----------------------------------------
 $margin-large: 100px;
 $margin: 60px;
-$margin-medium: 40px;
+$margin-medium: 30px;
 $margin-small: 20px;
 $padding-large: 100px;
 $padding: 45px;
@@ -51,7 +53,12 @@ $min-box-height: 700px;
 $box-radius: 10px;
 
 //breakpoints----------------------------------
-$small-screen: 576px;
-$medium-screen: 768px;
-$large-screen: 992px;
-$xlarge-screen: 1200px;
+$mobile-small: 375px;
+$mobile: 576px;
+$tablet: 768px;
+$desktop: 992px;
+$desktop-large: 1200px;
+$desktop-xlarge: 1500px;
+$desktop-xxlarge: 1920px;
+$desktop-xxxlarge: 2200px;
+$scroll-padding: 1550px;

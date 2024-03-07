@@ -38,18 +38,19 @@
 		}
   }
   .background {
+    top: 0;
   	position: absolute;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: black; /* Adjust the overlay color as needed */
-        opacity: 0; /* Default opacity if not defined in CMS */
-        z-index: 1; /* Adjust the z-index if needed to control overlay stacking */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $black;
+      opacity: 0;
+      z-index: 1;
     }
   }
   &.series {
@@ -75,4 +76,87 @@
       }
     }
   }
-}
+  &.contact {
+    .text {
+      max-width: unset;
+      .buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .btn {
+        background: $white;
+        color: $dark-blue;
+      }
+    }
+  }
+  &.location {
+    .inner img {
+      width: unset;
+    }
+  }
+  &.our-awards {
+    height: unset;
+    .arrow {
+      background: $white !important;
+      svg * {
+        fill: $dark-blue !important;
+      }
+    }
+  }
+  @include respond-to-max($desktop) {
+    &.series {
+      .inner .can-container {
+        max-height: 500px;
+        max-width: 250px;
+      }
+      .inner .text {
+        img {
+          max-height: 120px;
+          width: unset;
+        }
+        p {
+          width: 100%;
+          max-width: unset;
+          margin-left: unset;
+        }
+      }
+    }
+    .inner {
+      padding: $padding;
+    }
+  } // end $desktop
+  @include respond-to-max($tablet) {
+    max-height: 800px;
+    &.series {
+      .inner {
+        padding: $padding-medium;
+      }
+    }
+  } // end $tablet
+  @include respond-to-max($mobile) {
+    &.series {
+      height: unset;
+      .inner .can-container {
+        max-height: 600px;
+        max-width: 350px;
+      }
+      .inner .text img {
+        max-width: 90%;
+        position: absolute;
+        top: 85px;
+        right: 0;
+        left: 0;
+        margin: auto;
+        max-height: 100px;
+      }
+      .inner {
+        flex-direction: column;
+        padding: $padding-small;
+        padding-top: 230px;
+      }
+    }
+    .inner {
+      padding: $padding-small;
+    }
+  } // end $mobile
+} // end landing-section

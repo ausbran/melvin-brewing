@@ -1,4 +1,4 @@
-dateModified: 1709518520
+dateModified: 1709789150
 elementSources:
   craft\elements\Entry:
     -
@@ -57,68 +57,68 @@ email:
   transportType: craft\mail\transportadapters\Sendmail
 fs:
   artistArt:
-    hasUrls: false
+    hasUrls: true
     name: 'Artist Art'
     settings:
       path: /images/artist-art
     type: craft\fs\Local
-    url: null
+    url: '@web'
   backgroundImages:
-    hasUrls: false
+    hasUrls: true
     name: 'Background Images'
     settings:
-      path: images/background-images
+      path: '@webroot/images/background-images'
     type: craft\fs\Local
-    url: null
+    url: /images/background-images
   backgroundVideos:
-    hasUrls: false
+    hasUrls: true
     name: 'Background Videos'
     settings:
-      path: videos/background-videos
+      path: '@webroot/videos/background-videos'
     type: craft\fs\Local
-    url: null
+    url: /videos/background-videos
   canImages:
-    hasUrls: false
+    hasUrls: true
     name: 'Can Images'
     settings:
-      path: images/cans
+      path: '@webroot/images/cans'
     type: craft\fs\Local
-    url: null
+    url: /images/cans
   canVideos:
-    hasUrls: false
+    hasUrls: true
     name: 'Can Videos'
     settings:
-      path: videos/cans
+      path: '@webroot/videos/cans'
     type: craft\fs\Local
-    url: null
+    url: /videos/cans
   characterArt:
-    hasUrls: false
+    hasUrls: true
     name: 'Character Art'
     settings:
-      path: images/character-art
+      path: '@webroot/images/character-art'
     type: craft\fs\Local
-    url: null
+    url: /images/character-art
   generalImages:
-    hasUrls: false
+    hasUrls: true
     name: 'General Images'
     settings:
-      path: images/general-images
+      path: '@webroot/images/general-images'
     type: craft\fs\Local
-    url: null
+    url: /images/general-images
   menus:
-    hasUrls: false
+    hasUrls: true
     name: Menus
     settings:
-      path: images/menus
+      path: '@webroot/images/menus'
     type: craft\fs\Local
-    url: null
+    url: /images/menus
   sixPacks:
-    hasUrls: false
+    hasUrls: true
     name: 'Six Packs'
     settings:
-      path: images/six-packs
+      path: '@webroot/images/six-packs'
     type: craft\fs\Local
-    url: null
+    url: /images/six-packs
 meta:
   __names__:
     0c17af3e-bce7-4bba-9377-45c13f662fac: 'Button Link' # Button Link
@@ -158,16 +158,18 @@ meta:
     9b8c6c65-161d-4de1-b5c0-2f8dc954df9e: Button # Button
     9c713e83-f0c5-4a2d-b111-e0ae67fa8153: Simple # Simple
     9f07dd88-6f43-4077-bdb0-cd92afabd6ad: 'Tap List' # Tap List
+    9f5f0742-4deb-4408-a64a-f60a318f5e7e: Page # Page
     12dfe028-e83e-4153-a5d8-6212d151b7e5: Directions # Directions
     021dc031-5726-4bf4-808e-53a9d3c50ab2: Buttons # Buttons
     23ac335b-6422-49a1-b854-c74e5cf4e66f: Description # Description
     25c6a98b-d119-4ae1-8d5f-e0a804ac1448: 'Series Toggle' # Series Toggle
+    26df24ca-f2a9-40af-9c8a-01fb103c9b71: 'Beer Assets' # Beer Assets
     33cf5f76-e7a1-4bf0-9540-9df537e093bf: 'Location Fields' # Location Fields
     35d5050e-3d8c-448a-8ed5-1a9eaba13e13: 'Melvin Brewing' # Melvin Brewing
     43f9dbe1-a2b3-47e3-92df-7be878d7367c: 'Background Image' # Background Image
     44e811f6-d3d3-40d4-8ab8-c619a2ca9ed7: Sizes # Sizes
     46a0b265-f7ea-4e70-91d4-ef6fb8cde9f8: 'Link URL' # Link URL
-    47a2a87b-81e2-4dc8-8c48-9fe1c88ef5b2: Default # Default
+    47a2a87b-81e2-4dc8-8c48-9fe1c88ef5b2: Location # Location
     49ddd7e6-e7c8-4daa-9efc-c76341c5f129: 'Can Video' # Can Video
     55e9bc16-a0e6-4960-9a50-051e7b8c7dce: Style # Style
     68fb41e9-d36b-46dd-810d-92794e451db6: Image # Image
@@ -190,6 +192,7 @@ meta:
     1777ecad-74d3-487a-bfa0-01bcdbb8654a: Footer # Footer
     2123b6aa-6742-448c-95ac-70a91f1dfcef: 'General Fields' # General Fields
     2382eb8f-094b-419b-9d10-9646b6a08d24: 'Lifestyle Images' # Lifestyle Images
+    04064be6-a1dd-4ced-87d6-df11aec37a6d: 'Beer Story' # Beer Story
     4169ea13-b47e-4db2-a7bc-7c20b7a9a017: Description # Description
     5203aa15-48e5-4e8f-9881-a8551a8593e3: Description # Description
     7376a32e-bb38-4467-b1b4-6e6db135167e: 'CSS Fields' # CSS Fields
@@ -204,6 +207,7 @@ meta:
     7834810e-5c24-45f4-a020-d738de7d7f03: 'Button Link' # Button Link
     13504266-15af-46cc-abf9-80c9136fa83b: 'Background Overlay' # Background Overlay
     19428820-5a56-496c-a33a-d04ff9dac689: 'Artist Fields' # Artist Fields
+    24191240-8b69-49ba-8827-7ce1b93a9d92: Background # Background
     56292139-df69-4ba6-9471-83d0004f69ff: 'Entry Field inner' # Entry Field inner
     68810252-e0a1-46b8-9e77-0e47a057261b: Pages # Pages
     98806770-54d6-40e5-a88c-d8c5af972ee9: Description # Description
@@ -257,8 +261,14 @@ meta:
     f8978819-a636-4960-bbd5-f042fb766bbb: Image # Image
     fab91d94-7ec6-4694-80f5-f8da8ac5a47d: 'Public Schema' # Public Schema
     fcbd9c21-4ebd-4557-a8a2-f02bf5c32767: Slide # Slide
+    fd3723f7-ae7c-4ae3-ae60-3e2044f82fac: 'Background Navigation' # Background Navigation
     fdb4b497-cc54-40da-b81e-d107903c5bc6: 'Our Story' # Our Story
 plugins:
+  express-forms:
+    edition: pro
+    enabled: true
+    licenseKey: D0J8UVQN5Y7MVP9UBUX51KBP
+    schemaVersion: 1.0.2
   field-manager:
     edition: standard
     enabled: true
@@ -266,7 +276,7 @@ plugins:
     settings:
       cpSectionEnabled: true
   image-toolbox:
-    edition: pro
+    edition: lite
     enabled: true
     licenseKey: 0GYYCQN4XZPF0OB7HS3ANP1H
     schemaVersion: 1.0.0
@@ -284,6 +294,11 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 2.3.0
+  seomatic:
+    edition: standard
+    enabled: true
+    licenseKey: LJW88RX1V7BBQB200N3BW540
+    schemaVersion: 3.0.12
 system:
   edition: pro
   live: true

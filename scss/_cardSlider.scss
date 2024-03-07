@@ -39,6 +39,14 @@ $colsSmallDesktop: 3;
       color: $dark-blue;
     }
   }
+  &.our-story {
+    .arrow {
+      background: $white !important;
+      svg * {
+        fill: $dark-blue;
+      }
+    }
+  }
   .slide {
     border: 1px solid $white; 
     display: flex;
@@ -53,7 +61,7 @@ $colsSmallDesktop: 3;
     flex-shrink: 0;
     max-height: 600px;
     max-width: $max-width;
-    width: $max-width;
+    width: 90%;
     overflow: hidden;
     h4 {
       @include small-headers;
@@ -120,6 +128,35 @@ $colsSmallDesktop: 3;
           object-position: center;
         }
       }
+    }
+  }
+  @include respond-to-max($desktop-large) {
+    margin: $margin;
+    .slide {
+      flex-direction: column-reverse;
+      max-height: unset;
+      width: 100%;
+      margin: unset !important;
+    }
+    .slide .text {
+      padding: $padding;
+      overflow: visible;
+    }
+    .slide .background {
+      max-height: 400px;
+      width: 100%;
+      img {
+        object-fit: cover !important;
+      }
+    }
+  }
+  @include respond-to-max($desktop) {
+    margin: $margin-medium;
+  }
+  @include respond-to-max($mobile) {
+    margin: $margin-small;
+    .slide .text {
+      padding: $padding-medium;
     }
   }
 }

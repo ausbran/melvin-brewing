@@ -1,0 +1,11 @@
+fill: null
+format: webp
+handle: backgroundFit
+height: 1080
+interlace: none
+mode: fit
+name: Background
+position: center-center
+quality: 80
+upscale: true
+width: 1920

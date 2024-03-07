@@ -33,7 +33,7 @@
                         </div>
                     {% case 'image' %}
                         {% set image = block.image.one() %}
-                        <img {% if block.maxWidth %}style="max-width:{{ block.maxWidth }}px;"{% endif %} src="/images/general-images/{{ image.url }}" alt="An image for {{ block.title }}">
+                        <img {% if block.maxWidth %}style="max-width:{{ block.maxWidth }}px;"{% endif %} src="{{ image.url }}" alt="An image for {{ block.title }}">
                 {% endswitch %}
             {% endfor %}
         </div>

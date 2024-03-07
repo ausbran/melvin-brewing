@@ -1,0 +1,38 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
+handle: beerAssets
+instructions: 'Upload lifestyle images or videos associated with the beer.'
+name: 'Beer Assets'
+searchable: false
+settings:
+  allowSelfRelations: false
+  allowSubfolders: false
+  allowUploads: true
+  allowedKinds:
+    - image
+    - video
+  branchLimit: null
+  defaultUploadLocationSource: 'volume:5bde54d0-f163-4aff-82a7-fb8f3d0066a5' # Background Images
+  defaultUploadLocationSubpath: null
+  localizeRelations: false
+  maintainHierarchy: false
+  maxRelations: null
+  minRelations: null
+  previewMode: full
+  restrictFiles: true
+  restrictLocation: false
+  restrictedDefaultUploadSubpath: null
+  restrictedLocationSource: 'volume:76d72b7b-bcd8-4f9a-807e-905a9c11c83e' # Can Images
+  restrictedLocationSubpath: null
+  selectionLabel: null
+  showSiteMenu: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: large
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Assets

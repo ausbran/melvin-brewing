@@ -117,6 +117,18 @@ fieldLayouts:
             width: 100
           -
             elementCondition: null
+            fieldUid: 04064be6-a1dd-4ced-87d6-df11aec37a6d # Beer Story
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f56dc677-011f-4441-af82-de09136ec6ce
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
             fieldUid: f649f3ae-9db1-4aeb-a850-3977f5bc45ff # Six Pack
             instructions: null
             label: null
@@ -189,25 +201,13 @@ fieldLayouts:
             width: 100
           -
             elementCondition: null
-            fieldUid: bffc7c3c-02c7-46d1-9835-a9096a16f727 # Background Image
+            fieldUid: 26df24ca-f2a9-40af-9c8a-01fb103c9b71 # Beer Assets
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: cc1d1caa-140e-4a7c-bdf2-23190b7aebde
-            userCondition: null
-            warning: null
-            width: 100
-          -
-            elementCondition: null
-            fieldUid: a11615b2-853a-4fe3-9dd7-99901084d23e # Background Video
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: 8581d8c3-edcf-4e97-9b07-d8ac013f2d47
+            uid: f6d6a43b-385f-4b24-9b5e-b528b102f9de
             userCondition: null
             warning: null
             width: 100

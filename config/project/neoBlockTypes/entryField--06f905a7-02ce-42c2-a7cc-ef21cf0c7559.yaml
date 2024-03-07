@@ -93,8 +93,26 @@ fieldLayouts:
             userCondition: null
             warning: null
             width: 100
-        name: Entry
+        name: Content
         uid: c8e3fe17-b61d-4695-8cc4-966b9d97620a
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 0fe7b501-d81b-44ac-9f5d-e7e3ba23600b # Max Width
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7cfa2a20-f1f0-434d-9ee3-994fa2c7d282
+            userCondition: null
+            warning: null
+            width: 100
+        name: Settings
+        uid: cc283dff-4bb7-4eb3-a4b6-eaaf963580c7
         userCondition: null
 group: null
 groupChildBlockTypes: true

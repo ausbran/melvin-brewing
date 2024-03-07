@@ -17,57 +17,81 @@ function supportsHEVCAlpha() {
 }
 
 // navigation.twig
+document.addEventListener('DOMContentLoaded', function() {
 var links = document.querySelectorAll('.link');
 var secondaryContainer = document.querySelector('.secondary-container');
+var hamburger = document.querySelector('.hamburger');
+var nav = document.querySelector('nav');
+var primaryLinks = document.querySelector('.primary-links');
 
-links.forEach(function (link) {
-  link.addEventListener('click', function (event) {
-      links.forEach(function (otherLink) {
-          if (otherLink !== link) {
-              var otherSecondaryLinks = otherLink.querySelector('.secondary-links');
-              if (otherSecondaryLinks) {
-                  otherSecondaryLinks.classList.remove('visible');
-              }
-          }
-      });
-
-      var secondaryLinks = link.querySelector('.secondary-links');
-      if (secondaryLinks) {
-          secondaryLinks.classList.toggle('visible');
-
-          // Toggle visibility of secondary-container if at least one secondary-link is visible
-          if (secondaryContainer) {
-              var isVisible = Array.from(links).some(function (otherLink) {
-                  var otherSecondaryLinks = otherLink.querySelector('.secondary-links');
-                  return otherSecondaryLinks && otherSecondaryLinks.classList.contains('visible');
-              });
-
-              secondaryContainer.classList.toggle('visible', isVisible);
-          }
-      }
+// Function to open the menu for a specific link
+function openMenu(link) {
+  links.forEach(function (otherLink) {
+    var otherSecondaryLinks = otherLink.querySelector('.secondary-links');
+    if (otherSecondaryLinks) {
+      otherSecondaryLinks.classList.remove('visible');
+    }
   });
-});
 
-function onMainScroll() {
-  links.forEach(function (link) {
-      var secondaryLinks = link.querySelector('.secondary-links');
-      if (secondaryLinks) {
-          secondaryLinks.classList.remove('visible');
-      }
-  });
-  if (secondaryContainer) {
-      secondaryContainer.classList.remove('visible');
+  var secondaryLinks = link.querySelector('.secondary-links');
+  if (secondaryLinks) {
+    secondaryLinks.classList.add('visible');
+    secondaryContainer.classList.add('visible');
   }
 }
 
-let raf;
+// Function to close the menu
+function closeMenu() {
+  links.forEach(function (link) {
+    var secondaryLinks = link.querySelector('.secondary-links');
+    if (secondaryLinks) {
+      secondaryLinks.classList.remove('visible');
+    }
+  });
+  secondaryContainer.classList.remove('visible');
+}
+
+// Event listener for link clicks
+links.forEach(function (link) {
+  link.addEventListener('click', function (event) {
+    openMenu(link);
+  });
+});
+
+// Event listener for hamburger click
+hamburger.addEventListener('click', function() {
+  nav.classList.toggle('menu-opened');
+  primaryLinks.classList.toggle('menu-opened');
+});
+
+// Event listener for scroll to close
 window.onscroll = function (event) {
-  cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(onMainScroll);
+  closeMenu();
 };
 
-// call for cases when page loads mid-scroll:
-onMainScroll();
+document.body.addEventListener('click', function(event) {
+    if (event.target.closest('.close')) {
+        closeMenu();
+    }
+});
+
+function handleScroll() {
+  var scrolledClass = 'scrolled';
+  if (window.scrollY > 100) {
+    nav.classList.add(scrolledClass);
+  } else {
+    nav.classList.remove(scrolledClass);
+  }
+
+  // Request the next animation frame
+  requestAnimationFrame(handleScroll);
+}
+
+// Initial call to start RAF loop
+handleScroll();
+
+});
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
