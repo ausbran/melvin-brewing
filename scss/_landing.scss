@@ -1,6 +1,6 @@
 .landing-section {
 	position: relative;
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   min-height: 600px;
   @include flex-center;
@@ -110,6 +110,7 @@
   @include respond-to-max($desktop) {
     &.series {
       .inner .can-container {
+        height: 75%;
         max-height: 500px;
         max-width: 250px;
       }
@@ -133,10 +134,10 @@
     }
   } // end $desktop
   @include respond-to-max($tablet) {
-    // max-height: 800px;
     &.series {
       .inner {
         padding: $padding-medium;
+        padding-bottom: $padding-large;
       }
     }
   } // end $tablet
@@ -155,6 +156,9 @@
         left: 0;
         margin: auto;
         max-height: 100px;
+      }
+      .inner .text p {
+        text-align: center;
       }
       .inner {
         flex-direction: column;

@@ -181,3 +181,8 @@ a {
     }
   }
 }
+@include respond-to-max($mobile) {
+  p {
+    font-size: .8em;
+  }
+}

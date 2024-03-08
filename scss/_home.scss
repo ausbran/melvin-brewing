@@ -33,17 +33,6 @@
     .title:before {
         transform: translateX(210%);
     }
-    @keyframes marquee {
-      0% {
-        transform: translateX(0%);
-      }
-      1% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-200%);
-      }
-    }
     .series-container {
       display: flex;
       justify-content: flex-end;
@@ -236,6 +225,11 @@
       .btn {
         border: unset;
         padding: unset;
+        background: unset;
+        &:hover {
+          color: inherit;
+          opacity: .7;
+        }
       }
     }
     .tagline-container {
