@@ -89,18 +89,22 @@
       }
     }
   }
-  &.location {
+  &.the-mothership {
     .inner img {
       width: unset;
     }
   }
   &.our-awards {
     height: unset;
+    max-height: unset;
     .arrow {
       background: $white !important;
       svg * {
         fill: $dark-blue !important;
       }
+    }
+    .inner .text p {
+      max-width: 650px;
     }
   }
   @include respond-to-max($desktop) {
@@ -121,12 +125,15 @@
         }
       }
     }
+    .text.lottie {
+      width: 100%;
+    }
     .inner {
       padding: $padding;
     }
   } // end $desktop
   @include respond-to-max($tablet) {
-    max-height: 800px;
+    // max-height: 800px;
     &.series {
       .inner {
         padding: $padding-medium;

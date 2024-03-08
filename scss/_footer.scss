@@ -18,12 +18,13 @@ footer {
     @include rotate(20);
     min-width: 42%;
     min-height: 125%;
-    opacity: .025;
+    opacity: .03;
     position: absolute;
     left: -1%;
     top: 0;
     bottom: 0;
     margin: auto;
+    filter: invert(1);
   }
   .footer-links ul,
   .social-links {

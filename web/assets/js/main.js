@@ -1,100 +1,113 @@
-// TABLE OF CONTENTS FOR MAIN.JS
-// SEARCH FOR FILE NAMES BELOW TO SEE CORRESPONDING SCRIPTS
-// 0. universal
-// 1. navigation.twig 
-// 2. home.twig 
-// 3. entrySlider.twig
-// 4. cardSlider.twig
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
 
-// universal 
-// serve transparent can videos based on browser.
+// Universal function to check browser capabilities
 function supportsHEVCAlpha() {
   const navigator = window.navigator;
-  const ua = navigator.userAgent.toLowerCase()
-  const hasMediaCapabilities = !!(navigator.mediaCapabilities && navigator.mediaCapabilities.decodingInfo)
-  const isSafari = ((ua.indexOf('safari') != -1) && (!(ua.indexOf('chrome')!= -1) && (ua.indexOf('version/')!= -1)))
-  return isSafari && hasMediaCapabilities
+  const ua = navigator.userAgent.toLowerCase();
+  const hasMediaCapabilities = !!(navigator.mediaCapabilities && navigator.mediaCapabilities.decodingInfo);
+  const isSafari = ua.includes('safari') && !ua.includes('chrome') && ua.includes('version/');
+  return isSafari && hasMediaCapabilities;
 }
-
-// navigation.twig
-document.addEventListener('DOMContentLoaded', function() {
-var links = document.querySelectorAll('.link');
-var secondaryContainer = document.querySelector('.secondary-container');
-var hamburger = document.querySelector('.hamburger');
-var nav = document.querySelector('nav');
-var primaryLinks = document.querySelector('.primary-links');
-
-// Function to open the menu for a specific link
-function openMenu(link) {
-  links.forEach(function (otherLink) {
-    var otherSecondaryLinks = otherLink.querySelector('.secondary-links');
-    if (otherSecondaryLinks) {
-      otherSecondaryLinks.classList.remove('visible');
-    }
-  });
-
-  var secondaryLinks = link.querySelector('.secondary-links');
-  if (secondaryLinks) {
-    secondaryLinks.classList.add('visible');
-    secondaryContainer.classList.add('visible');
-  }
-}
-
-// Function to close the menu
-function closeMenu() {
-  links.forEach(function (link) {
-    var secondaryLinks = link.querySelector('.secondary-links');
-    if (secondaryLinks) {
-      secondaryLinks.classList.remove('visible');
-    }
-  });
-  secondaryContainer.classList.remove('visible');
-}
-
-// Event listener for link clicks
-links.forEach(function (link) {
-  link.addEventListener('click', function (event) {
-    openMenu(link);
-  });
-});
-
-// Event listener for hamburger click
-hamburger.addEventListener('click', function() {
-  nav.classList.toggle('menu-opened');
-  primaryLinks.classList.toggle('menu-opened');
-});
-
-// Event listener for scroll to close
-window.onscroll = function (event) {
-  closeMenu();
-};
-
-document.body.addEventListener('click', function(event) {
-    if (event.target.closest('.close')) {
-        closeMenu();
-    }
-});
-
-function handleScroll() {
-  var scrolledClass = 'scrolled';
-  if (window.scrollY > 100) {
-    nav.classList.add(scrolledClass);
-  } else {
-    nav.classList.remove(scrolledClass);
-  }
-
-  // Request the next animation frame
-  requestAnimationFrame(handleScroll);
-}
-
-// Initial call to start RAF loop
-handleScroll();
-
-});
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
+  var links = document.querySelector('.primary-links');
+  var secondaryContainer = document.querySelector('.secondary-container');
+  var hamburger = document.querySelector('.hamburger');
+  var nav = document.querySelector('nav');
+  var primaryLinks = document.querySelector('.primary-links');
+  var body = document.querySelector('body');
+
+  // Function to open the menu for a specific link
+  function openMenu(link) {
+    links.querySelectorAll('.secondary-links.visible').forEach(function (otherSecondaryLinks) {
+      otherSecondaryLinks.classList.remove('visible');
+    });
+
+    if (isMobileDevice()) {
+      body.classList.add('no-scroll');
+    }
+
+    if (!isMobileDevice()) {
+      nav.classList.add('visible');
+    }
+
+    var secondaryLinks = link.querySelector('.secondary-links');
+    if (secondaryLinks) {
+      secondaryLinks.classList.add('visible');
+      secondaryContainer.classList.add('visible');
+    }
+  }
+
+  // Function to close the menu
+  function closeMenu() {
+    links.querySelectorAll('.secondary-links.visible').forEach(function (otherSecondaryLinks) {
+      otherSecondaryLinks.classList.remove('visible');
+    });
+    secondaryContainer.classList.remove('visible');
+    body.classList.remove('no-scroll');
+    nav.classList.remove('visible');
+  }
+
+  document.body.addEventListener('click', function(event) {
+    if (event.target.closest('.close')) {
+      closeMenu();
+    }
+  });
+
+  // Event listener for link clicks using event delegation
+  links.addEventListener('click', function (event) {
+    var link = event.target.closest('.link');
+    if (link) {
+      openMenu(link);
+    }
+  });
+
+  // Event listener for hamburger click
+  hamburger.addEventListener('click', function () {
+    nav.classList.toggle('menu-opened');
+    primaryLinks.classList.toggle('menu-opened');
+  });
+
+  // Throttle scroll event to improve performance
+  function throttle(func) {
+    let inThrottle;
+    return function () {
+      const context = this;
+      const args = arguments;
+
+      if (!inThrottle) {
+        func.apply(context, args);
+        inThrottle = true;
+
+        requestAnimationFrame(function () {
+          inThrottle = false;
+        });
+      }
+    };
+  }
+
+  // Handle scroll with throttle
+  function handleScroll() {
+    var scrolledClass = 'scrolled';
+    if (window.scrollY > 100) {
+      nav.classList.add(scrolledClass);
+    } else {
+      nav.classList.remove(scrolledClass);
+    }
+
+    // Additional logic for handling scroll
+    // ...
+
+    // Close menu if needed
+    closeMenu();
+  }
+
+  // Attach the throttled function to the scroll event
+  window.addEventListener('scroll', throttle(handleScroll));
+
+
   function adjustFontSize() {
     var wordContainer = document.querySelector('.title');
     if (wordContainer) {
@@ -113,71 +126,69 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// entrySlider.twig 
+// Additional document ready functions...
 
-
-// cardSlider.twig
-// univeral slider with arrow functionality
+// Universal slider with arrow functionality
 var instances = document.querySelectorAll(".slider");
 
 instances.forEach(function (instance) {
   var arrows = instance.querySelectorAll(".arrow"),
-      prevArrow = instance.querySelector('.arrow-prev'),
-      nextArrow = instance.querySelector('.arrow-next'),
-      box = instance.querySelector(".slider-inner"),
-      x = 0,
-      mx = 0,
-      maxScrollWidth = box.scrollWidth - (box.clientWidth / 2) - (box.offsetWidth / 2);
+    prevArrow = instance.querySelector('.arrow-prev'),
+    nextArrow = instance.querySelector('.arrow-next'),
+    box = instance.querySelector(".slider-inner"),
+    x = 0,
+    mx = 0,
+    maxScrollWidth = box.scrollWidth - (box.clientWidth / 2) - (box.offsetWidth / 2);
 
   arrows.forEach(function (arrow) {
-      arrow.addEventListener('click', function () {
-          if (this.classList.contains("arrow-next")) {
-              x = ((box.offsetWidth / 1.5)) + box.scrollLeft - 10;
-              box.scrollTo({
-                  left: x,
-                  behavior: 'smooth'
-              });
-              console.log('next')
-          } else {
-              x = ((box.offsetWidth / 1.5)) - box.scrollLeft - 10;
-              box.scrollTo({
-                  left: -x,
-                  behavior: 'smooth'
-              });
-              console.log('prev')
-          }
-      });
+    arrow.addEventListener('click', function () {
+      if (this.classList.contains("arrow-next")) {
+        x = ((box.offsetWidth / 1.5)) + box.scrollLeft - 10;
+        box.scrollTo({
+          left: x,
+          behavior: 'smooth'
+        });
+        console.log('next');
+      } else {
+        x = ((box.offsetWidth / 1.5)) - box.scrollLeft - 10;
+        box.scrollTo({
+          left: -x,
+          behavior: 'smooth'
+        });
+        console.log('prev');
+      }
+    });
   });
 
   box.addEventListener('mousemove', function (e) {
-      var mx2 = e.pageX - this.offsetLeft;
-      if (mx) this.scrollLeft = this.sx + mx - mx2;
+    var mx2 = e.pageX - this.offsetLeft;
+    if (mx) this.scrollLeft = this.sx + mx - mx2;
   });
 
   box.addEventListener('mousedown', function (e) {
-      this.sx = this.scrollLeft;
-      mx = e.pageX - this.offsetLeft;
+    this.sx = this.scrollLeft;
+    mx = e.pageX - this.offsetLeft;
   });
 
   box.addEventListener('scroll', function () {
-      toggleArrows();
+    toggleArrows();
   });
 
   document.addEventListener("mouseup", function () {
-      mx = 0;
+    mx = 0;
   });
 
   function toggleArrows() {
-      if (box.scrollLeft > maxScrollWidth - 10) {
-          // disable next button when right end has reached 
-          nextArrow.classList.add('disabled');
-      } else if (box.scrollLeft < 10) {
-          // disable prev button when left end has reached 
-          prevArrow.classList.add('disabled');
-      } else {
-          // both are enabled
-          nextArrow.classList.remove('disabled');
-          prevArrow.classList.remove('disabled');
-      }
+    if (box.scrollLeft > maxScrollWidth - 10) {
+      // disable next button when right end has reached 
+      nextArrow.classList.add('disabled');
+    } else if (box.scrollLeft < 10) {
+      // disable prev button when left end has reached 
+      prevArrow.classList.add('disabled');
+    } else {
+      // both are enabled
+      nextArrow.classList.remove('disabled');
+      prevArrow.classList.remove('disabled');
+    }
   }
 });

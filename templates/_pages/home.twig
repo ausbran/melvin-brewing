@@ -17,6 +17,14 @@
         .background {
             background-color: {{  beer.lightColor }};
         }
+        @media (max-width: 768px) {
+            .text-container .btn {
+                background-color: {{  beer.darkColor }};
+            }
+            .series-style {
+                color: {{ beer.lightColor }};
+            }
+        }
     </style>
     <div class="home-landing-section" style="background-color: {{ beer.darkColor }};">
         <div class="content">
@@ -55,7 +63,25 @@
                             <source src="{{ bgVid.url }}" type="video/mp4">
                         </video>
                     {% elseif bgImg %}
-                        <img src="{{ bgImg.url }}" alt="Background Image">
+                            {% set transform = 
+                                [
+                                    {
+                                        asset: bgImg,
+                                        transform: {
+                                            width: 1920,
+                                            height: 1080,
+                                            mode: 'crop',
+                                            format: 'avif'
+                                        }
+                                    }      
+                                ]
+                             %}
+
+                            {% set attributes = {
+                                quality: 90,
+                            } %}
+
+                            {{ craft.images.pictureMultiple(transform, attributes) }}
                     {% endif %}
                 </div>
             </div>

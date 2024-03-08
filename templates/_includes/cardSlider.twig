@@ -47,7 +47,32 @@
                                             {% for grandChild in child.children %}
                                                 {% switch grandChild.type.handle %}
                                                     {% case 'background' %}
-                                                        {% include "_includes/background" with {'block': grandChild, class: 'slide-bg', height: grandChild.height} %}
+                                                        <div class="background">
+                                                            {% set can = grandChild.backgroundImage.one() %}
+                                                            {% set transform = 
+                                                                [
+                                                                    {
+                                                                        asset: can,
+                                                                        transform: {
+                                                                            width: 500,
+                                                                            height: 800,
+                                                                            mode: 'fit',
+                                                                            format: 'avif'
+                                                                        }
+                                                                    }      
+                                                                ]
+                                                             %}
+
+                                                            {% set class = {
+                                                                class: 'can',
+                                                            } %}
+
+                                                            {% set attributes = {
+                                                                quality: 90,
+                                                            } %}
+
+                                                            {{ craft.images.pictureMultiple(transform, class, attributes) }}
+                                                        </div>
                                                 {% endswitch %}
                                             {% endfor %}
                                          {% endif %}

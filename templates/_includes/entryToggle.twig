@@ -69,7 +69,25 @@
                                     </video>
                                 {% elseif block.backgroundImage.one() %}
                                     {% set bg = block.backgroundImage.one() %}
-                                    <img src="{{ bg.url }}" alt="The background image for {{ block.title }}">
+                                    {% set transform = 
+                                        [
+                                            {
+                                                asset: bg,
+                                                transform: {
+                                                    width: 1920,
+                                                    height: 1080,
+                                                    mode: 'crop',
+                                                    format: 'avif'
+                                                }
+                                            }      
+                                        ]
+                                     %}
+
+                                    {% set attributes = {
+                                        quality: 90,
+                                    } %}
+
+                                    {{ craft.images.pictureMultiple(transform, attributes) }}
                                 {% endif %}
                             </div>
                     {% endswitch %}

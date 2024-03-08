@@ -2,79 +2,81 @@
 
 {% block content %}
 	{% include "_includes/landing" %}
-	<div class="outer">
-		<div class="locations-grid">
-	    {% if entry.menu %}
-	    	<div class="grid-item">
-		    	<div>
-			    	<h4>Menu</h4>
-		    		<p>Looking for beer and food? See what we’re serving up for dinner and lunch.</p>
-	    		</div>
-			    <a href="{{ entry.menu.one().url }}" target="_blank" class="arrow arrow-next">
-			    	{% include "_includes/_svg/arrow.svg" %}
-			    </a>
-			    <img src="/images/background-images/menu.jpg" alt="Hamburger Image">
-		    </div>
-	    {% endif %}
-
-	    {% if entry.tapList %}
-	    	<div class="grid-item">
-		    	<div>
-			    	<h4>Tap List</h4>
-				    <p>View Tap List on <img src="/images/icons/untappd.svg" alt="UNTAPPD"></p>
-			    </div>
-			    <a class="arrow arrow-next" href="{{ entry.tapList }}" target="_blank">
-			    	{% include "_includes/_svg/arrow.svg" %}
-			    </a>
-		    </div>
-	    {% endif %}
-
-	    {% if entry.lifestyleImages %}
-		    {% for image in entry.lifestyleImages %}
-	        {% if loop.first %}
-	        	<div class="grid-item" style="background: center / cover url({{ image.url }}) no-repeat;"></div>
-	        {% endif %}
-		    {% endfor %}
-			{% endif %}
-
-	    {% if entry.hours %}
-	    	<div class="grid-item">
-		    	<div>
-			    	<h4>Hours</h4>
-				    {{ entry.hours }}
-			    </div>
-		    </div>
-		  {% endif %}
-
-	    {% if entry.directions %}
-	    	<div class="grid-item">
-		    	<div>
-			    	<h4>Directions</h4>
-			    	<p>We’re at the corner of 5th and Main in downtown. Look for the outdoor patio.</p>
-		    	</div>
-				    <a href="{{ entry.directions }}" target="_blank" class="arrow arrow-next">
+	{% if entry.type == 'location' %}
+		<div class="outer">
+			<div class="locations-grid">
+		    {% if entry.menu | length %}
+		    	<div class="grid-item">
+			    	<div>
+				    	<h4>Menu</h4>
+			    		<p>Looking for beer and food? See what we’re serving up for dinner and lunch.</p>
+		    		</div>
+				    <a href="{{ entry.menu.one().url }}" target="_blank" class="arrow arrow-next">
 				    	{% include "_includes/_svg/arrow.svg" %}
 				    </a>
-		    </div>
-	    {% endif %}
+				    <img src="/images/background-images/menu.jpg" alt="Hamburger Image">
+			    </div>
+		    {% endif %}
 
-	    <div class="grid-item">
-		    <div>
-			    <h4>Questions</h4>
-			    <p>Need some help? Looking to get a keg for a party? Just want to tell us how good our beer was? Fill out this form.</p>
-		    </div>
-		    <a class="arrow arrow-next" href="/contact">
-		    	{% include "_includes/_svg/arrow.svg" %}
-		    </a>
-	    </div>
+		    {% if entry.tapList | length %}
+		    	<div class="grid-item">
+			    	<div>
+				    	<h4>Tap List</h4>
+					    <p>View Tap List on <img src="/images/icons/untappd.svg" alt="UNTAPPD"></p>
+				    </div>
+				    <a class="arrow arrow-next" href="{{ entry.tapList }}" target="_blank">
+				    	{% include "_includes/_svg/arrow.svg" %}
+				    </a>
+			    </div>
+		    {% endif %}
 
-	    {% if entry.lifestyleImages %}
-		    {% for image in entry.lifestyleImages %}
-	        {% if loop.index == 2 %}
-	        	<div class="grid-item" style="background: center / cover url({{ image.url }}) no-repeat;"></div>
-	        {% endif %}
-		    {% endfor %}
-			{% endif %}
+		    {% if entry.lifestyleImages | length %}
+			    {% for image in entry.lifestyleImages %}
+		        {% if loop.first %}
+		        	<div class="grid-item" style="background: center / cover url({{ image.url }}) no-repeat;"></div>
+		        {% endif %}
+			    {% endfor %}
+				{% endif %}
+
+		    {% if entry.hours | length %}
+		    	<div class="grid-item">
+			    	<div>
+				    	<h4>Hours</h4>
+					    {{ entry.hours }}
+				    </div>
+			    </div>
+			  {% endif %}
+
+		    {% if entry.directions | length %}
+		    	<div class="grid-item">
+			    	<div>
+				    	<h4>Directions</h4>
+				    	<p>We’re at the corner of 5th and Main in downtown. Look for the outdoor patio.</p>
+			    	</div>
+					    <a href="{{ entry.directions }}" target="_blank" class="arrow arrow-next">
+					    	{% include "_includes/_svg/arrow.svg" %}
+					    </a>
+			    </div>
+		    {% endif %}
+
+			    <div class="grid-item">
+				    <div>
+					    <h4>Questions</h4>
+					    <p>Need some help? Looking to get a keg for a party? Just want to tell us how good our beer was? Fill out this form.</p>
+				    </div>
+				    <a class="arrow arrow-next" href="/contact">
+				    	{% include "_includes/_svg/arrow.svg" %}
+				    </a>
+			    </div>
+
+		    {% if entry.lifestyleImages | length %}
+			    {% for image in entry.lifestyleImages %}
+		        {% if loop.index == 2 %}
+		        	<div class="grid-item" style="background: center / cover url({{ image.url }}) no-repeat;"></div>
+		        {% endif %}
+			    {% endfor %}
+				{% endif %}
+			</div>
 		</div>
-	</div>
+	{% endif %}
 {% endblock %}

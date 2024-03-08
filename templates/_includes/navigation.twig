@@ -22,9 +22,9 @@
 		                <div class="description">
 			                {% include '_includes/close' %}
 		                  {{ node.description }}
-		                  {% if node.children|length > 3 %}
+		                  {# {% if node.children|length > 3 %} #}
 		                      {% include '_includes/arrows' %}
-		                  {% endif %}
+		                  {# {% endif %} #}
 		                </div>
 			            <ul class="secondary-link slider-inner">
 		                    {% if node.children %}
@@ -32,7 +32,26 @@
 		                            <li class="inner slide">
 		                                {% if subnode.backgroundImage %}
 		                                    <a class="gradient" href="{{ subnode.url }}">
-		                                       <img src="{{ subnode.backgroundImage.one().getUrl('backgroundNavigation') }}" alt="">
+			                                      {% set bg = subnode.backgroundImage.one() %}
+																		        {% set transform = 
+																	            [
+																                {
+															                    asset: bg,
+															                    transform: {
+														                        width: 600,
+														                        height: 800,
+														                        mode: 'fit',
+														                        format: 'avif'
+															                    }
+																                }      
+																	            ]
+																		         %}
+
+																		        {% set attributes = {
+																		            quality: 100,
+																		        } %}
+
+																		        {{ craft.images.pictureMultiple(transform, attributes) }}
 		                                       <span class="link-title" >{{ subnode.title }}</span>
 		                                    </a>
 		                                {% else %}

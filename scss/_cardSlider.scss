@@ -69,6 +69,10 @@ $colsSmallDesktop: 3;
     .text,
     .background {
       flex: 50%;
+      width: 100%;
+    }
+    .background picture {
+      width: inherit;
     }
     .text {
       display: flex;
@@ -95,7 +99,7 @@ $colsSmallDesktop: 3;
       height: 100%;
       display: flex;
       img {
-        object-position: right;
+        object-position: center;
         margin: auto;
       }
     }
@@ -128,35 +132,103 @@ $colsSmallDesktop: 3;
           object-position: center;
         }
       }
-    }
-  }
-  @include respond-to-max($desktop-large) {
-    margin: $margin;
-    .slide {
-      flex-direction: column-reverse;
-      max-height: unset;
-      width: 100%;
-      margin: unset !important;
-    }
-    .slide .text {
-      padding: $padding;
-      overflow: visible;
-    }
-    .slide .background {
-      max-height: 400px;
-      width: 100%;
-      img {
-        object-fit: cover !important;
+      .text {
+        display: none;
       }
     }
   }
+  @include respond-to-max($desktop-large) {
+    &:not(.our-story) {
+      margin: $margin;
+      .slider-inner {
+        overflow: hidden;
+      }
+      .slider-nav {
+        display: none;
+      }
+      .slide {
+        flex-direction: column-reverse;
+        max-height: unset;
+        width: 100%;
+        margin: unset !important;
+      }
+      .slide .text {
+        padding: $padding;
+        overflow: visible;
+      }
+      .slide .background {
+        max-height: 400px;
+        width: 100%;
+        img {
+          object-fit: cover !important;
+        }
+      }
+    }
+    &.our-story {
+      .slide {
+        width: $width;
+        .text {
+          padding: $padding;
+        }
+      }
+    }
+  }
+  @include respond-to-max($desktop-large) {
+    .header {
+      flex-direction: column;
+      gap: 7px;
+    }
+  }
   @include respond-to-max($desktop) {
-    margin: $margin-medium;
+    &:not(.our-story) {
+      margin: $margin-medium;
+    }
+    &.our-story {
+      .slide {
+        width: $width-medium;
+        &:first-child {
+          margin-left: $margin-medium;
+        }
+      }
+      .header {
+        margin-left: $margin-medium;
+        margin-right: $margin-medium;
+      }
+    }
+  }
+  @include respond-to-max($tablet) {
+    &.our-story {
+      .slide {
+        max-height: unset;
+        flex-direction: column-reverse;
+        .background {
+          flex: unset;
+          height: unset;
+        }
+        .text {
+          padding: $padding-medium;
+        }
+      }
+    }
   }
   @include respond-to-max($mobile) {
-    margin: $margin-small;
-    .slide .text {
-      padding: $padding-medium;
+    &.our-story {
+      .slide {
+        width: $width-medium;
+        &:first-child {
+          margin-left: $margin-small;
+        }
+      }
+      .header {
+        margin-left: $margin-small;
+        margin-right: $margin-small;
+      }
+    }
+    &:not(.our-story) {
+      margin: $margin-small;
+      .slide .text {
+        padding: $padding-medium;
+      }
     }
   }
 }

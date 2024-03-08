@@ -1,11 +1,11 @@
 fill: null
-format: webp
+format: png
 handle: twelveOzCan
 height: 575
 interlace: none
 mode: fit
 name: 'Twelve oz Can'
 position: center-center
-quality: 100
+quality: 80
 upscale: true
 width: 300

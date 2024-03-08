@@ -47,4 +47,10 @@
     padding-left: 50px;
     margin-top: $margin;
   }
+  @include respond-to-max($tablet) {
+    padding-left: $margin-small;
+    .award {
+      min-width: 300px;
+    }
+  }
 }

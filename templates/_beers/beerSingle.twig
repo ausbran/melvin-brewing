@@ -60,7 +60,7 @@
 
                     {% set parent = entry.getAncestors().one() %}
                     {% if parent %}
-                        <span class="series-title btn">{{ parent.title }}</span>
+                        <a href="{{ parent.url }}"><span class="series-title btn">{{ parent.title }}</span></a>
                     {% endif %}
                 </div>
 
@@ -72,7 +72,7 @@
                 <div class="buttons">
                     <a class="btn scroll">Explore</a>
                     <a class="btn" href="/beer-finder-2000">Find it</a>
-                    <a class="btn" href="#">Shop</a>
+                    <a class="btn" target="_blank" href="https://puremadness.brist.store/">Shop</a>
                 </div>
             </div>
             {% include '_includes/characterArt' %}
@@ -141,21 +141,23 @@
         </section>
     {% endif %}
 
-    <section class="beer-block character {% if not entry.beerStory %}no-story{% endif %}">
-        <div class="image-container">
-            {% for asset in beerAssets|slice(1, 1) %}
-                {% include '/_includes/beerAssets.twig' with { 'asset': asset } %}
-            {% endfor %}
-        </div>
-        {# {% include '_includes/characterArt' %} #}
-        <div class="text">
-            <h4>About the Character</h4>
-            <h2>{{ entry.tagline }}</h2>
-            {% if entry.beerStory | length  %}
-                {{ entry.beerStory }}
-            {% endif %}
-        </div>
-    </section>
+    {% if beerAssets|length >= 2 %}
+        <section class="beer-block character {% if not entry.beerStory %}no-story{% endif %}">
+            <div class="image-container">
+                {% for asset in beerAssets|slice(1, 1) %}
+                    {% include '/_includes/beerAssets.twig' with { 'asset': asset } %}
+                {% endfor %}
+            </div>
+            {# {% include '_includes/characterArt' %} #}
+            <div class="text">
+                <h4>About the Character</h4>
+                <h2>{{ entry.tagline }}</h2>
+                {% if entry.beerStory | length  %}
+                    {{ entry.beerStory }}
+                {% endif %}
+            </div>
+        </section>
+    {% endif %}
 
     {% if entry.awards | length  %}
         <div class="small-blocks">
@@ -177,17 +179,19 @@
         </div>
     {% endif %}
 
-    <section class="beer-block image">
-    {% if entry.awards | length  %}
-        {% for asset in beerAssets| slice(3, 1) %}
-            {% include '/_includes/beerAssets.twig' with { 'asset': asset } %}
-        {% endfor %}
-    {% else  %}
-        {% for asset in beerAssets| slice(2, 1) %}
-            {% include '/_includes/beerAssets.twig' with { 'asset': asset } %}
-        {% endfor %}
+    {% if beerAssets|length >= 3 %}
+        <section class="beer-block image">
+        {% if entry.awards | length  %}
+            {% for asset in beerAssets| slice(3, 1) %}
+                {% include '/_includes/beerAssets.twig' with { 'asset': asset } %}
+            {% endfor %}
+        {% else  %}
+            {% for asset in beerAssets| slice(2, 1) %}
+                {% include '/_includes/beerAssets.twig' with { 'asset': asset } %}
+            {% endfor %}
+        {% endif %}
+        </section>
     {% endif %}
-    </section>
 
     <div class="divider">
         <span>Explore more beers</span>
@@ -199,102 +203,95 @@
     {% set currentSection = entry.section.handle %}
     {% set currentParent = entry.parent() %}
 
-    {% if currentSection and currentParent %}
-        {% set moreEntries = currentParent.children()
-            .section(currentSection)
-            .id('not ' ~ entry.id)
-            .orderBy('RAND()')
-            .limit(3)
-            .all() %}
+    <div class="more-wrapper">
+        {% if currentSection and currentParent %}
+            {% set moreEntries = currentParent.children()
+                .section(currentSection)
+                .id('not ' ~ entry.id)
+                .orderBy('RAND()')
+                .limit(3)
+                .all() %}
 
-        {% for more in moreEntries %}
-            <section class="beer-block more" style="background-color: {{ more.lightColor }};">
-                <div class="text">
-                    <div class="text-inner">
-                        <h2>{{ more.title }}</h2>
-                        <div class="stats" style="color: {{ more.darkColor }};">
-                            {% if more.style %}
-                                <span>{{ more.style }}</span>
-                            {% endif %}
+            {% for more in moreEntries %}
+                <section class="beer-block more" style="background-color: {{ more.lightColor }};">
+                    <div class="text">
+                        <div class="text-inner">
+                            <h2>{{ more.title }}</h2>
+                            <div class="stats" style="color: {{ more.darkColor }};">
+                                {% if more.style %}
+                                    <span>{{ more.style }}</span>
+                                {% endif %}
+                            </div>
+                            {% set words = more.description|split(' ') %}
+                            {% set truncatedDescription = words|slice(0, 20)|join(' ') ~ (words|length > 20 ? '...' : '') %}
+                            <p>{{ truncatedDescription }}</p>
                         </div>
-                        {% set words = more.description|split(' ') %}
-                        {% set truncatedDescription = words|slice(0, 20)|join(' ') ~ (words|length > 20 ? '...' : '') %}
-                        <p>{{ truncatedDescription }}</p>
+                        <a href="{{ more.url }}" class="btn" style="background-color: {{ more.darkColor }};">
+                            Explore
+                        </a>
+                        <a href="{{ more.url }}">
+                            {% include '_includes/can' with {'block': more} %}
+                        </a>
                     </div>
-                    <a href="{{ more.url }}" class="btn" style="background-color: {{ more.darkColor }};">
-                        Explore
-                    </a>
-                    <a href="{{ more.url }}">
-                        {% include '_includes/can' with {'block': more} %}
-                    </a>
+                    <div class="dark-color" style="background-color: {{ more.darkColor }};"></div>
+                </section>
+            {% endfor %}
+        {% endif %}
+
+        <section class="beer-block more" style="background-color: {{ currentParent.backgroundColor }};">
+            <div class="text">
+                <div class="text-inner">
+                    <h2>Explore the <span>{{ currentParent.title }}</span></h2>
+                    {% for block in currentParent.seriesLandingSection.all() %}
+                        {{ block.description }}
+                    {% endfor %}
                 </div>
-                <div class="dark-color" style="background-color: {{ more.darkColor }};"></div>
-            </section>
-        {% endfor %}
-    {% endif %}
-
-    <section class="beer-block more" style="background-color: {{ currentParent.backgroundColor }};">
-        <div class="text">
-            <div class="text-inner">
-                <h2>Explore the <span>{{ currentParent.title }}</span></h2>
-                {% for block in currentParent.seriesLandingSection.all() %}
-                    {{ block.description }}
-                {% endfor %}
+                <a href="{{ currentParent.url }}" class="btn" style="color: {{ currentParent.backgroundColor }};">
+                    Explore
+                </a>
             </div>
-            <a href="{{ currentParent.url }}" class="btn" style="color: {{ currentParent.backgroundColor }};">
-                Explore
-            </a>
-        </div>
-        {% for block in currentParent.seriesLandingSection.all() %}
-            {% switch block.type.handle %}
-                {% case 'background' %}
-                    {% include "_includes/background" %}
-            {% endswitch %}
-        {% endfor %}
-    </section>
-
+            {% for block in currentParent.seriesLandingSection.all() %}
+                {% switch block.type.handle %}
+                    {% case 'background' %}
+                        {% include "_includes/background" %}
+                {% endswitch %}
+            {% endfor %}
+        </section>
+    </div>
 
 </article>
 
 <script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function () {
-    const scrollContainer = document.querySelector("article");
-    const mainSection = document.querySelector(".main");
-    const scrollButton = document.querySelector(".btn.scroll");
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0
-    };
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollContainer = document.querySelector("article");
+  const mainSection = document.querySelector(".main");
+  const scrollButton = document.querySelector(".btn.scroll");
 
-    const handleIntersection = (entries, observer) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-          scrollContainer.scrollTo({
-            left: mainSection.offsetWidth + mainSection.offsetLeft,
-            behavior: 'smooth'
-          });
-          observer.unobserve(mainSection);
-        }
-      });
-    };
+  const handleScroll = (evt) => {
+    if (window.innerWidth > 992) {
+      evt.preventDefault();
+      scrollContainer.scrollLeft += evt.deltaY;
+    }
+  };
 
-    const intersectionObserver = new IntersectionObserver(handleIntersection, observerOptions);
-
-    intersectionObserver.observe(mainSection);
-
-    scrollButton.addEventListener("click", function () {
+  const handleButtonClick = () => {
+    if (window.innerWidth > 992) {
       scrollContainer.scrollTo({
         left: mainSection.offsetWidth + mainSection.offsetLeft,
         behavior: 'smooth'
       });
-    });
+    }
+  };
 
-    scrollContainer.addEventListener("wheel", function (evt) {
-      evt.preventDefault();
-      scrollContainer.scrollLeft += evt.deltaY;
-    });
+  scrollContainer.addEventListener("wheel", handleScroll);
+  scrollButton.addEventListener("click", handleButtonClick);
+
+  // Optional: Remove the event listeners on window resize if needed
+  window.addEventListener("resize", () => {
+    // You can choose to remove the event listeners on resize if it's causing issues
+    // This may depend on your specific requirements
   });
+});
 </script>
 
 {% endblock %}

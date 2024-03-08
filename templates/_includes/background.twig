@@ -7,15 +7,29 @@
     {% elseif block.backgroundImage.one() %}
         {% set bg = block.backgroundImage.one() %}
         {% if bg %}
-            <img src="{{ bg.getUrl('backgroundFit') }}" alt="The background image for {{ block.title }}" style="{% if block.backgroundSize %}object-fit:{{ block.backgroundSize }};{% endif %}
-    {% if height is defined %}
-        {% set dynamicHeight = height | default('100') %}
-        {% if dynamicHeight | replace('px', '') != dynamicHeight %}
-            height: {{ dynamicHeight }};
-        {% else %}
-            height: {{ dynamicHeight }}%;
-        {% endif %}
-    {% endif %}">
+        {% set transform = 
+            [
+                {
+                    asset: bg,
+                    transform: {
+                        width: 1920,
+                        height: 1080,
+                        mode: 'crop',
+                        format: 'avif'
+                    }
+                }      
+            ]
+         %}
+
+        {# {% set style = {
+            style: '{% if block.backgroundSize %}object-fit:{{ block.backgroundSize }};{% endif %}{% if height is defined %}height:{{ dynamicHeight }}%;{% endif %}',
+        } %} #}
+
+        {% set attributes = {
+            quality: 90,
+        } %}
+
+        {{ craft.images.pictureMultiple(transform, attributes) }}
         {% endif %}
     {% endif %}
     {% if block.backgroundOverlay %}

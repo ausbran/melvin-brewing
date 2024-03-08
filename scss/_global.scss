@@ -205,6 +205,11 @@ ul {
     margin: $margin-medium;
   }
 }
+@include respond-to-max($tablet) {
+  .slider-nav {
+    display: none !important;
+  }
+}
 @include respond-to-max($mobile) {
   .outer {
     width: $width-small;

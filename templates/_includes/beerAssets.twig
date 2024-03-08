@@ -4,23 +4,23 @@
     </video>
 {% else %}
     {% set img = asset %}
-        {% set transform = 
-            [
-                {
-                    asset: img,
-                    transform: {
-                        width: 1200,
-                        height: 800,
-                        mode: 'fit',
-                        format: 'webp'
-                    }
-                }      
-            ]
-         %}
+    {% set transform = 
+        [
+            {
+                asset: img,
+                transform: {
+                    width: 1200,
+                    height: 800,
+                    mode: 'fit',
+                    format: 'avif'
+                }
+            }      
+        ]
+     %}
 
-        {% set attributes = {
-            quality: 100,
-        } %}
+    {% set attributes = {
+        quality: 100,
+    } %}
 
-        {{ craft.images.pictureMultiple(transform, attributes) }}
+    {{ craft.images.pictureMultiple(transform, attributes) }}
 {% endif %}

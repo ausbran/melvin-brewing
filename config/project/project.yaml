@@ -1,4 +1,4 @@
-dateModified: 1709789150
+dateModified: 1709849731
 elementSources:
   craft\elements\Entry:
     -
@@ -201,6 +201,7 @@ meta:
     43882e81-bc87-43ff-9313-d303783fa479: Default # Default
     79759d1d-2122-469e-b071-f35ad6a27d0b: 'Tasting Notes' # Tasting Notes
     91292bbe-c31e-4eec-ab7b-920070a37071: Background # Background
+    266786aa-2656-4be5-a651-76969bec701a: 'Beer Finder' # Beer Finder
     958171f2-eff1-4ea5-a3c8-227de99ce18c: 'Entry Field' # Entry Field
     5626309f-5327-4844-a153-344a113be872: 'Location Toggle' # Location Toggle
     7106060e-2428-41c0-86c7-cd3cc951b8d5: Menus # Menus

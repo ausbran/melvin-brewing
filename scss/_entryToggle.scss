@@ -6,7 +6,7 @@
   .entry-nav {
     display: flex;
     gap: $gap-large;
-    margin: $margin-medium auto;
+    margin: 40px auto;
     justify-content: center;
     .entry-title {
       @include small-headers;
@@ -97,6 +97,7 @@
           position: relative;
           top: 0;
           left: 0;
+          min-height: 650px;
           height: 70vh;
           border-radius: 10px;
           overflow: hidden;
