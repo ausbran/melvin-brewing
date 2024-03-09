@@ -41,6 +41,12 @@
       min-width: 400px !important;
       flex: 50%;
       overflow: hidden;
+      picture {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
       img {
         height: 100%;
         width: 100%;
@@ -78,7 +84,7 @@
 .beer-blocks {
   box-sizing: content-box;
   height: 100dvh;
-  min-height: 970px;
+  min-height: 1000px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -491,6 +497,7 @@
           width: 100vw;
           text-wrap: nowrap;
           flex-wrap: nowrap;
+          white-space: nowrap;
           right: 0;
           left: 0;
           margin: auto;
@@ -536,6 +543,7 @@
       &.awards-container {
         max-width: unset;
         overflow: visible;
+        padding-right: $padding;
         .slider-nav {
           // display: none;
         }
@@ -624,6 +632,7 @@
     .beer-block.character,
     .beer-block.image {
       width: $width-small;
+      max-width: $width-small;
     }
     .beer-block.awards-container {
       margin: unset;

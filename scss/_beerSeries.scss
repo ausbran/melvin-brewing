@@ -36,6 +36,7 @@
       .text {
         padding: $padding;
         .can-container {
+          text-align: center;
           max-width: 280px;
           max-height: 525px;
           .can {

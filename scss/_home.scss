@@ -20,6 +20,8 @@
       font-weight: 900;
       line-height: .8em;
       margin-left: 10vw;
+      text-wrap: nowrap;
+      white-space: nowrap;
     }
     .title:after,
     .title:before {
@@ -202,12 +204,14 @@
     .content .text-container {
       width: $width-small;
       .can-container {
-        max-width: 68%;
+        max-width: 300px;
+        width: 70%;
       }
     }
     .content .title {
       font-size: 20vw !important;
       text-wrap: nowrap;
+      white-space: nowrap;
       animation: marquee 20s linear infinite;
     }
     .content .text-container .can-container {

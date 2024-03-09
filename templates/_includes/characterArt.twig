@@ -1,4 +1,26 @@
-{% set characterImage = entry.characterArt.one() %}
-{% if characterImage %}
-    <img class="character" src="{{ characterImage.url }}" alt="The character artwork for {{ entry.title }}">
+{% set characterArt = entry.characterArt.one() %}
+{% if characterArt %}
+    {% set transform = 
+        [
+            {
+                asset: characterArt,
+                transform: {
+                    width: 350,
+                    height: 600,
+                    mode: 'fit',
+                    format: 'avif'
+                }
+            }      
+        ]
+     %}
+
+    {% set class = {
+        class: 'character',
+    } %}
+
+    {% set attributes = {
+        quality: 90,
+    } %}
+
+    {{ craft.images.pictureMultiple(transform, class, attributes) }}
 {% endif %}

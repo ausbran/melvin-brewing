@@ -40,39 +40,32 @@
                 </article>
 
                 {# Insert random photo grid-item every 3rd item #}
-                {% if loop.index is divisible by 3 %}
+                {# {% if loop.index is divisible by 3 %}
                     {% set imagesDirectory = 'images/random-images/' %}
                     {% set imageFilenames = ['random1.jpg', 'random2.jpg', 'random3.jpg', 'random4.jpg', 'random5.jpg', 'random6.jpg', 'random7.jpg', 'random8.jpg', 'random9.jpg', 'random10.jpg', 'random11.jpg', 'random12.jpg'] %}
 
-                    {# Get the session variable containing displayed images (initialize if not set) #}
                     {% set displayedImages = craft.app.session.get('displayedImages') ?? [] %}
 
-                    {# Remove the displayed images from the available images #}
                     {% set availableImages = imageFilenames|filter(image => not image in displayedImages) %}
 
-                    {# If all images have been displayed, reset the session variable #}
                     {% if availableImages|length == 0 %}
                         {% set displayedImages = [] %}
                         {% set availableImages = imageFilenames %}
                     {% endif %}
 
-                    {# Get a random index from the available images #}
                     {% set randomIndex = random(0, availableImages|length - 1) %}
 
-                    {# Get the random image filename from the available images #}
                     {% set randomImageFilename = availableImages[randomIndex] %}
 
-                    {# Add the displayed image to the session variable #}
                     {% set displayedImages = displayedImages|merge([randomImageFilename]) %}
                     {% do craft.app.session.set('displayedImages', displayedImages) %}
 
-                    {# Display the random image #}
                     <article class="grid-item random">
                         <div class="inner">
                             <img src="{{ imagesDirectory ~ randomImageFilename }}" alt="Random Image">
                         </div>
                     </article>
-                {% endif %}
+                {% endif %} #}
 
             {% endfor %}
         </section>
