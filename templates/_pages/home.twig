@@ -94,6 +94,8 @@
             <span>{{ beer.tagline }}</span>
         </div>
     </div>
+{% else %}
+    {% include '_includes/landing' %}
 {% endif %}
 
 {% include '_includes/entryToggle' with {'entry': entry.seriesToggle} %}

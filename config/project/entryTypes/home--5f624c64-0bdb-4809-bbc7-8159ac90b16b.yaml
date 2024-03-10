@@ -45,6 +45,18 @@ fieldLayouts:
             width: 100
           -
             elementCondition: null
+            fieldUid: 612bfd79-519c-4db3-9ad9-3df56af2b354 # Landing Section
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1f1333ca-c465-4353-9860-e792646d9792
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
             fieldUid: 25c6a98b-d119-4ae1-8d5f-e0a804ac1448 # Series Toggle
             instructions: null
             label: null

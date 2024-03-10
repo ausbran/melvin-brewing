@@ -17,7 +17,71 @@
         {% for block in entry.seriesLandingSection.all() %}
             {% switch block.type.handle %}
                 {% case 'can' %}
-                    {% include '_includes/can' %}
+                    {# {% include '_includes/can' %} #}
+                    {# Include this JavaScript code in your template #}
+<script>
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    document.cookie = "isSafari=" + isSafari + "; path=/";
+</script>
+
+{# Check if the user is on Safari using JavaScript and hide/show elements accordingly #}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var isSafariCookie = document.cookie.replace(/(?:(?:^|.*;\s*)isSafari\s*=\s*([^;]*).*$)|^.*$/, "$1");
+        var isSafari = isSafariCookie === "true";
+
+        if (isSafari) {
+            // Hide video, show image, or perform any other logic specific to Safari
+            document.querySelector(".can-video").style.display = "none";
+            document.querySelector(".can-image").style.display = "block";
+        }
+    });
+</script>
+
+<div class="can-container shadow">
+    {% if block.canVideo.one() %}
+        <div class="can-video">
+            {# Display video for non-Safari browsers #}
+            {% set canVid = block.canVideo.one() %}
+            <video class="can" autoplay loop muted playsinline webkit-playsinline>
+                <source src="{{ canVid.url }}" type="video/webm">
+                <source src="{{ canVid.url }}" type='video/mp4; codecs="hvc1"'>
+            </video>
+        </div>
+    {% endif %}
+
+    {% if block.canImage.one() %}
+        <div class="can-image" style="display: none;">
+            {# Display image only on Safari #}
+            {% set can = block.canImage.one() %}
+
+            {% set transform = 
+                [
+                    {
+                        asset: can,
+                        transform: {
+                            width: 800,
+                            height: 1000,
+                            mode: 'fit',
+                            format: 'avif'
+                        }
+                    }      
+                ]
+            %}
+
+            {% set class = {
+                class: 'can',
+            } %}
+
+            {% set attributes = {
+                quality: 90,
+            } %}
+
+            {{ craft.images.pictureMultiple(transform, class, attributes) }}
+        </div>
+    {% endif %}
+</div>
+
             {% endswitch %}
         {% endfor %}
         <div class="text {% if entry.seriesLandingSection.type('lottieAnimation').count() > 0 %}lottie{% endif %}" {% if maxWidth %}style="max-width:{{ maxWidth }}px;"{% endif %}>

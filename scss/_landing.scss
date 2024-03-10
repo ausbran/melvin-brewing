@@ -60,6 +60,16 @@
         margin: unset;
         height: 90%;
         max-height: 700px;
+        .can-video,
+        .can-image {
+          height: 100%;
+          width: 100%;
+          video,
+          img,
+          picture {
+            height: inherit;
+          }
+        }
       }
       .text {
         gap: $gap;
