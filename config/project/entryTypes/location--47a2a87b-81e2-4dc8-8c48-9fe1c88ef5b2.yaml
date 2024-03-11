@@ -93,6 +93,18 @@ fieldLayouts:
             width: 100
           -
             elementCondition: null
+            fieldUid: 8de84d79-3354-4daf-955d-1b712c976678 # Directions Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f80f6f7d-a88c-43c5-b305-4dc954133d40
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
             fieldUid: 2382eb8f-094b-419b-9d10-9646b6a08d24 # Lifestyle Images
             instructions: null
             label: null

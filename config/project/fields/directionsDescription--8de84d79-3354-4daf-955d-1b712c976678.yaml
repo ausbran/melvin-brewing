@@ -1,0 +1,19 @@
+columnSuffix: plcztggy
+contentColumnType: text
+fieldGroup: 33cf5f76-e7a1-4bf0-9540-9df537e093bf # Location Fields
+handle: directionsDescription
+instructions: 'Give a short description of where the location is.'
+name: 'Directions Description'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  columnType: null
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -1,4 +1,4 @@
-dateModified: 1710034549
+dateModified: 1710174682
 elementSources:
   craft\elements\Entry:
     -
@@ -153,6 +153,7 @@ meta:
     7f08e263-a49f-4714-a5af-252c205d57c1: 'Background Video' # Background Video
     8c7ca72d-2bc1-4123-975e-84d0829fb82e: 'Artist Art' # Artist Art
     8dbf61b7-8e71-4013-8e45-0e1e3f0d5922: 'Social Link' # Social Link
+    8de84d79-3354-4daf-955d-1b712c976678: 'Directions Description' # Directions Description
     8eeba15c-12e4-4a45-b506-bacbeac6ca4d: Card # Card
     8f9dcf6c-c14a-42d3-93aa-50bb7d29b35d: 'Background Color' # Background Color
     9b8c6c65-161d-4de1-b5c0-2f8dc954df9e: Button # Button
