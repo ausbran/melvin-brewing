@@ -206,9 +206,9 @@ nav {
       }
       &.no-scroll {
         justify-content: space-between;
-        // padding-right: 60px;
         .secondary-link {
-          width: calc(100% - 550px);
+          justify-content: flex-end;
+          width: 70%;
           .slide {
             width: 50%;
             max-width: 440px;
@@ -327,6 +327,15 @@ nav {
       }
       &.no-scroll .secondary-link {
         width: 100%;
+      }
+    }
+  }
+  @include respond-to-max($desktop-xlarge) {
+    .secondary-links {
+      &.no-scroll {
+        .secondary-link {
+          justify-content: flex-start;
+        }
       }
     }
   }

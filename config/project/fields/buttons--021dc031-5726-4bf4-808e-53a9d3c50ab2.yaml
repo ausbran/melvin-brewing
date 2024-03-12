@@ -7,7 +7,7 @@ name: Buttons
 searchable: false
 settings:
   contentTable: '{{%matrixcontent_buttons}}'
-  maxBlocks: 5
+  maxBlocks: null
   minBlocks: null
   propagationKeyFormat: null
   propagationMethod: all

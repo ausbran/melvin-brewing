@@ -7,14 +7,14 @@ name: Description
 searchable: true
 settings:
   availableTransforms: '*'
-  availableVolumes: ''
+  availableVolumes: '*'
   columnType: text
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
   purifierConfig: null
   purifyHtml: true
-  redactorConfig: default.json
+  redactorConfig: null
   removeEmptyTags: true
   removeInlineStyles: false
   removeNbsp: false

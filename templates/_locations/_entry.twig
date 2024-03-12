@@ -4,7 +4,7 @@
 	{% include "_includes/landing" %}
 	{% if entry.type == 'location' %}
 		<div class="outer">
-			<div class="locations-grid">
+			<div class="grid location">
 		    {% if entry.menu | length %}
 		    	<div class="grid-item">
 			    	<div>
@@ -14,7 +14,7 @@
 				    <a href="{{ entry.menu.one().url }}" target="_blank" class="arrow arrow-next">
 				    	{% include "_includes/_svg/arrow.svg" %}
 				    </a>
-				    <img src="/images/background-images/menu.jpg" alt="Hamburger Image">
+				    <img class="background" src="/images/background-images/menu.jpg" alt="Hamburger Image">
 			    </div>
 		    {% endif %}
 

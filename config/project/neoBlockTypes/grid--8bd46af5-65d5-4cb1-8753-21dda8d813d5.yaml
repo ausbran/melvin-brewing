@@ -1,0 +1,21 @@
+childBlocks:
+  - gridHeader
+  - gridItem
+conditions: null
+description: 'Add a header and grid items to the grid.'
+enabled: true
+field: 10e9a8b2-c801-433b-82f1-4bfddf3231af # Page Sections
+group: null
+groupChildBlockTypes: true
+handle: grid
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 0
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: Grid
+topLevel: true

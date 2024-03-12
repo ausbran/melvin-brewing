@@ -71,5 +71,5 @@ fields:
     translationMethod: none
     type: craft\fields\Url
 handle: button
-name: Button
+name: 'Text Button'
 sortOrder: 1

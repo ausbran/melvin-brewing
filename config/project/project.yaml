@@ -1,4 +1,4 @@
-dateModified: 1710174682
+dateModified: 1710201063
 elementSources:
   craft\elements\Entry:
     -
@@ -145,12 +145,13 @@ meta:
     6b38e3b8-9668-4a06-9898-2904d065930d: Headline # Headline
     6b810e20-091f-4ba9-a515-86143511bd1a: 'Release Date' # Release Date
     06f905a7-02ce-42c2-a7cc-ef21cf0c7559: 'Entry Field' # Entry Field
-    6f946d78-01c5-4036-b1bc-c43719d7b8de: Button # Button
+    6f946d78-01c5-4036-b1bc-c43719d7b8de: 'Text Button' # Text Button
     7a9cb2ec-51b4-4eb8-821c-a1c35cdc2434: 'Can Image' # Can Image
     7b03dfd1-415d-4f52-abcc-c4d80fdf3331: 'Our Awards' # Our Awards
     07c79531-04c5-402e-bbb8-d65dd4e43599: Background # Background
     7e937d6c-ebdb-4e27-8b62-0e0252bfdf52: 'Lottie Animation' # Lottie Animation
     7f08e263-a49f-4714-a5af-252c205d57c1: 'Background Video' # Background Video
+    8bd46af5-65d5-4cb1-8753-21dda8d813d5: Grid # Grid
     8c7ca72d-2bc1-4123-975e-84d0829fb82e: 'Artist Art' # Artist Art
     8dbf61b7-8e71-4013-8e45-0e1e3f0d5922: 'Social Link' # Social Link
     8de84d79-3354-4daf-955d-1b712c976678: 'Directions Description' # Directions Description
@@ -160,9 +161,11 @@ meta:
     9c713e83-f0c5-4a2d-b111-e0ae67fa8153: Simple # Simple
     9f07dd88-6f43-4077-bdb0-cd92afabd6ad: 'Tap List' # Tap List
     9f5f0742-4deb-4408-a64a-f60a318f5e7e: Page # Page
+    10e9a8b2-c801-433b-82f1-4bfddf3231af: 'Page Sections' # Page Sections
     12dfe028-e83e-4153-a5d8-6212d151b7e5: Directions # Directions
     021dc031-5726-4bf4-808e-53a9d3c50ab2: Buttons # Buttons
     23ac335b-6422-49a1-b854-c74e5cf4e66f: Description # Description
+    23d727ae-ebdd-4af8-8f61-bd7ebec87655: 'Arrow Button' # Arrow Button
     25c6a98b-d119-4ae1-8d5f-e0a804ac1448: 'Series Toggle' # Series Toggle
     26df24ca-f2a9-40af-9c8a-01fb103c9b71: 'Beer Assets' # Beer Assets
     33cf5f76-e7a1-4bf0-9540-9df537e093bf: 'Location Fields' # Location Fields
@@ -181,6 +184,7 @@ meta:
     78a4c7b4-e76d-4060-910a-b557917fffcd: Image # Image
     81a24339-11e3-4828-9bb5-f5db1693d5a4: 'Individual Beer' # Individual Beer
     86e3ad6e-0ef5-493d-a6da-40829476cdf8: Description # Description
+    92b602c5-a12a-4516-a436-f4a79378b6b6: 'Button Link' # Button Link
     98a60530-1347-4020-a302-a11e470b343d: Events # Events
     164cf5ba-20a0-4835-aada-5d84eb1661b8: 'Award Name' # Award Name
     369ec072-926c-46a5-96b3-e6f2c9241548: 'Gold Award' # Gold Award
@@ -197,12 +201,15 @@ meta:
     4169ea13-b47e-4db2-a7bc-7c20b7a9a017: Description # Description
     5203aa15-48e5-4e8f-9881-a8551a8593e3: Description # Description
     7376a32e-bb38-4467-b1b4-6e6db135167e: 'CSS Fields' # CSS Fields
+    8096c7d3-a86e-4f8a-918e-b35d8071e1b5: 300x300 # 300x300
+    8525e2d0-f976-4d8c-b2dd-b7303cd69cc8: Background # Background
     31803f1b-64e4-4e43-84c2-e2b426caa398: 'Our Approach' # Our Approach
     33276f80-27b6-498b-af0c-9b2fecae98db: 'Entry Field' # Entry Field
     43882e81-bc87-43ff-9313-d303783fa479: Default # Default
     79759d1d-2122-469e-b071-f35ad6a27d0b: 'Tasting Notes' # Tasting Notes
     91292bbe-c31e-4eec-ab7b-920070a37071: Background # Background
     266786aa-2656-4be5-a651-76969bec701a: 'Beer Finder' # Beer Finder
+    582493c9-a03e-475f-987f-6a591dc3a8d7: 'Grid Header' # Grid Header
     958171f2-eff1-4ea5-a3c8-227de99ce18c: 'Entry Field' # Entry Field
     5626309f-5327-4844-a153-344a113be872: 'Location Toggle' # Location Toggle
     7106060e-2428-41c0-86c7-cd3cc951b8d5: Menus # Menus
@@ -240,6 +247,7 @@ meta:
     cde561fa-f273-48e3-ba47-db9fc49ecbe8: 'Award Name' # Award Name
     cfc8675b-6656-4bc0-8889-b63d80b4c1d9: Image # Image
     d0b7ca56-f372-41c3-90fa-dddc29006740: Buttons # Buttons
+    d21f0f27-c1a1-4d6d-9b1f-09d8c4ad40b8: 'Grid Item' # Grid Item
     d65d412c-37d7-40cd-b379-d7b6d0a20a45: 'Tasting Notes' # Tasting Notes
     d576e14e-afd8-482e-9c41-2c24b7f4c69b: 'Lottie Animation' # Lottie Animation
     d9712e97-c935-48f3-8b44-f3ce6e52d842: 'Melvin Brewing' # Melvin Brewing
@@ -253,6 +261,8 @@ meta:
     e2c0d4de-9225-40c7-8a32-f7de10a7aaa8: 'Link URL' # Link URL
     e4f36dd9-d500-4ca9-8e3a-52e4db8d58c6: 'Button Text' # Button Text
     e9dbc6a8-c947-4769-887a-b8e7d205a8d7: 'Character Art' # Character Art
+    e315bcd4-924c-4ea6-8dd8-f36cd72fc7d8: Description # Description
+    e909387a-c868-4f17-80d0-1cf2375a4f9f: Buttons # Buttons
     eb65a6c5-a692-4ead-997b-adef82b174cd: 'Light Color' # Light Color
     ec54db85-dc39-4841-b6bc-17523b4d074d: Beers # Beers
     edf1bec9-a1e3-47ea-beab-3c17e1cc133e: 'Accent Color' # Accent Color
