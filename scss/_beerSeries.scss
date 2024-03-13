@@ -10,7 +10,7 @@
     text-transform: uppercase;
   }
   .grid {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
     gap: $gap;
   }
@@ -21,6 +21,7 @@
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    padding: unset;
     @include flex-center;
     flex-direction: column;
     .grid-item-inner {
@@ -60,6 +61,11 @@
             flex-wrap: wrap;
             gap: 0 $gap;
           }
+        }
+        p {
+          max-width: unset;
+          font-weight: 500;
+          line-height: 2em;
         }
       }
     }

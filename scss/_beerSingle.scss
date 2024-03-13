@@ -230,6 +230,13 @@
         }
       }
     }
+    &:not(.main) {
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
     h4 {
       @include small-headers;
       color: $white;
