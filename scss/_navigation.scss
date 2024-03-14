@@ -134,6 +134,8 @@ nav {
       .close {
         position: absolute;
         top: 60px;
+        @include scale(.8);
+        transition: $transition;
       }
       .arrows {
         margin: unset;
@@ -172,12 +174,28 @@ nav {
         width: 100%;
       }
       .slide {
+        will-change: blur;
         height: inherit;
         position: relative;
         border-radius: $box-radius;
         overflow: hidden;
         min-width: 340px;
         transition: $transition-medium;
+        opacity: 0;
+        visibility: hidden;
+        @include translate(30px,0,0);
+        &:nth-child(1) {
+          transition-delay: 0;
+        }
+        &:nth-child(2) {
+          transition-delay: .1s;
+        }
+        &:nth-child(3) {
+          transition-delay: .2s;
+        }
+        &:nth-child(4) {
+          transition-delay: .3s;
+        }
          img {
           height:100%;
           width: 100%;
@@ -199,10 +217,21 @@ nav {
          &:last-of-type {
           margin-right: 60px;
          }
-         &:hover {
-          @include translate(0,-1px,0);
-          filter: brightness(1.2);
-         }
+      }
+      &.visible {
+        .slide {
+          opacity: 1;
+          visibility: visible;
+          @include translate(0,0,0);
+          filter: brightness(1) blur(0);
+          &:hover {
+            @include translate(0,-1px,0);
+            filter: brightness(1.2);
+          }
+        }
+        .close {
+          @include scale(1);
+        }
       }
       &.no-scroll {
         justify-content: space-between;
@@ -321,6 +350,16 @@ nav {
       position: static;
       opacity: 1;
       visibility: visible;
+      .slide {
+          opacity: 1;
+          visibility: visible;
+          @include translate(0,0,0);
+          filter: brightness(1) blur(0);
+          &:hover {
+            @include translate(0,-1px,0);
+            filter: brightness(1.2);
+          }
+        }
       .secondary-link,
       &.no-scroll .secondary-link {
         gap: $gap;

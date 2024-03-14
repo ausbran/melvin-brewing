@@ -18,50 +18,50 @@
 		    {% for node in nodes %}
 		        <li class="link">
 		            {{ node.link }}
-		            <ul class="slider secondary-links {% if node.children|length < 3 %}no-scroll{% endif %} {% if node.children|length == 1 %}one{% endif %}">
-		                <div class="description">
-			                {% include '_includes/close' %}
-		                  {{ node.description }}
-		                  {# {% if node.children|length > 3 %} #}
-		                      {% include '_includes/arrows' %}
-		                  {# {% endif %} #}
-		                </div>
-			            <ul class="secondary-link slider-inner">
-		                    {% if node.children %}
-		                        {% for subnode in node.children %}
-		                            <li class="inner slide">
-		                                {% if subnode.backgroundImage %}
-		                                    <a class="gradient" href="{{ subnode.url }}">
-			                                      {% set bg = subnode.backgroundImage.one() %}
-																		        {% set transform = 
-																	            [
-																                {
-															                    asset: bg,
-															                    transform: {
-														                        width: 600,
-														                        height: 800,
-														                        mode: 'fit',
-														                        format: 'avif'
-															                    }
-																                }      
-																	            ]
-																		         %}
+		            {% if node.children | length %}
+			            <div class="slider secondary-links {% if node.children|length < 3 %}no-scroll{% endif %} {% if node.children|length == 1 %}one{% endif %}">
+			                <div class="description">
+				                {% include '_includes/close' %}
+			                  {{ node.description }}
+			                  {# {% if node.children|length > 3 %} #}
+			                      {% include '_includes/arrows' %}
+			                  {# {% endif %} #}
+			                </div>
+					            <ul class="secondary-link slider-inner">
+			                  {% for subnode in node.children %}
+			                      <li class="inner slide">
+			                          {% if subnode.backgroundImage %}
+			                              <a class="gradient" href="{{ subnode.url }}">
+			                                  {% set bg = subnode.backgroundImage.one() %}
+																        {% set transform = 
+															            [
+														                {
+													                    asset: bg,
+													                    transform: {
+												                        width: 600,
+												                        height: 800,
+												                        mode: 'fit',
+												                        format: 'avif'
+													                    }
+														                }      
+															            ]
+																         %}
 
-																		        {% set attributes = {
-																		            quality: 100,
-																		        } %}
+																        {% set attributes = {
+																            quality: 100,
+																        } %}
 
-																		        {{ craft.images.pictureMultiple(transform, attributes) }}
-		                                       <span class="link-title" >{{ subnode.title }}</span>
-		                                    </a>
-		                                {% else %}
-			                                <a class="link-title" href="{{ subnode.url }}">{{ subnode.title }}</a>
-		                                {% endif %}
-		                          </li>
-		                      {% endfor %}
-		                    {% endif %}
-		                </ul>
-		            </ul>
+																        {{ craft.images.pictureMultiple(transform, attributes) }}
+			                                 <span class="link-title" >{{ subnode.title }}</span>
+			                              </a>
+			                          {% else %}
+			                            <a class="link-title" href="{{ subnode.url }}">{{ subnode.title }}</a>
+			                          {% endif %}
+			                    </li>
+				                {% endfor %}
+				              </ul>
+			            </div>
+			          {% endif %}
 		        </li>
 		    {% endfor %}
 		</ul>

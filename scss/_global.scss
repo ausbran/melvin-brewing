@@ -83,6 +83,7 @@ ul {
   }
   &:hover {
     filter: brightness(1.2);
+    @include translate(0,-1px,0);
   }
 }
 .close,
@@ -94,11 +95,11 @@ ul {
   @include flex-center;
   transition: $transition;
   cursor: pointer;
+}
+.close {
   &:hover {
     filter: brightness(1.5);
   }
-}
-.close {
   &:before {
     display: block;
     content: "";
@@ -114,9 +115,11 @@ ul {
     .arrow {
       svg {
         width: 15px;
+        transition: $transition;
       }
       &.disabled {
         opacity: .2;
+
       }
       &.arrow-prev svg {
         transform: rotate(-180deg);
@@ -128,6 +131,14 @@ ul {
         background-color: $white;
         svg {
           fill: $dark-blue;
+        }
+      }
+      &:not(.disabled):hover {
+        &.arrow-prev svg {
+          transform: rotate(-180deg) translateX(2px);
+        }
+        &.arrow-next svg {
+          transform: rotate(0deg)  translateX(2px);
         }
       }
     }

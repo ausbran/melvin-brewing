@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var secondaryContainer = document.querySelector('.secondary-container');
   var hamburger = document.querySelector('.hamburger');
   var nav = document.querySelector('nav');
-  var primaryLinks = document.querySelector('.primary-links');
   var body = document.querySelector('body');
 
   // Function to open the menu for a specific link
@@ -59,15 +58,18 @@ document.addEventListener('DOMContentLoaded', function () {
   // Event listener for link clicks using event delegation
   links.addEventListener('click', function (event) {
     var link = event.target.closest('.link');
-    if (link) {
+    var secondaryLinks = link.querySelector('.secondary-links');
+    if (link && secondaryLinks) {
       openMenu(link);
+    } else {
+      closeMenu();
     }
   });
 
   // Event listener for hamburger click
   hamburger.addEventListener('click', function () {
     nav.classList.toggle('menu-opened');
-    primaryLinks.classList.toggle('menu-opened');
+    links.classList.toggle('menu-opened');
   });
 
   // Throttle scroll event to improve performance
@@ -96,11 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       nav.classList.remove(scrolledClass);
     }
-
-    // Additional logic for handling scroll
-    // ...
-
-    // Close menu if needed
     closeMenu();
   }
 
