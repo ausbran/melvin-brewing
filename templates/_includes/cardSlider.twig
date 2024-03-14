@@ -54,10 +54,10 @@
                                                                     {
                                                                         asset: can,
                                                                         transform: {
-                                                                            width: 500,
-                                                                            height: 800,
-                                                                            mode: 'fit',
-                                                                            format: 'avif'
+                                                                            width: 1000,
+                                                                            height: 1000,
+                                                                            mode: 'crop',
+                                                                            format: 'webp'
                                                                         }
                                                                     }      
                                                                 ]
@@ -68,7 +68,7 @@
                                                             } %}
 
                                                             {% set attributes = {
-                                                                quality: 90,
+                                                                quality: 100,
                                                             } %}
 
                                                             {{ craft.images.pictureMultiple(transform, class, attributes) }}
