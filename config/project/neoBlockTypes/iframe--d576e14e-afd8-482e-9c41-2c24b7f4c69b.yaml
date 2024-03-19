@@ -1,32 +1,44 @@
 childBlocks: null
 conditions: null
-description: ''
+description: 'Copy and paste the embed code for your iframe.'
 enabled: true
 field: 612bfd79-519c-4db3-9ad9-3df56af2b354 # Landing Section
 fieldLayouts:
-  c1e496fb-f279-43c6-b58c-99d5e39c7a3f:
+  589e2536-e749-4f46-98e9-9e2a68dc39ce:
     tabs:
       -
         elementCondition: null
         elements:
           -
             elementCondition: null
-            fieldUid: ef7ef68b-2072-4b19-835b-e2429a536f4f # Image
+            fieldUid: 7e937d6c-ebdb-4e27-8b62-0e0252bfdf52 # iFrame
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 3bc86806-12e7-4931-bda6-0a1eb4ed018f
+            uid: f22dcfc9-836e-445f-bad4-f6ae1902367a
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: e5cfc9e9-b843-4db2-b209-03c8cbe0163c
+        uid: 1b21694c-ce67-4b92-be7f-cd34b9f2ffb6
         userCondition: null
       -
         elementCondition: null
         elements:
+          -
+            elementCondition: null
+            fieldUid: 917f53fa-1fa1-47af-8866-5b042d19b183 # Text Alignment
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c0339027-d681-4a90-ba54-b8a2db3cab8a
+            userCondition: null
+            warning: null
+            width: 100
           -
             elementCondition: null
             fieldUid: 0fe7b501-d81b-44ac-9f5d-e7e3ba23600b # Max Width
@@ -35,24 +47,24 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 3bff55da-dd56-4977-b184-07c88e745ce3
+            uid: 8fc6f589-adfe-46bf-b300-cc6ce155a05c
             userCondition: null
             warning: null
             width: 100
         name: Settings
-        uid: 7494e40a-76c4-4671-9fd4-6f77b3dd70cf
+        uid: fc5d9a34-6e82-4a26-8f70-1bded3be9803
         userCondition: null
 group: null
 groupChildBlockTypes: true
-handle: image
+handle: iframe
 icon: null
 iconFilename: ''
 ignorePermissions: true
-maxBlocks: 0
+maxBlocks: 1
 maxChildBlocks: 0
 maxSiblingBlocks: 0
 minBlocks: 0
 minChildBlocks: 0
 minSiblingBlocks: 0
-name: Image
+name: iFrame
 topLevel: true

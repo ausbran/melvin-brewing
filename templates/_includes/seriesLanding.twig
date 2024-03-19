@@ -84,7 +84,7 @@
 
             {% endswitch %}
         {% endfor %}
-        <div class="text {% if entry.seriesLandingSection.type('lottieAnimation').count() > 0 %}lottie{% endif %}" {% if maxWidth %}style="max-width:{{ maxWidth }}px;"{% endif %}>
+        <div class="text {% if entry.seriesLandingSection.type('iframe').count() > 0 %}iframe{% endif %}" {% if maxWidth %}style="max-width:{{ maxWidth }}px;"{% endif %}>
             {% for block in entry.seriesLandingSection.all() %}
                 {% switch block.type.handle %}
                     {% case 'description' %}

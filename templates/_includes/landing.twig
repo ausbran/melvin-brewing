@@ -1,23 +1,40 @@
+{# Initialize variable to store textAlignment #}
 {% set textAlignment = '' %}
-{% set maxWidth = null %}
-{% set class = '' %}
 
+{# Initialize variable to store maximum maxWidth #}
+{% set maxChildMaxWidth = null %}
+
+{# Loop through blocks to find the first textAlignment value and maximum maxWidth #}
 {% for block in entry.landingSection.all() %}
-    {% if block.type.handle == 'description' %}
+    {% if block.textAlignment is not empty and textAlignment == '' %}
         {% set textAlignment = block.textAlignment %}
-        {% set maxWidth = block.maxWidth %}
+    {% endif %}
+    {% if block.maxWidth is not null and (maxChildMaxWidth is null or block.maxWidth > maxChildMaxWidth) %}
+        {% set maxChildMaxWidth = block.maxWidth %}
     {% endif %}
 {% endfor %}
 
 <div class="landing-section {{ entry.slug }}">
-    <div class="inner {% if textAlignment%}{{ textAlignment }}{% endif %} ">
-        <div class="text {% if entry.landingSection.type('lottieAnimation').count() > 0 %}lottie{% endif %}" {% if maxWidth %}style="max-width:{{ maxWidth }}px;"{% endif %}>
+    <div class="inner {{ textAlignment }}">
+        <div class="text" {% if maxChildMaxWidth is not null %}style="max-width: {{ maxChildMaxWidth }}px;"{% endif %}>
             {% for block in entry.landingSection.all() %}
                 {% switch block.type.handle %}
-                    {% case 'lottieAnimation' %}
-                        {{ block.lottieAnimation | raw }}
+                    {% case 'iframe' %}
+                        {% if block.maxWidth %}
+                            <div class="iframe-wrapper" style="max-width:{{ block.maxWidth }}px;">
+                                {{ block.iframe | raw }}
+                            </div>
+                        {% else %}
+                            {{ block.iframe | raw }}
+                        {% endif %}
                     {% case 'description' %}
-                        {{ block.description }}
+                        {% if block.maxWidth %}
+                            <div class="description-wrapper" style="max-width:{{ block.maxWidth }}px;">
+                                {{ block.description }}
+                            </div>
+                        {% else %}
+                            {{ block.description }}
+                        {% endif %}
                     {% case 'buttons' %}
                         <div class="buttons">
                             {% for button in block.buttons.all() %}
@@ -26,7 +43,11 @@
                         </div>
                     {% case 'image' %}
                         {% set image = block.image.one() %}
-                        <img src="{{ image.url }}" alt="An image for {{ block.title }}">
+                        {% if block.maxWidth %}
+                            <img src="{{ image.url }}" alt="An image for {{ block.title }}" style="max-width: {{ block.maxWidth }}px;">
+                        {% else %}
+                            <img src="{{ image.url }}" alt="An image for {{ block.title }}">
+                        {% endif %}
                     {% case 'awards' %}
                         {% include '_includes/awards' %}
                 {% endswitch %}

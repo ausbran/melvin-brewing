@@ -18,10 +18,6 @@
       display: flex;
       flex-direction: column;
       gap: $gap;
-      max-width: 800px;
-      &.lottie {
-        max-width: unset;
-      }
       img {
         width:80%;
         max-width:450px;
@@ -30,13 +26,20 @@
     * {
       color: $white;
     }
-     p {
-     	max-width: 600px;
-     }
+    p {
+      max-width: 1000px;
+    }
 		.buttons {
 			display: flex;
 			gap: $gap;
 		}
+    .description-wrapper,
+    .iframe-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: $gap;
+    }
   }
   .background {
     top: 0;
@@ -140,9 +143,6 @@
           margin-left: unset;
         }
       }
-    }
-    .text.lottie {
-      width: 100%;
     }
     .inner {
       padding: $padding;

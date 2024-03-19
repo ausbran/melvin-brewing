@@ -1,4 +1,4 @@
-dateModified: 1710201063
+dateModified: 1710890987
 elementSources:
   craft\elements\Entry:
     -
@@ -149,7 +149,7 @@ meta:
     7a9cb2ec-51b4-4eb8-821c-a1c35cdc2434: 'Can Image' # Can Image
     7b03dfd1-415d-4f52-abcc-c4d80fdf3331: 'Our Awards' # Our Awards
     07c79531-04c5-402e-bbb8-d65dd4e43599: Background # Background
-    7e937d6c-ebdb-4e27-8b62-0e0252bfdf52: 'Lottie Animation' # Lottie Animation
+    7e937d6c-ebdb-4e27-8b62-0e0252bfdf52: iFrame # iFrame
     7f08e263-a49f-4714-a5af-252c205d57c1: 'Background Video' # Background Video
     8bd46af5-65d5-4cb1-8753-21dda8d813d5: Grid # Grid
     8c7ca72d-2bc1-4123-975e-84d0829fb82e: 'Artist Art' # Artist Art
@@ -249,7 +249,7 @@ meta:
     d0b7ca56-f372-41c3-90fa-dddc29006740: Buttons # Buttons
     d21f0f27-c1a1-4d6d-9b1f-09d8c4ad40b8: 'Grid Item' # Grid Item
     d65d412c-37d7-40cd-b379-d7b6d0a20a45: 'Tasting Notes' # Tasting Notes
-    d576e14e-afd8-482e-9c41-2c24b7f4c69b: 'Lottie Animation' # Lottie Animation
+    d576e14e-afd8-482e-9c41-2c24b7f4c69b: iFrame # iFrame
     d9712e97-c935-48f3-8b44-f3ce6e52d842: 'Melvin Brewing' # Melvin Brewing
     d16669bc-8ed5-462f-9d01-7d54f2d6bf4b: 'Twelve oz Can' # Twelve oz Can
     d80269be-c6b2-4b02-80a3-0debca223b2e: Description # Description
@@ -270,6 +270,7 @@ meta:
     ef14b30a-e09c-44a2-abf7-37e5265430f3: Image # Image
     f72f22c2-cd1f-412b-8d4c-b83e4514b948: 'Our Artists' # Our Artists
     f649f3ae-9db1-4aeb-a850-3977f5bc45ff: 'Six Pack' # Six Pack
+    f728967f-35c8-4330-933c-d8f03d06b855: iFrame # iFrame
     f8978819-a636-4960-bbd5-f042fb766bbb: Image # Image
     fab91d94-7ec6-4694-80f5-f8da8ac5a47d: 'Public Schema' # Public Schema
     fcbd9c21-4ebd-4557-a8a2-f02bf5c32767: Slide # Slide
