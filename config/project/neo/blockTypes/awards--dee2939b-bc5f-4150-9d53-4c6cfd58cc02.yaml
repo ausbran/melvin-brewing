@@ -1,0 +1,44 @@
+childBlocks: null
+color: null
+conditions: null
+description: ''
+enabled: true
+field: 612bfd79-519c-4db3-9ad9-3df56af2b354 # Landing Section
+fieldLayouts:
+  150794de-24f4-4e54-9608-2b7107fb8cf3:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: a5788732-8476-446d-b6ed-04f8cc7d9c00 # Awards
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a8bc96a3-91c7-4791-a18e-5c8dbbfd9058
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 4867933a-985e-4f52-b114-7caba40426d0
+        userCondition: null
+group: null
+groupChildBlockTypes: true
+handle: awards
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 1
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: Awards
+topLevel: true

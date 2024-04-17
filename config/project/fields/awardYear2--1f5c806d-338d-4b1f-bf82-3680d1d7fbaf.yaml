@@ -1,0 +1,18 @@
+columnSuffix: yxrhhnds
+handle: awardYear2
+instructions: 'What year was this award won?'
+name: 'Awards - Bronze Award - Award Year'
+searchable: false
+settings:
+  decimals: 0
+  defaultValue: null
+  max: null
+  min: 0
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

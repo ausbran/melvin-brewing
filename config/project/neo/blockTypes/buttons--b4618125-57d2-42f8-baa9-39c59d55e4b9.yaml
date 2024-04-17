@@ -1,0 +1,44 @@
+childBlocks: null
+color: null
+conditions: null
+description: 'Add a button.'
+enabled: true
+field: 612bfd79-519c-4db3-9ad9-3df56af2b354 # Landing Section
+fieldLayouts:
+  6d38771e-55f2-41ec-b3a7-7be31abf4876:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 021dc031-5726-4bf4-808e-53a9d3c50ab2 # Buttons
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: dd5e3097-c89f-43c8-8a2c-3cb97b416ff3
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: da7083e4-cc9a-4c9f-9358-3fb7975b1409
+        userCondition: null
+group: null
+groupChildBlockTypes: true
+handle: buttons
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 1
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: Buttons
+topLevel: true

@@ -1,0 +1,14 @@
+columnSuffix: eukqdbzx
+handle: buttonLink
+instructions: 'Add a URL to the button.'
+name: 'Buttons - Text Button - Button Link'
+searchable: false
+settings:
+  maxLength: 255
+  types:
+    - url
+    - tel
+    - email
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Url

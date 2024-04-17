@@ -21,13 +21,19 @@ use benf\neo\validators\FieldValidator;
 use Craft;
 use craft\base\EagerLoadingFieldInterface;
 use craft\base\Element;
+use craft\base\ElementContainerFieldInterface;
 use craft\base\ElementInterface;
 use craft\base\Field as BaseField;
 use craft\base\GqlInlineFragmentFieldInterface;
 use craft\base\GqlInlineFragmentInterface;
+use craft\base\NestedElementInterface;
 use craft\db\Query;
 use craft\db\Table;
 use craft\elements\db\ElementQueryInterface;
+use craft\elements\User;
+use craft\enums\AttributeStatus;
+use craft\enums\Color;
+use craft\enums\PropagationMethod;
 use craft\errors\InvalidFieldException;
 use craft\fields\conditions\EmptyFieldConditionRule;
 use craft\helpers\ArrayHelper;
@@ -40,6 +46,7 @@ use craft\helpers\StringHelper;
 use craft\services\Elements;
 use craft\validators\ArrayValidator;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Collection;
 use yii\base\InvalidArgumentException;
 
 /**
@@ -50,17 +57,11 @@ use yii\base\InvalidArgumentException;
  * @author Benjamin Fleming
  * @since 2.0.0
  */
-class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFragmentFieldInterface
+class Field extends BaseField implements
+    EagerLoadingFieldInterface,
+    ElementContainerFieldInterface,
+    GqlInlineFragmentFieldInterface
 {
-    public const PROPAGATION_METHOD_NONE = 'none';
-    public const PROPAGATION_METHOD_SITE_GROUP = 'siteGroup';
-    public const PROPAGATION_METHOD_LANGUAGE = 'language';
-    /**
-     * @since 2.12.0
-     */
-    public const PROPAGATION_METHOD_CUSTOM = 'custom';
-    public const PROPAGATION_METHOD_ALL = 'all';
-
     /**
      * @inheritdoc
      */
@@ -72,9 +73,17 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
     /**
      * @inheritdoc
      */
-    public static function hasContentColumn(): bool
+    public static function icon(): string
     {
-        return false;
+        return '@benf/neo/icon.svg';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function dbType(): array|string|null
+    {
+        return null;
     }
 
     /**
@@ -90,7 +99,7 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
     /**
      * @inheritdoc
      */
-    public static function valueType(): string
+    public static function phpType(): string
     {
         return BlockQuery::class;
     }
@@ -150,27 +159,27 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
     private ?array $_blockTypeFields = null;
 
     /**
-     * @var string Propagation method
+     * @var PropagationMethod
      *
      * This will be set to one of the following:
      *
-     * - `none` – Only save blocks in the site they were created in
-     * - `siteGroup` – Save blocks to other sites in the same site group
-     * - `language` – Save blocks to other sites with the same language
-     * - `all` – Save blocks to all sites supported by the owner element
-     * - `custom` – Save blocks to sites depending on the [[propagationKeyFormat]] value
+     * - `PropagationMethod::None` – Only save blocks in the site they were created in
+     * - `PropagationMethod::SiteGroup` – Save blocks to other sites in the same site group
+     * - `PropagationMethod::Language` – Save blocks to other sites with the same language
+     * - `PropagationMethod::All` – Save blocks to all sites supported by the owner element
+     * - `PropagationMethod::Custom` – Save blocks to sites depending on the [[propagationKeyFormat]] value
      *
      * @since 2.4.0
      */
-    public string $propagationMethod = self::PROPAGATION_METHOD_ALL;
+    public PropagationMethod $propagationMethod = PropagationMethod::All;
 
     /**
-     * @var string|null The old propagation method for this field
+     * @var PropagationMethod|null The old propagation method for this field
      */
-    private ?string $_oldPropagationMethod = null;
+    private ?PropagationMethod $_oldPropagationMethod = null;
 
     /**
-     * @var string|null The field’s propagation key format, if [[propagationMethod]] is `custom`
+     * @var string|null The field’s propagation key format, if [[propagationMethod]] is `PropagationMethod::Custom`
      * @since 2.12.0
      */
     public ?string $propagationKeyFormat = null;
@@ -222,15 +231,6 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
     protected function defineRules(): array
     {
         $rules = parent::defineRules();
-        $rules[] = [
-            ['propagationMethod'], 'in', 'range' => [
-                self::PROPAGATION_METHOD_NONE,
-                self::PROPAGATION_METHOD_SITE_GROUP,
-                self::PROPAGATION_METHOD_LANGUAGE,
-                self::PROPAGATION_METHOD_CUSTOM,
-                self::PROPAGATION_METHOD_ALL,
-            ],
-        ];
         $rules[] = [['blockTypes'], ArrayValidator::class, 'min' => 1, 'skipOnEmpty' => false];
         $rules[] = [['minBlocks', 'maxBlocks', 'maxTopBlocks', 'minLevels', 'maxLevels'], 'integer', 'min' => 0];
 
@@ -452,6 +452,9 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
         $newBlockType->description = $blockType['description'] ?? '';
         $newBlockType->iconFilename = $blockType['iconFilename'] ?? '';
         $newBlockType->iconId = !empty($blockType['iconId']) ? (int)$blockType['iconId'] : null;
+        $newBlockType->color = !empty($blockType['color']) && $blockType['color'] !== '__blank__'
+            ? Color::from($blockType['color'])
+            : null;
         $newBlockType->minBlocks = (int)($blockType['minBlocks'] ?? 0);
         $newBlockType->maxBlocks = (int)($blockType['maxBlocks'] ?? 0);
         $newBlockType->minSiblingBlocks = (int)($blockType['minSiblingBlocks'] ?? 0);
@@ -573,7 +576,7 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
     /**
      * @inheritdoc
      */
-    protected function inputHtml(mixed $value, ?ElementInterface $element = null): string
+    protected function inputHtml(mixed $value, ?ElementInterface $element = null, bool $inline = false): string
     {
         // `inputHtml` being called a second time with namespace depth > 1 when there's an error...
         if ($this->_inputHtmlException !== null) {
@@ -707,8 +710,7 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
             return $value;
         }
 
-        $query = Block::find();
-        $this->_populateQuery($query, $element);
+        $query = $this->_createBlockQuery($element);
 
         // Set the initially matched elements if $value is already set, which is the case if there was a validation
         // error or we're loading an entry revision.
@@ -778,10 +780,10 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
                 (new Query())
                     ->from(["neoblocks_$ns" => '{{%neoblocks}}'])
                     ->innerJoin(["elements_$ns" => Table::ELEMENTS], "[[elements_$ns.id]] = [[neoblocks_$ns.id]]")
-                    ->innerJoin(["neoblocks_owners_$ns" => '{{%neoblocks_owners}}'], [
+                    ->innerJoin(["elements_owners_$ns" => Table::ELEMENTS_OWNERS], [
                         'and',
-                        "[[neoblocks_owners_$ns.blockId]] = [[elements_$ns.id]]",
-                        "[[neoblocks_owners_$ns.ownerId]] = [[elements.id]]",
+                        "[[elements_owners_$ns.elementId]] = [[elements_$ns.id]]",
+                        "[[elements_owners_$ns.ownerId]] = [[elements.id]]",
                     ])
                     ->andWhere([
                         "neoblocks_$ns.fieldId" => $this->id,
@@ -797,7 +799,7 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
      */
     public function getIsTranslatable(?ElementInterface $element = null): bool
     {
-        return $this->propagationMethod !== self::PROPAGATION_METHOD_ALL;
+        return $this->propagationMethod !== PropagationMethod::All;
     }
 
     /**
@@ -806,7 +808,7 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
     public function getStatus(ElementInterface $element): ?array
     {
         return $element->isFieldOutdated($this->handle) ? [
-            Element::ATTR_STATUS_OUTDATED,
+            AttributeStatus::Outdated,
             Craft::t('app', 'This field was updated in the Current revision.'),
         ] : null;
     }
@@ -906,14 +908,14 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
         // Return any relation data on these elements, defined with this field.
         $map = (new Query())
             ->select([
-                'source' => 'neoblocks_owners.ownerId',
+                'source' => 'elements_owners.ownerId',
                 'target' => 'neoblocks.id',
             ])
             ->from(['neoblocks' => '{{%neoblocks}}'])
-            ->innerJoin(['neoblocks_owners' => '{{%neoblocks_owners}}'], [
+            ->innerJoin(['elements_owners' => Table::ELEMENTS_OWNERS], [
                 'and',
-                '[[neoblocks_owners.blockId]] = [[neoblocks.id]]',
-                ['neoblocks_owners.ownerId' => $sourceElementIds],
+                '[[elements_owners.elementId]] = [[neoblocks.id]]',
+                ['elements_owners.ownerId' => $sourceElementIds],
             ])
             ->where(['neoblocks.fieldId' => $this->id])
             // Join structural information to get the ordering of the blocks.
@@ -921,7 +923,7 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
                 '{{%neoblockstructures}} neoblockstructures',
                 [
                     'and',
-                    '[[neoblockstructures.ownerId]] = [[neoblocks_owners.ownerId]]',
+                    '[[neoblockstructures.ownerId]] = [[elements_owners.ownerId]]',
                     '[[neoblockstructures.fieldId]] = [[neoblocks.fieldId]]',
                     '[[neoblockstructures.siteId]] = ' . Craft::$app->getSites()->getCurrentSite()->id,
                 ]
@@ -934,7 +936,7 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
                     '[[structureelements.elementId]] = [[neoblocks.id]]',
                 ]
             )
-            ->orderBy(['[[neoblocks_owners.sortOrder]]' => SORT_ASC])
+            ->orderBy(['[[elements_owners.sortOrder]]' => SORT_ASC])
             ->all();
 
         if (count($sourceElements) === 1) {
@@ -997,7 +999,8 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
         Neo::$plugin->fields->save($this);
 
         if ($this->oldSettings !== null) {
-            $oldPropagationMethod = $this->oldSettings['propagationMethod'] ?? self::PROPAGATION_METHOD_ALL;
+            $oldPropagationMethod = PropagationMethod::tryFrom($this->oldSettings['propagationMethod'] ?? '')
+                ?? PropagationMethod::All;
             $oldPropagationKeyFormat = $this->oldSettings['propagationKeyFormat'] ?? null;
 
             if ($this->propagationMethod !== $oldPropagationMethod || $this->propagationKeyFormat !== $oldPropagationKeyFormat) {
@@ -1031,7 +1034,8 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
                 Neo::$plugin->fields->duplicateOwnership($this, $element->duplicateOf, $element);
             } elseif ($element->getIsRevision()) {
                 Neo::$plugin->fields->createRevisionBlocks($this, $element->duplicateOf, $element);
-            } else {
+            // getIsUnpublishedDraft is needed for "save as new" duplication
+            } elseif (!$element->getIsDraft() || $element->getIsUnpublishedDraft()) {
                 Neo::$plugin->fields->duplicateBlocks($this, $element->duplicateOf, $element, true, !$isNew);
             }
             $resetValue = true;
@@ -1042,14 +1046,11 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
             $resetValue = true;
         }
 
-        // Repopulate the Neo block query if this is a new element
-        if ($resetValue || $isNew) {
-            $value = $element->getFieldValue($this->handle);
-            if ($value instanceof BlockQuery) {
-                $this->_populateQuery($value, $element);
-            }
-            $value->clearCachedResult();
-            $value->useMemoized(false);
+        // Always reset the value if the owner is new
+        if ($isNew || $resetValue) {
+            $dirtyFields = $element->getDirtyFields();
+            $element->setFieldValue($this->handle, $this->_createBlockQuery($element));
+            $element->setDirtyFields($dirtyFields, false);
         }
 
         parent::afterElementPropagate($element, $isNew);
@@ -1215,6 +1216,22 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
     /**
      * @inheritdoc
      */
+    public function beforeElementDeleteForSite(ElementInterface $element): bool
+    {
+        $elementsService = Craft::$app->getElements();
+        Block::find()
+            ->primaryOwnerId($element->id)
+            ->status(null)
+            ->siteId($element->siteId)
+            ->collect()
+            ->each(fn($block) => $elementsService->deleteElementForSite($block));
+
+        return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function afterElementRestore(ElementInterface $element): void
     {
         $elementsService = Craft::$app->getElements();
@@ -1228,7 +1245,7 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
                 ->siteId($supportedSite['siteId'])
                 ->primaryOwnerId($element->id)
                 ->trashed()
-                ->andWhere(['neoblocks.deletedWithOwner' => true])
+                ->andWhere(['elements.deletedWithOwner' => true])
                 ->all();
 
             foreach ($blocks as $block) {
@@ -1237,6 +1254,155 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
         }
 
         parent::afterElementRestore($element);
+    }
+
+    // ElementContainerFieldInterface methods
+
+    /**
+     * @inheritdoc
+     */
+    public function getFieldLayoutProviders(): array
+    {
+        return $this->getBlockTypes();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUriFormatForElement(NestedElementInterface $element): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getRouteForElement(NestedElementInterface $element): mixed
+    {
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSupportedSitesForElement(NestedElementInterface $element): array
+    {
+        try {
+            $owner = $element->getOwner();
+        } catch (InvalidConfigException) {
+            $owner = $element->duplicateOf;
+        }
+
+        return !$owner
+            ? [Craft::$app->getSites()->getPrimarySite()->id]
+            : ElementHelper::supportedSitesForElement($owner);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function canViewElement(NestedElementInterface $element, User $user): ?bool
+    {
+        $owner = $element->getOwner();
+        return $owner && Craft::$app->getElements()->canView($owner, $user);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function canSaveElement(NestedElementInterface $element, User $user): ?bool
+    {
+        $owner = $element->getOwner();
+
+        if (!$owner || !Craft::$app->getElements()->canSave($owner, $user)) {
+            return false;
+        }
+
+        // If this is a new block, make sure we aren't hitting the Max Block limit
+        if (!$element->id && $element->getIsCanonical() && $this->_maxBlocksReached($owner)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function canDuplicateElement(NestedElementInterface $element, User $user): ?bool
+    {
+        $owner = $element->getOwner();
+
+        if (!$owner || !Craft::$app->getElements()->canSave($owner, $user)) {
+            return false;
+        }
+
+        // Make sure we aren't hitting the Max Blocks limit
+        return !$this->_maxBlocksReached($owner);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function canDeleteElement(NestedElementInterface $element, User $user): ?bool
+    {
+        $owner = $element->getOwner();
+
+        if (!$owner || !Craft::$app->getElements()->canSave($owner, $user)) {
+            return false;
+        }
+
+        // Make sure we aren't hitting the Min Blocks limit
+        return !$this->_minBlocksReached($owner);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function canDeleteElementForSite(NestedElementInterface $element, User $user): ?bool
+    {
+        $owner = $element->getOwner();
+
+        if (!$owner || !Craft::$app->getElements()->canSave($owner, $user)) {
+            return false;
+        }
+
+        // Make sure we aren't hitting the Min Blocks limit
+        return !$this->_minBlocksReached($owner);
+    }
+
+    private function _minBlocksReached(ElementInterface $owner): bool
+    {
+        return (
+            $this->minBlocks &&
+            $this->minBlocks >= $this->_totalBlocks($owner)
+        );
+    }
+
+    private function _maxBlocksReached(ElementInterface $owner): bool
+    {
+        return (
+            $this->maxBlocks &&
+            $this->maxBlocks <= $this->_totalBlocks($owner)
+        );
+    }
+
+    private function _totalBlocks(ElementInterface $owner): int
+    {
+        /** @var EntryQuery|ElementCollection $value */
+        $value = $owner->getFieldValue($this->handle);
+
+        if ($value instanceof BlockQuery) {
+            return (clone $value)
+                ->drafts(null)
+                ->status(null)
+                ->site('*')
+                ->limit(null)
+                ->unique()
+                ->count();
+        }
+
+        return $value->count();
     }
 
     /**
@@ -1346,6 +1512,22 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
         $user = Craft::$app->getUser();
         $blockTypes = ArrayHelper::index(Neo::$plugin->blockTypes->getByFieldId($this->id), 'handle');
 
+        // Were the blocks posted by UUID or ID?
+        $uids = (
+            (isset($value['blocks']) && str_starts_with(array_key_first($value['blocks']), 'uid:')) ||
+            (isset($value['sortOrder']) && StringHelper::isUUID(reset($value['sortOrder'])))
+        );
+
+        if ($uids) {
+            // strip out the `uid:` key prefixes
+            if (isset($value['blocks'])) {
+                $value['blocks'] = array_combine(
+                    array_map(fn(string $key) => StringHelper::removeLeft($key, 'uid:'), array_keys($value['blocks'])),
+                    array_values($value['blocks']),
+                );
+            }
+        }
+
         // Get the old blocks
         if ($element->id) {
             $oldBlocksById = Block::find()
@@ -1355,10 +1537,32 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
                 ->status(null)
                 ->siteId($element->siteId)
                 ->orderBy(['sortOrder' => SORT_ASC])
-                ->indexBy('id')
+                ->indexBy($uids ? 'uid' : 'id')
                 ->all();
         } else {
             $oldBlocksById = [];
+        }
+
+        if ($uids) {
+            // Get the canonical block UUIDs in case the data was posted with them
+            $derivatives = Collection::make($oldBlocksById)
+                ->filter(fn(Block $block) => $block->getIsDerivative())
+                ->keyBy(fn(Block $block) => $block->getCanonicalId());
+
+            if ($derivatives->isNotEmpty()) {
+                $canonicalUids = (new Query())
+                    ->select(['id', 'uid'])
+                    ->from(Table::ELEMENTS)
+                    ->where(['id' => $derivatives->keys()->all()])
+                    ->pairs();
+                $derivativeUidMap = [];
+                $canonicalUidMap = [];
+                foreach ($canonicalUids as $canonicalId => $canonicalUid) {
+                    $derivativeUid = $derivatives->get($canonicalId)->uid;
+                    $derivativeUidMap[$canonicalUid] = $derivativeUid;
+                    $canonicalUidMap[$derivativeUid] = $canonicalUid;
+                }
+            }
         }
 
         // Should we ignore disabled blocks?
@@ -1382,7 +1586,6 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
             $newSortOrder = array_keys($value);
         }
 
-        /** @var Block[] $blocks */
         $blocks = [];
         $prevBlock = null;
 
@@ -1390,11 +1593,12 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
             if (isset($newBlockData[$blockId])) {
                 $blockData = $newBlockData[$blockId];
             } elseif (
-                isset(Elements::$duplicatedElementSourceIds[$blockId]) &&
-                isset($newBlockData[Elements::$duplicatedElementSourceIds[$blockId]])
+                $uids &&
+                isset($canonicalUidMap[$blockId]) &&
+                isset($newBlockData[$canonicalUidMap[$blockId]])
             ) {
-                // $blockId is a duplicated block's ID, but the data was sent with the original block ID
-                $blockData = $newBlockData[Elements::$duplicatedElementSourceIds[$blockId]];
+                // $blockId is a draft block's UUID, but the data was sent with the canonical block UUID
+                $entryData = $newBlockData[$canonicalUidMap[$blockId]];
             } else {
                 $blockData = [];
             }
@@ -1402,22 +1606,22 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
             // If this is a preexisting block but we don't have a record of it,
             // check to see if it was recently duplicated.
             if (
-                !str_starts_with($blockId, 'new') &&
+                $uids &&
                 !isset($oldBlocksById[$blockId]) &&
-                isset(Elements::$duplicatedElementIds[$blockId]) &&
-                isset($oldBlocksById[Elements::$duplicatedElementIds[$blockId]])
+                isset($derivativeUidMap[$blockId]) &&
+                isset($oldBlocksById[$derivativeUidMap[$blockId]])
             ) {
-                $blockId = Elements::$duplicatedElementIds[$blockId];
+                $blockId = $derivativeUidMap[$blockId];
             }
 
             // Existing block?
             if (isset($oldBlocksById[$blockId])) {
                 $block = $oldBlocksById[$blockId];
-                $dirty = !empty($blockData);
+                $forceSave = !empty($blockData);
                 $blockEnabled = (bool)($blockData['enabled'] ?? $block->enabled);
 
                 // Is this a derivative element, and does the block primarily belong to the canonical?
-                if ($dirty && $element->getIsDerivative() && $block->primaryOwnerId === $element->getCanonicalId()) {
+                if ($forceSave && $element->getIsDerivative() && $block->getPrimaryOwnerId() === $element->getCanonicalId()) {
                     // Duplicate it as a draft. (We'll drop its draft status from `Fields::saveValue`.)
                     $block = $draftsService->createDraft($block, $user->getId(), null, null, [
                         'canonicalId' => $block->id,
@@ -1435,7 +1639,7 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
                     $block->enabled = $blockEnabled;
                 }
 
-                $block->dirty = $dirty;
+                $block->forceSave = $forceSave;
             } else {
                 // Make sure it's a valid block type
                 if (!isset($blockData['type']) || !isset($blockTypes[$blockData['type']])) {
@@ -1445,15 +1649,20 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
                 $block = new Block();
                 $block->fieldId = $this->id;
                 $block->typeId = $blockTypes[$blockData['type']]->id;
-                $block->primaryOwnerId = $block->ownerId = $element->id;
+                $block->setPrimaryOwner($element);
+                $block->setOwner($element);
                 $block->siteId = $element->siteId;
                 $block->enabled = (bool)($blockData['enabled'] ?? true);
                 $block->unsavedId = $i;
+
+                // Use the provided UUID, so the block can persist across future autosaves
+                if ($uids) {
+                    $block->uid = $blockId;
+                }
             }
 
             $blockLevel = (int)($blockData['level'] ?? $block->level);
 
-            $block->setOwner($element);
             $block->oldLevel = $block->level;
             $block->level = $blockLevel;
 
@@ -1471,9 +1680,15 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
                 continue;
             }
 
+            $block->setOwner($element);
+
             // Set the content post location on the block if we can
             if ($baseBlockFieldNamespace) {
-                $block->setFieldParamNamespace("$baseBlockFieldNamespace.$blockId.fields");
+                if ($uids) {
+                    $block->setFieldParamNamespace("$baseBlockFieldNamespace.uid:$blockId.fields");
+                } else {
+                    $block->setFieldParamNamespace("$baseBlockFieldNamespace.$blockId.fields");
+                }
             }
 
             if (isset($blockData['fields'])) {
@@ -1520,16 +1735,15 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
     /**
      * Sets some default properties on a Neo block query on this field, given its owner element.
      *
-     * @param BlockQuery $query
-     * @param ElementInterface|null $element
+     * @param ElementInterface|null $owner
      */
-    private function _populateQuery(BlockQuery $query, ?ElementInterface $element = null): void
+    private function _createBlockQuery(?ElementInterface $owner): BlockQuery
     {
-        // Existing element?
-        $existingElement = $element && $element->id;
+        $query = Block::find();
 
-        if ($element && $element->id) {
-            $query->ownerId = $element->id;
+        // Existing element?
+        if ($owner && $owner->id) {
+            $query->ownerId = $owner->id;
 
             // Clear out id=false if this query was populated previously
             if ($query->id === false) {
@@ -1537,24 +1751,29 @@ class Field extends BaseField implements EagerLoadingFieldInterface, GqlInlineFr
             }
 
             // If the owner is a revision, allow revision blocks to be returned as well
-            if ($element->getIsRevision()) {
+            if ($owner->getIsRevision()) {
                 $query
                     ->revisions(null)
                     ->trashed(null);
             }
 
             // If the owner element exists, set the appropriate block structure
-            $blockStructure = Neo::$plugin->blocks->getStructure($this->id, $element->id, (int)$element->siteId);
+            $blockStructure = Neo::$plugin->blocks->getStructure($this->id, $owner->id, (int)$owner->siteId);
 
             if ($blockStructure) {
                 $query->structureId($blockStructure->structureId);
             }
+
+            // Prepare the query for lazy eager loading
+            $query->prepForEagerLoading($this->handle, $owner);
         } else {
             $query->id = false;
         }
 
         $query
             ->fieldId($this->id)
-            ->siteId($element->siteId ?? null);
+            ->siteId($owner->siteId ?? null);
+
+        return $query;
     }
 }

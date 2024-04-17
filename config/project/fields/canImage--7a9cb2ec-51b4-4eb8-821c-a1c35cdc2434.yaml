@@ -1,6 +1,5 @@
 columnSuffix: null
 contentColumnType: string
-fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
 handle: canImage
 instructions: 'Upload a transparent image of the can for the beer.'
 name: 'Can Image'

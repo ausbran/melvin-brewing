@@ -121,7 +121,6 @@ fieldLayouts:
 handle: location
 hasTitleField: true
 name: Location
-section: 1f34453a-cacc-4c27-a515-05b3a89f5b76 # Locations
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site

@@ -11,7 +11,6 @@
 namespace nystudio107\pluginvite\variables;
 
 use Twig\Markup;
-
 use yii\base\InvalidConfigException;
 
 /**

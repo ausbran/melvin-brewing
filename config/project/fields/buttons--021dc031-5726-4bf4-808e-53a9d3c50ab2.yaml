@@ -1,16 +1,18 @@
 columnSuffix: null
 contentColumnType: string
-fieldGroup: 2123b6aa-6742-448c-95ac-70a91f1dfcef # General Fields
 handle: buttons
 instructions: 'Add buttons to direct users.'
 name: Buttons
 searchable: false
 settings:
-  contentTable: '{{%matrixcontent_buttons}}'
-  maxBlocks: null
-  minBlocks: null
+  entryTypes:
+    - 6f946d78-01c5-4036-b1bc-c43719d7b8de
+    - 23d727ae-ebdd-4af8-8f61-bd7ebec87655
+  maxEntries: null
+  minEntries: null
   propagationKeyFormat: null
   propagationMethod: all
+  viewMode: blocks
 translationKeyFormat: null
 translationMethod: site
 type: craft\fields\Matrix

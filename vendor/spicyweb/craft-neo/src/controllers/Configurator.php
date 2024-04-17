@@ -39,7 +39,7 @@ class Configurator extends Controller
             'settingsJs' => $renderedData['settingsJs'],
             'bodyHtml' => $renderedData['bodyHtml'],
             'headHtml' => $renderedData['headHtml'],
-            'layoutHtml' => $renderedData['layoutHtml'],
+            'fieldLayoutHtml' => $renderedData['fieldLayoutHtml'],
         ]);
     }
 
@@ -93,7 +93,7 @@ class Configurator extends Controller
 
             $renderedSettings = Neo::$plugin->blockTypes->renderSettings(
                 $blockType,
-                'types[' . Field::class . ']',
+                'types[' . str_replace('\\', '-', Field::class) . ']',
             );
         } else {
             $newBlockType = new BlockType();
@@ -105,7 +105,8 @@ class Configurator extends Controller
                 $newBlockType->ignorePermissions = $settings['ignorePermissions'];
                 $newBlockType->description = $settings['description'] ?? '';
                 $newBlockType->iconFilename = $settings['iconFilename'] ?? '';
-                $newBlockType->iconId = $settings['iconId'];
+                $newBlockType->iconId = $settings['iconId'] ?? null;
+                $newBlockType->color = $settings['color'] ?? null;
                 $newBlockType->minBlocks = (int)$settings['minBlocks'];
                 $newBlockType->maxBlocks = (int)$settings['maxBlocks'];
                 $newBlockType->minSiblingBlocks = (int)$settings['minSiblingBlocks'];
@@ -130,7 +131,7 @@ class Configurator extends Controller
             'settingsJs' => $renderedSettings['settingsJs'],
             'bodyHtml' => $renderedSettings['bodyHtml'],
             'headHtml' => $renderedSettings['headHtml'],
-            'layoutHtml' => Neo::$plugin->blockTypes->renderFieldLayoutDesigner($fieldLayout),
+            'fieldLayoutHtml' => Neo::$plugin->blockTypes->renderFieldLayoutDesigner($fieldLayout),
         ];
     }
 }

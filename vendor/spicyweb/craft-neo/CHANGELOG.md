@@ -1,5 +1,102 @@
 # Changelog
 
+## 5.0.0-beta.6 - 2024-04-12
+
+### Changed
+- Block type action menus are now implemented as disclosure menus
+
+### Fixed
+- Fixed a bug where action menus on existing block types' field layout designers would not open
+- Fixed a bug where pasting a block copied from one entry onto a different entry, then saving the first entry, could cause the pasted block to be saved for the first entry
+
+## 5.0.0-beta.5 - 2024-04-08
+
+### Added
+- Added `benf\neo\services\Conversion::convertBlockToEntry()`
+- Added `benf\neo\services\Conversion::convertBlockTypeToEntryType()`
+- Added `benf\neo\services\Conversion::convertBlockTypesToEntryTypes()`
+
+### Removed
+- Removed `benf\neo\services\Conversion::convertBlockToToMatrix()`
+- Removed `benf\neo\services\Conversion::convertBlockTypeToMatrix()`
+- Removed `benf\neo\services\Conversion::convertBlockTypesToMatrix()`
+
+### Fixed
+- Fixed Neo-to-Matrix conversion
+
+## 5.0.0-beta.4 - 2024-04-03
+
+### Fixed
+- Fixed a bug where action menus would not open on new blocks that contained at least one dropdown field
+
+## 5.0.0-beta.3 - 2024-04-03
+
+> {note} See also the release notes for [4.0.8](https://github.com/spicywebau/craft-neo/blob/5.x/CHANGELOG.md#408---2024-03-22) and [4.1.0](https://github.com/spicywebau/craft-neo/blob/5.x/CHANGELOG.md#410---2024-04-03).
+
+### Fixed
+- Fixed a bug where content would be lost when upgrading from Craft 4
+
+## 5.0.0-beta.2 - 2024-03-11
+
+### Added
+- Added `benf\neo\models\BlockType::$color` and the `neoblocktypes.color` column
+
+### Changed
+- `benf\neo\models\BlockType` now implements `craft\base\Colorable`
+
+### Removed
+- Removed `benf\neo\Field::PROPAGATION_METHOD_ALL`; use `craft\enums\PropagationMethod::All` instead
+- Removed `benf\neo\Field::PROPAGATION_METHOD_CUSTOM`; use `craft\enums\PropagationMethod::Custom` instead
+- Removed `benf\neo\Field::PROPAGATION_METHOD_LANGUAGE`; use `craft\enums\PropagationMethod::Language` instead
+- Removed `benf\neo\Field::PROPAGATION_METHOD_NONE`; use `craft\enums\PropagationMethod::None` instead
+- Removed `benf\neo\Field::PROPAGATION_METHOD_SITE_GROUP`; use `craft\enums\PropagationMethod::SiteGroup` instead
+
+## 5.0.0-beta.1 - 2024-03-10
+
+### Added
+- Added Craft 5 compatibility
+
+### Removed
+- Removed Craft 4 compatibility
+- Removed the `neoblocks_owners` table; the Craft 5 `elements_owners` table is used instead
+- Removed the `neoblocks.deletedWithOwner` column; the Craft 5 `elements.deletedWithOwner` column is used instead
+- Removed `benf\neo\models\Settings::$enableLazyLoadingNewBlocks`; new blocks are now always lazy loaded
+- Removed `benf\neo\services\Blocks::renderTabs()`
+
+## 4.1.2 - 2024-04-09
+
+### Fixed
+- Fixed an error that occurred during Neo-to-Matrix conversion
+
+## 4.1.1 - 2024-04-08
+
+### Fixed
+- Fixed a bug when validation errors occurred on new block types when trying to save a Neo field, where the new block types' settings and field layout designer would not load when selected
+
+## 4.1.0 - 2024-04-03
+
+### Added
+- Added `benf\neo\console\controllers\BlockTypesController::actionFixFieldLayouts()` (`php craft neo/block-types/fix-field-layouts` console command)
+- Added `benf\neo\console\controllers\FieldsController::actionFixBlockStructureSiteIds()` (`php craft neo/fields/fix-block-structure-site-ids` console command)
+
+### Fixed
+- Fixed an error that could occur when changing a Neo field's propagation method, if a Neo block structure for that field exists for an owner element that no longer has the field on its field layout
+- Fixed a bug where deleting an entry for a site wasn't propagating to Neo blocks for that entry/site
+
+## 4.0.8 - 2024-03-22
+
+### Fixed
+- Fixed a bug where soft-deleted Neo blocks that were not deleted with their owner element were not being cleaned up by Craft garbage collection
+- Fixed a bug where Neo blocks that were initially created for a newly-added site within a draft could be lost when applying the draft
+
+## 4.0.7 - 2024-03-09
+
+### Fixed
+- Fixed missing `getField()` method on blocks
+- Fixed an error that occurred when changing the propagation method for a Neo field with no blocks
+- Fixed an error that could occur when cloning block types, if Neo's `blockTypeIconSelectMode` plugin setting is set to `'path'`
+- Fixed a bug where field layout designers for new block types could be reloaded when cloning those block types
+
 ## 4.0.6 - 2024-02-23
 
 ### Added
@@ -830,6 +927,11 @@
 
 ### Fixed
 - Fixed a bug where it was possible to create a Neo field with no block types
+
+## 2.13.21 - 2024-03-21
+
+### Fixed
+- Fixed an error that could occur during Craft garbage collection if the `neoblockstructures` table contained more than 65535 rows
 
 ## 2.13.20 - 2024-02-23
 

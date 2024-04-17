@@ -1,0 +1,24 @@
+columnSuffix: ajekvbbz
+handle: awardName2
+instructions: 'What is the name of the award?'
+name: 'Awards - Bronze Award - Award Name'
+searchable: false
+settings:
+  availableTransforms: '*'
+  availableVolumes: ''
+  configSelectionMode: choose
+  defaultTransform: ''
+  manualConfig: ''
+  purifierConfig: null
+  purifyHtml: true
+  redactorConfig: null
+  removeEmptyTags: false
+  removeInlineStyles: false
+  removeNbsp: false
+  showHtmlButtonForNonAdmins: false
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  uiMode: enlarged
+translationKeyFormat: null
+translationMethod: none
+type: craft\redactor\Field

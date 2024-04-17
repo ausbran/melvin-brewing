@@ -1,6 +1,5 @@
 columnSuffix: hqbgypka
 contentColumnType: string(13)
-fieldGroup: 7376a32e-bb38-4467-b1b4-6e6db135167e # CSS Fields
 handle: textAlignment
 instructions: 'Choose where you would like text to align in the box.'
 name: 'Text Alignment'

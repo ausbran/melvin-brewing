@@ -1,5 +1,8 @@
 defaultPlacement: end
 enableVersioning: true
+entryTypes:
+  - 2f0eebdb-494a-4076-91e6-fba3c5059a2a # Beer Series
+  - 81a24339-11e3-4828-9bb5-f5db1693d5a4 # Individual Beer
 handle: beers
 name: Beers
 previewTargets:

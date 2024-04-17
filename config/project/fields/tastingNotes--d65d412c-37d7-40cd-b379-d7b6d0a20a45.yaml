@@ -1,16 +1,17 @@
 columnSuffix: sqskmytk
 contentColumnType: string
-fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
 handle: tastingNotes
 instructions: 'What is the beer''s tasting notes?'
 name: 'Tasting Notes'
 searchable: true
 settings:
-  contentTable: '{{%matrixcontent_tastingnotes}}'
-  maxBlocks: 5
-  minBlocks: null
+  entryTypes:
+    - 79759d1d-2122-469e-b071-f35ad6a27d0b
+  maxEntries: 5
+  minEntries: null
   propagationKeyFormat: null
   propagationMethod: all
+  viewMode: blocks
 translationKeyFormat: null
 translationMethod: site
 type: craft\fields\Matrix

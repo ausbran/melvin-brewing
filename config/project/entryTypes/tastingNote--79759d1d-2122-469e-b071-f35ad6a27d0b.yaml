@@ -1,0 +1,36 @@
+color: null
+fieldLayouts:
+  e29ca005-ed6a-42c6-839b-88c0d153b5b9:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 1b1ff12a-eac3-4d7f-b1c6-5544ec614eea
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: 'Tasting Note'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 99285a5f-af58-4da3-99d4-8665517c7ffa
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: a73d967b-1615-469d-94bc-9f643cd6eda4
+        userCondition: null
+handle: tastingNote
+hasTitleField: false
+icon: null
+name: 'Tasting Notes'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

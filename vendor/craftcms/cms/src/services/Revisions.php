@@ -100,7 +100,7 @@ class Revisions extends Component
                 $lastRevisionInfo &&
                 DateTimeHelper::toDateTime($lastRevisionInfo['dateCreated'])->getTimestamp() === $canonical->dateUpdated->getTimestamp() &&
                 // Make sure all its data is in-tact
-                $canonical::find()->revisionId($lastRevisionInfo['id'])->status(null)->exists()
+                $canonical::find()->id($lastRevisionInfo['id'])->revisions()->status(null)->siteId($canonical->siteId)->exists()
             ) {
                 // The canonical element hasn't been updated since the last revision's creation date,
                 // so there's no need to create a new one
@@ -218,7 +218,7 @@ class Revisions extends Component
             ]));
         }
 
-        // "Duplicate" the revision with the source element’s ID, UID, and content ID
+        // "Duplicate" the revision with the source element’s ID and UID
         $newSource = Craft::$app->getElements()->updateCanonicalElement($revision, [
             'revisionCreatorId' => $creatorId,
             'revisionNotes' => Craft::t('app', 'Reverted content from revision {num}.', ['num' => $revision->revisionNum]),

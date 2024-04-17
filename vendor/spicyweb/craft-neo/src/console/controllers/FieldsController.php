@@ -4,10 +4,13 @@ namespace benf\neo\console\controllers;
 
 use benf\neo\elements\Block;
 use benf\neo\Field;
+use benf\neo\Plugin as Neo;
 use Craft;
 use craft\console\Controller;
 use craft\db\Query;
 use craft\db\Table;
+use craft\enums\PropagationMethod;
+use craft\helpers\Db;
 use craft\helpers\Queue;
 use craft\i18n\Translation;
 use craft\queue\jobs\ApplyNewPropagationMethod;
@@ -55,6 +58,24 @@ class FieldsController extends Controller
     }
 
     /**
+     * Changes `null` block structure site IDs to the primary site ID.
+     *
+     * @return int
+     * @since 4.1.0
+     */
+    public function actionFixBlockStructureSiteIds(): int
+    {
+        Db::update('{{%neoblockstructures}}', [
+            'siteId' => Craft::$app->getSites()->getPrimarySite()->id,
+        ], [
+            'siteId' => null,
+        ]);
+        $this->stdout('Done.' . PHP_EOL);
+
+        return ExitCode::OK;
+    }
+
+    /**
      * Reapplies a Neo field's propagation method to its blocks if the Craft install is multi-site.
      *
      * @return int
@@ -71,10 +92,10 @@ class FieldsController extends Controller
         $withPropagationMethod = $this->withPropagationMethod
             ? explode(',', $this->withPropagationMethod)
             : [
-                Field::PROPAGATION_METHOD_NONE,
-                Field::PROPAGATION_METHOD_SITE_GROUP,
-                Field::PROPAGATION_METHOD_LANGUAGE,
-                Field::PROPAGATION_METHOD_CUSTOM,
+                PropagationMethod::Custom->value,
+                PropagationMethod::Language->value,
+                PropagationMethod::None->value,
+                PropagationMethod::SiteGroup->value,
             ];
 
         // If not reapplying by block structure, just do one for every field
@@ -89,7 +110,7 @@ class FieldsController extends Controller
 
             $neoFields = array_filter($fieldsService->getAllFields(), function($field) use ($setIds, $withPropagationMethod) {
                 return $field instanceof Field &&
-                    in_array($field->propagationMethod, $withPropagationMethod) &&
+                    in_array($field->propagationMethod->value, $withPropagationMethod) &&
                     (empty($setIds) || isset($setIds[$field->id]));
             });
 
@@ -128,7 +149,7 @@ class FieldsController extends Controller
                     continue;
                 }
 
-                $fieldPropagationMethod[$fieldId] = $field->propagationMethod;
+                $fieldPropagationMethod[$fieldId] = $field->propagationMethod->value;
             }
 
             if (in_array($fieldPropagationMethod[$fieldId], $withPropagationMethod)) {

@@ -1,0 +1,12 @@
+columnSuffix: null
+handle: loopVideo
+instructions: 'Enable or disable looping for video.'
+name: 'Loop Video'
+searchable: false
+settings:
+  default: true
+  offLabel: 'Don''t Loop'
+  onLabel: Loop
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

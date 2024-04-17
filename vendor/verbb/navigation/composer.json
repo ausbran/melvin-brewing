@@ -2,7 +2,7 @@
     "name": "verbb/navigation",
     "description": "Create navigation menus for your site.",
     "type": "craft-plugin",
-    "version": "2.0.26",
+    "version": "3.0.0-beta.3",
     "keywords": [
         "craft",
         "cms",
@@ -26,9 +26,9 @@
         }
     ],
     "require": {
-        "php": "^8.0.2",
-        "craftcms/cms": "^4.0.0",
-        "verbb/base": "^2.0.0"
+        "php": "^8.2",
+        "craftcms/cms": "^5.0.0-beta.1",
+        "verbb/base": "^3.0.0-beta.1"
     },
     "autoload": {
         "psr-4": {
@@ -38,7 +38,7 @@
     "extra": {
         "name": "Navigation",
         "handle": "navigation",
-        "changelogUrl": "https://raw.githubusercontent.com/verbb/navigation/craft-4/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/verbb/navigation/craft-5/CHANGELOG.md",
         "class": "verbb\\navigation\\Navigation"
     }
 }

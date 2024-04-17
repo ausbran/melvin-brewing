@@ -1,0 +1,51 @@
+color: null
+fieldLayouts:
+  53533afe-fa87-42f2-a291-14fab5ee2457:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 0719e0bc-b265-44ef-a609-0f532d8f91ed
+            handle: awardYear
+            includeInCards: true
+            instructions: null
+            label: 'Award Year'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 795e1e8c-95ec-4d9a-a39c-5a326e38d938
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 5fbe9456-92e8-4281-af03-cd8dc1435b6b
+            handle: awardName
+            includeInCards: false
+            instructions: null
+            label: 'Award Name'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 88f4ad5f-baf6-4c03-963f-a89090db603d
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 3f03998a-3cfb-433c-a306-92720b0b8029
+        userCondition: null
+handle: goldAward
+hasTitleField: false
+icon: null
+name: 'Gold Award'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

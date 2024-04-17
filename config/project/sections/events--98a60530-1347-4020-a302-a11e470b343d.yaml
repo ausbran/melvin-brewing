@@ -1,5 +1,7 @@
 defaultPlacement: end
 enableVersioning: true
+entryTypes:
+  - 43882e81-bc87-43ff-9313-d303783fa479 # Default
 handle: events
 name: Events
 previewTargets:

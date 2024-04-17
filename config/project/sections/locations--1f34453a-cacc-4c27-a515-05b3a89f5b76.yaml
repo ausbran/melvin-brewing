@@ -1,5 +1,7 @@
 defaultPlacement: end
 enableVersioning: true
+entryTypes:
+  - 47a2a87b-81e2-4dc8-8c48-9fe1c88ef5b2 # Location
 handle: locations
 name: Locations
 previewTargets:

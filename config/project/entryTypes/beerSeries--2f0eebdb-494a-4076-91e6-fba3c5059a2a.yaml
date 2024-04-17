@@ -61,7 +61,6 @@ fieldLayouts:
 handle: beerSeries
 hasTitleField: true
 name: 'Beer Series'
-section: ec54db85-dc39-4841-b6bc-17523b4d074d # Beers
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site

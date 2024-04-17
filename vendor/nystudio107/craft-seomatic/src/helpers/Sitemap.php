@@ -9,7 +9,7 @@ use craft\base\Event;
 use craft\console\Application as ConsoleApplication;
 use craft\db\Paginator;
 use craft\elements\Asset;
-use craft\elements\MatrixBlock;
+use craft\elements\Entry;
 use craft\errors\SiteNotFoundException;
 use craft\fields\Assets as AssetsField;
 use craft\queue\Queue;
@@ -24,7 +24,6 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\Seomatic;
 use Throwable;
-use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use yii\base\Exception;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
@@ -301,25 +300,6 @@ class Sitemap
                             }
                         }
                     }
-                    // Handle news sitemaps https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap
-                    if ((bool)$metaBundle->metaSitemapVars->newsSitemap) {
-                        $now = new DateTime();
-                        $interval = $now->diff($dateUpdated);
-                        if ($interval->days <= 2) {
-                            $language = strtolower($element->getLanguage());
-                            if (!str_starts_with($language, 'zh')) {
-                                $language = substr($language, 0, 2);
-                            }
-                            $lines[] = '<news:news>';
-                            $lines[] = '<news:publication>';
-                            $lines[] = '<news:name>' . $metaBundle->metaSitemapVars->newsPublicationName . '</news:name>';
-                            $lines[] = '<news:language>' . $language . '</news:language>';
-                            $lines[] = '</news:publication>';
-                            $lines[] = '<news:publication_date>' . $dateUpdated->format(DateTime::W3C) . '</news:publication_date>';
-                            $lines[] = '<news:title>' . $element->title . '</news:title>';
-                            $lines[] = '</news:news>';
-                        }
-                    }
                     // Handle any Assets
                     if ($metaBundle->metaSitemapVars->sitemapAssets) {
                         // Regular Assets fields
@@ -343,17 +323,14 @@ class Sitemap
                         );
                         foreach ($blockFields as $blockField) {
                             $blocks = $element[$blockField]->all();
-                            /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
+                            /** @var Entry[]|NeoBlock[]|object[] $blocks */
                             foreach ($blocks as $block) {
                                 $assetFields = [];
-                                if ($block instanceof MatrixBlock) {
+                                if ($block instanceof Entry) {
                                     $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
                                 }
                                 if ($block instanceof NeoBlock) {
                                     $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
-                                }
-                                if ($block instanceof SuperTableBlock) {
-                                    $assetFields = FieldHelper::superTableFieldsOfType($block, AssetsField::class);
                                 }
                                 foreach ($assetFields as $assetField) {
                                     foreach ($block[$assetField]->all() as $asset) {
@@ -387,14 +364,11 @@ class Sitemap
                     );
                     foreach ($blockFields as $blockField) {
                         $blocks = $element[$blockField]->all();
-                        /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
+                        /** @var Entry[]|NeoBlock[]|object[] $blocks */
                         foreach ($blocks as $block) {
                             $assetFields = [];
-                            if ($block instanceof MatrixBlock) {
+                            if ($block instanceof Entry) {
                                 $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
-                            }
-                            if ($block instanceof SuperTableBlock) {
-                                $assetFields = FieldHelper::superTableFieldsOfType($block, AssetsField::class);
                             }
                             if ($block instanceof NeoBlock) {
                                 $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
@@ -553,15 +527,16 @@ class Sitemap
         if ((bool)$asset->enabledForSite && $asset->getUrl() !== null) {
             switch ($asset->kind) {
                 case 'image':
+                    $transform = Craft::$app->getImageTransforms()->getTransformByHandle($metaBundle->metaSitemapVars->sitemapAssetTransform ?? '');
                     $lines[] = '<image:image>';
                     $lines[] = '<image:loc>';
-                    $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
+                    $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl($transform, true)));
                     $lines[] = '</image:loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
                         $fieldName = $row['field'] ?? '';
                         $propName = $row['property'] ?? '';
-                        if (!empty($asset[$fieldName]) && !empty($propName)) {
+                        if (!empty($fieldName) && !empty($asset[$fieldName]) && !empty($propName)) {
                             $lines[] = '<image:' . $propName . '>';
                             $lines[] = Html::encode($asset[$fieldName]);
                             $lines[] = '</image:' . $propName . '>';
@@ -579,7 +554,7 @@ class Sitemap
                     foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
                         $fieldName = $row['field'] ?? '';
                         $propName = $row['property'] ?? '';
-                        if (!empty($asset[$fieldName]) && !empty($propName)) {
+                        if (!empty($fieldName) && !empty($asset[$fieldName]) && !empty($propName)) {
                             $lines[] = '<video:' . $propName . '>';
                             $lines[] = Html::encode($asset[$fieldName]);
                             $lines[] = '</video:' . $propName . '>';

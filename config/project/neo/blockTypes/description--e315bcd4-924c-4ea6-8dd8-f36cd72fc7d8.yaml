@@ -1,0 +1,70 @@
+childBlocks: null
+conditions: null
+description: ''
+enabled: true
+field: 10e9a8b2-c801-433b-82f1-4bfddf3231af # Page Sections
+fieldLayouts:
+  15491c17-76d8-474a-8dc5-a27cb08dd637:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: ad02cc6a-65c1-461f-a44b-2675bdcd2625 # Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8391dc0a-5b22-4435-b16c-36abcfa84470
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 5f2424c8-13f1-4160-81e8-b74ef34f0024
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 0fe7b501-d81b-44ac-9f5d-e7e3ba23600b # Max Width
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e1dbe9c4-0656-4a76-b31e-756938740cd6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 917f53fa-1fa1-47af-8866-5b042d19b183 # Text Alignment
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: eab99e2c-fe93-40ec-b9e3-a9b2eeaf5993
+            userCondition: null
+            warning: null
+            width: 100
+        name: Settings
+        uid: 8d58eea5-c79f-41b3-aef5-a80bb75c1d99
+        userCondition: null
+group: null
+groupChildBlockTypes: true
+handle: description
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 0
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: Description
+topLevel: false

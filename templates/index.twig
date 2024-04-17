@@ -11,11 +11,12 @@
     <meta name="msapplication-TileColor" content="#383E42">
     <meta name="theme-color" content="#ffffff">
     {% css "/assets/css/main.css" %}
+    <script type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=QPkd8U"></script>
 </head>
 <body {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %}>
     {% include '_includes/navigation' %}
     {% block content %}{% endblock %}
     {% include '_includes/footer' %}
-    <script src="/assets/js/main.js"></script>
+    {% js "/assets/js/main.js" %}
 </body>
 </html>

@@ -1,6 +1,4 @@
 columnSuffix: null
-contentColumnType: string
-fieldGroup: 2123b6aa-6742-448c-95ac-70a91f1dfcef # General Fields
 handle: locationToggle
 instructions: null
 name: 'Location Toggle'

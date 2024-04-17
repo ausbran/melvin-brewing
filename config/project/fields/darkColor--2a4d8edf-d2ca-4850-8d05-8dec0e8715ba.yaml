@@ -1,6 +1,5 @@
 columnSuffix: ydfukqvp
 contentColumnType: char(7)
-fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
 handle: darkColor
 instructions: 'This is the dark color of the beer can.'
 name: 'Dark Color'

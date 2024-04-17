@@ -1,0 +1,36 @@
+color: null
+fieldLayouts:
+  9b0578a6-7039-4608-814f-a1d49936a7b0:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 92b602c5-a12a-4516-a436-f4a79378b6b6
+            handle: buttonLink
+            includeInCards: true
+            instructions: null
+            label: 'Button Link'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 51eae3d1-7e6d-4a13-ba64-e2e77f88c7e0
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: a0d62df1-44e1-4caf-9866-5bf2b280444f
+        userCondition: null
+handle: arrowButton
+hasTitleField: false
+icon: null
+name: 'Arrow Button'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

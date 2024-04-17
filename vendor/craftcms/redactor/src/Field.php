@@ -54,16 +54,18 @@ class Field extends HtmlField
      * Plugins can get notified when HTML Purifier config is being constructed.
      *
      * ```php
+     * use craft\htmlfield\events\ModifyPurifierConfigEvent;
      * use craft\redactor\Field;
-     * use craft\htmlfield\ModifyPurifierConfigEvent;
-     * use HTMLPurifier_AttrDef_Text;
+     * use HTMLPurifier_Config;
      * use yii\base\Event;
      *
      * Event::on(
      *     Field::class,
      *     Field::EVENT_MODIFY_PURIFIER_CONFIG,
      *     function(ModifyPurifierConfigEvent $event) {
-     *          // ...
+     *         // @var HTMLPurifier_Config $config
+     *         $config = $event->config;
+     *         // ...
      *     }
      * );
      * ```
@@ -229,6 +231,14 @@ class Field extends HtmlField
     }
 
     /**
+     * @inheritdoc
+     */
+    public static function icon(): string
+    {
+        return '@craft/redactor/icon-mask.svg';
+    }
+
+    /**
      * Registers a Redactor plugin's JS & CSS files.
      *
      * @param string $plugin
@@ -360,7 +370,7 @@ class Field extends HtmlField
     /**
      * @inheritdoc
      */
-    protected function inputHtml(mixed $value, ElementInterface $element = null): string
+    protected function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
     {
         // register the asset/redactor bundles
         $view = Craft::$app->getView();
@@ -465,7 +475,7 @@ class Field extends HtmlField
     /**
      * @inheritdoc
      */
-    public function serializeValue(mixed $value, ?\craft\base\ElementInterface $element = null): mixed
+    public function serializeValue(mixed $value, ?ElementInterface $element): mixed
     {
         if ($value instanceof HtmlFieldData) {
             $value = $value->getRawContent();
@@ -491,7 +501,7 @@ class Field extends HtmlField
      * @param ElementInterface|null $element The element the field is associated with, if there is one
      * @return array
      */
-    private function _getLinkOptions(ElementInterface $element = null): array
+    private function _getLinkOptions(?ElementInterface $element): array
     {
         $linkOptions = [];
 
@@ -551,10 +561,10 @@ class Field extends HtmlField
      * @param ElementInterface|null $element The element the field is associated with, if there is one
      * @return array
      */
-    private function _getSectionSources(ElementInterface $element = null): array
+    private function _getSectionSources(?ElementInterface $element): array
     {
         $sources = [];
-        $sections = Craft::$app->getSections()->getAllSections();
+        $sections = Craft::$app->getEntries()->getAllSections();
         $showSingles = false;
 
         // Get all sites
@@ -590,7 +600,7 @@ class Field extends HtmlField
      * @param ElementInterface|null $element The element the field is associated with, if there is one
      * @return array
      */
-    private function _getCategorySources(ElementInterface $element = null): array
+    private function _getCategorySources(?ElementInterface $element): array
     {
         $sources = [];
 

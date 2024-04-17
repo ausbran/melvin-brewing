@@ -1,0 +1,51 @@
+color: null
+fieldLayouts:
+  fa308689-7fd1-4324-80a2-051eb10cf1e0:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 459bad13-5ca0-488e-9e0a-8e78783dceaf
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: 'Button Text'
+            providesThumbs: false
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d05e8cae-59b7-46bd-b498-f7b0bc6419f7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 7834810e-5c24-45f4-a020-d738de7d7f03
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: 'Button Link'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5901e939-fde1-4c84-b39f-d014abdf6472
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: b79c3790-c98a-4222-97b3-ceb10eeed581
+        userCondition: null
+handle: button
+hasTitleField: false
+icon: null
+name: 'Text Button'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

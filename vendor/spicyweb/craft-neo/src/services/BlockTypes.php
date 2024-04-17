@@ -27,6 +27,7 @@ use craft\elements\Entry;
 use craft\elements\GlobalSet;
 use craft\elements\Tag;
 use craft\elements\User;
+use craft\enums\Color;
 use craft\events\ConfigEvent;
 use craft\helpers\App;
 use craft\helpers\Cp;
@@ -256,6 +257,7 @@ class BlockTypes extends Component
         $record->description = $blockType->description;
         $record->iconFilename = $blockType->iconFilename;
         $record->iconId = $blockType->iconId;
+        $record->color = $blockType->color?->value;
         $record->enabled = $blockType->enabled;
         $record->ignorePermissions = $blockType->ignorePermissions;
         $record->sortOrder = $blockType->sortOrder;
@@ -313,7 +315,7 @@ class BlockTypes extends Component
 
         $this->trigger(self::EVENT_BEFORE_SAVE_BLOCK_TYPE, $event);
 
-        $path = 'neoBlockTypes.' . $blockType->uid;
+        $path = 'neo.blockTypes.' . $blockType->uid;
         $sortOrder = $config['sortOrder'] - 1;
         unset($config['sortOrder']);
         $projectConfig->set('neo.orders.' . $config['field'] . ".$sortOrder", "blockType:$blockType->uid");
@@ -339,7 +341,7 @@ class BlockTypes extends Component
             $blockTypeGroup->uid = Db::uidById('{{%neoblocktypegroups}}', $blockTypeGroup->id);
         }
 
-        $path = 'neoBlockTypeGroups.' . $blockTypeGroup->uid;
+        $path = 'neo.blockTypeGroups.' . $blockTypeGroup->uid;
         $config = $blockTypeGroup->getConfig();
         $sortOrder = $config['sortOrder'] - 1;
         unset($config['sortOrder']);
@@ -363,16 +365,21 @@ class BlockTypes extends Component
     public function delete(BlockType $blockType): bool
     {
         $projectConfig = Craft::$app->getProjectConfig();
-        $fieldSortOrderPath = 'neo.orders.' . $blockType->getConfig()['field'];
-        $fieldSortOrder = $projectConfig->get($fieldSortOrderPath);
-        $key = array_search($blockType->uid, $fieldSortOrder);
+        $fieldUid = $blockType->getConfig()['field'];
 
-        if ($key) {
-            unset($fieldSortOrder[$key]);
+        if ($fieldUid !== null) {
+            $fieldSortOrderPath = 'neo.orders.' . $blockType->getConfig()['field'];
+            $fieldSortOrder = $projectConfig->get($fieldSortOrderPath);
+            $key = array_search($blockType->uid, $fieldSortOrder);
+
+            if ($key) {
+                unset($fieldSortOrder[$key]);
+            }
+
+            $projectConfig->set($fieldSortOrderPath, array_values($fieldSortOrder));
         }
 
-        $projectConfig->set($fieldSortOrderPath, array_values($fieldSortOrder));
-        $projectConfig->remove('neoBlockTypes.' . $blockType->uid);
+        $projectConfig->remove('neo.blockTypes.' . $blockType->uid);
 
         return true;
     }
@@ -397,7 +404,7 @@ class BlockTypes extends Component
         }
 
         $projectConfig->set($fieldSortOrderPath, array_values($fieldSortOrder));
-        $projectConfig->remove('neoBlockTypeGroups.' . $blockTypeGroup->uid);
+        $projectConfig->remove('neo.blockTypeGroups.' . $blockTypeGroup->uid);
 
         return true;
     }
@@ -550,6 +557,7 @@ class BlockTypes extends Component
             $record->description = $data['description'] ?? '';
             $record->iconFilename = $data['iconFilename'] ?? '';
             $record->iconId = $blockTypeIcon?->id ?? null;
+            $record->color = $data['color'] ?? null;
             $record->enabled = $data['enabled'] ?? true;
             $record->ignorePermissions = $data['ignorePermissions'] ?? true;
             $record->sortOrder = $sortOrder;
@@ -573,6 +581,9 @@ class BlockTypes extends Component
             $blockType->name = $data['name'];
             $blockType->handle = $data['handle'];
             $blockType->description = $data['description'] ?? '';
+            $blockType->color = !empty($record->color) && $record->color !== '__blank__'
+                ? Color::from($record->color)
+                : null;
             $blockType->enabled = $data['enabled'] ?? true;
             $blockType->ignorePermissions = $data['ignorePermissions'] ?? true;
             $blockType->sortOrder = $sortOrder;
@@ -1013,6 +1024,7 @@ class BlockTypes extends Component
             'description',
             'iconFilename',
             'iconId',
+            'color',
             'enabled',
             'ignorePermissions',
             'minBlocks',

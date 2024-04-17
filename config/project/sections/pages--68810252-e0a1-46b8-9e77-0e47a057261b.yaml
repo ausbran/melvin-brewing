@@ -1,5 +1,8 @@
 defaultPlacement: end
 enableVersioning: true
+entryTypes:
+  - 5f624c64-0bdb-4809-bbc7-8159ac90b16b # Home
+  - 9f5f0742-4deb-4408-a64a-f60a318f5e7e # Page
 handle: pages
 name: Pages
 previewTargets:

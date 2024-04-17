@@ -37,7 +37,7 @@ abstract class Container extends FluentModel implements ContainerInterface
      *
      * @return static
      */
-    public static function create(array $config = []): static
+    public static function create(array $config = [])
     {
         $className = static::class;
         $model = new $className($config);

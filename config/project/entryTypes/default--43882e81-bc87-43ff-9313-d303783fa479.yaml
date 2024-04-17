@@ -49,7 +49,6 @@ fieldLayouts:
 handle: default
 hasTitleField: true
 name: Default
-section: 98a60530-1347-4020-a302-a11e470b343d # Events
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site

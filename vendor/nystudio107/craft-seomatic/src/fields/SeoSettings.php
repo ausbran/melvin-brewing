@@ -111,9 +111,33 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
+    public static function dbType(): array|string|null
+    {
+        return Schema::TYPE_TEXT;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public static function displayName(): string
     {
         return Craft::t('seomatic', 'SEO Settings');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function icon(): string
+    {
+        return '@nystudio107/seomatic/icon-mask.svg';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function phpType(): string
+    {
+        return sprintf('\\%s', MetaBundle::class);
     }
 
     // Public Methods
@@ -154,14 +178,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         ]);
 
         return $rules;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getContentColumnType(): array|string
-    {
-        return Schema::TYPE_TEXT;
     }
 
     /**

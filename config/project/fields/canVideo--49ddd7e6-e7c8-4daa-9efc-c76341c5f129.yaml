@@ -1,6 +1,5 @@
 columnSuffix: null
 contentColumnType: string
-fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
 handle: canVideo
 instructions: 'Upload a video associated with the beer.'
 name: 'Can Video'

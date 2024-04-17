@@ -37,6 +37,11 @@ class MetaSitemapVars extends InheritableSettingsModel
     public $sitemapAssets;
 
     /**
+     * @var string
+     */
+    public $sitemapAssetTransform = null;
+
+    /**
      * @var bool
      */
     public $newsSitemap = false;
@@ -86,7 +91,7 @@ class MetaSitemapVars extends InheritableSettingsModel
      */
     public $sitemapVideoFieldMap = [];
 
-    // Public Static Methods
+    // Static Methods
     // =========================================================================
 
     /**
@@ -132,6 +137,7 @@ class MetaSitemapVars extends InheritableSettingsModel
                 [
                     'sitemapChangeFreq',
                     'newsPublicationName',
+                    'sitemapAssetTransform',
                 ],
                 'string',
             ],

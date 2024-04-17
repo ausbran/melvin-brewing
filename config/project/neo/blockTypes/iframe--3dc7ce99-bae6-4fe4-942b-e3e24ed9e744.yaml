@@ -1,0 +1,40 @@
+childBlocks: null
+conditions: null
+description: 'Copy and paste your iframe embed code.'
+enabled: true
+field: 10e9a8b2-c801-433b-82f1-4bfddf3231af # Page Sections
+fieldLayouts:
+  d68754cc-8e55-41bd-bb1e-b0c3a1fe5b47:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 7e937d6c-ebdb-4e27-8b62-0e0252bfdf52 # iFrame
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4a5a8b04-1e41-40d3-8bac-37fde656290b
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: d7744e07-d6e3-40c0-81d4-8ad36b020acf
+        userCondition: null
+group: null
+groupChildBlockTypes: true
+handle: iframe
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 0
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: iFrame
+topLevel: true

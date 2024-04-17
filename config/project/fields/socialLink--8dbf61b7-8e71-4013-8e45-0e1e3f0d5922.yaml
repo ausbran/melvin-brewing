@@ -1,16 +1,17 @@
 columnSuffix: null
 contentColumnType: string
-fieldGroup: 2123b6aa-6742-448c-95ac-70a91f1dfcef # General Fields
 handle: socialLink
 instructions: 'Paste the link and choose the corresponding channel.'
 name: 'Social Link'
 searchable: false
 settings:
-  contentTable: '{{%matrixcontent_sociallink}}'
-  maxBlocks: null
-  minBlocks: null
+  entryTypes:
+    - 2a66e961-61be-482a-b5c4-bd49a3747ea5
+  maxEntries: null
+  minEntries: null
   propagationKeyFormat: null
   propagationMethod: all
+  viewMode: blocks
 translationKeyFormat: null
 translationMethod: site
 type: craft\fields\Matrix

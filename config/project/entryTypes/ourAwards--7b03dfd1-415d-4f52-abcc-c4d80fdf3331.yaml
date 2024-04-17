@@ -49,7 +49,6 @@ fieldLayouts:
 handle: ourAwards
 hasTitleField: true
 name: 'Our Awards'
-section: 76a1851c-73ea-4eb1-8e0d-a7501be656b0 # About
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site

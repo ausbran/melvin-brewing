@@ -3,15 +3,6 @@
 $vendorDir = dirname(__DIR__);
 
 return array (
-  'yiisoft/yii2-symfonymailer' => 
-  array (
-    'name' => 'yiisoft/yii2-symfonymailer',
-    'version' => '2.0.4.0',
-    'alias' => 
-    array (
-      '@yii/symfonymailer' => $vendorDir . '/yiisoft/yii2-symfonymailer/src',
-    ),
-  ),
   'yiisoft/yii2-queue' => 
   array (
     'name' => 'yiisoft/yii2-queue',
@@ -69,24 +60,23 @@ return array (
     ),
     'bootstrap' => 'yii\\shell\\Bootstrap',
   ),
-  'craftcms/generator' => 
-  array (
-    'name' => 'craftcms/generator',
-    'version' => '1.6.1.0',
-    'alias' => 
-    array (
-      '@craft/generator' => $vendorDir . '/craftcms/generator/src',
-    ),
-    'bootstrap' => 'craft\\generator\\Extension',
-  ),
   'nystudio107/craft-code-editor' => 
   array (
     'name' => 'nystudio107/craft-code-editor',
-    'version' => '1.0.17.0',
+    'version' => '1.0.19.0',
     'alias' => 
     array (
       '@nystudio107/codeeditor' => $vendorDir . '/nystudio107/craft-code-editor/src',
     ),
     'bootstrap' => 'nystudio107\\codeeditor\\CodeEditor',
+  ),
+  'yiisoft/yii2-symfonymailer' => 
+  array (
+    'name' => 'yiisoft/yii2-symfonymailer',
+    'version' => '4.0.0.0',
+    'alias' => 
+    array (
+      '@yii/symfonymailer' => $vendorDir . '/yiisoft/yii2-symfonymailer/src',
+    ),
   ),
 );

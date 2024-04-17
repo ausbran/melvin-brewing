@@ -61,7 +61,6 @@ fieldLayouts:
 handle: page
 hasTitleField: true
 name: Page
-section: 68810252-e0a1-46b8-9e77-0e47a057261b # Pages
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site

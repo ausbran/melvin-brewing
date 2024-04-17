@@ -1,6 +1,5 @@
 columnSuffix: null
 contentColumnType: string
-fieldGroup: 33cf5f76-e7a1-4bf0-9540-9df537e093bf # Location Fields
 handle: lifestyleImages
 instructions: 'Add two lifestyle images to display in the grid.'
 name: 'Lifestyle Images'

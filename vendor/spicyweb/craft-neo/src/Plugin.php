@@ -29,7 +29,7 @@ use craft\events\DefineConsoleActionsEvent;
 use craft\events\DefineFieldLayoutElementsEvent;
 use craft\events\RebuildConfigEvent;
 use craft\events\RegisterComponentTypesEvent;
-use craft\events\RegisterConditionRuleTypesEvent;
+use craft\events\RegisterConditionRulesEvent;
 use craft\events\RegisterGqlTypesEvent;
 use craft\events\RegisterUserPermissionsEvent;
 use craft\feedme\events\RegisterFeedMeFieldsEvent;
@@ -40,6 +40,7 @@ use craft\gatsbyhelper\services\Deltas;
 use craft\helpers\Console;
 use craft\helpers\Db;
 use craft\models\FieldLayout;
+use craft\services\Elements;
 use craft\services\Fields;
 use craft\services\Gc;
 use craft\services\Gql;
@@ -66,12 +67,12 @@ class Plugin extends BasePlugin
     /**
      * @inheritdoc
      */
-    public string $schemaVersion = '4.0.0';
+    public string $schemaVersion = '5.0.0.1';
 
     /**
      * @inheritdoc
      */
-    public string $minVersionRequired = '2.13.0';
+    public string $minVersionRequired = '3.6.2';
 
     /**
      * @var bool
@@ -111,6 +112,7 @@ class Plugin extends BasePlugin
         Craft::$app->view->registerTwigExtension(new TwigExtension());
 
         $this->_registerFieldType();
+        $this->_registerElementType();
         $this->_registerTwigVariable();
         $this->_registerGqlType();
         $this->_registerProjectConfigApply();
@@ -156,6 +158,16 @@ class Plugin extends BasePlugin
     }
 
     /**
+     * Registers the Neo block element type.
+     */
+    private function _registerElementType(): void
+    {
+        Event::on(Elements::class, Elements::EVENT_REGISTER_ELEMENT_TYPES, function(RegisterComponentTypesEvent $event) {
+            $event->types[] = Block::class;
+        });
+    }
+
+    /**
      * Registers the `craft.neo` Twig variable.
      */
     private function _registerTwigVariable(): void
@@ -182,12 +194,12 @@ class Plugin extends BasePlugin
     {
         Craft::$app->getProjectConfig()
             ->onUpdate('neo.orders.{uid}', [$this->blockTypes, 'handleChangedOrders'])
-            ->onAdd('neoBlockTypes.{uid}', [$this->blockTypes, 'handleChangedBlockType'])
-            ->onUpdate('neoBlockTypes.{uid}', [$this->blockTypes, 'handleChangedBlockType'])
-            ->onRemove('neoBlockTypes.{uid}', [$this->blockTypes, 'handleDeletedBlockType'])
-            ->onAdd('neoBlockTypeGroups.{uid}', [$this->blockTypes, 'handleChangedBlockTypeGroup'])
-            ->onUpdate('neoBlockTypeGroups.{uid}', [$this->blockTypes, 'handleChangedBlockTypeGroup'])
-            ->onRemove('neoBlockTypeGroups.{uid}', [$this->blockTypes, 'handleDeletedBlockTypeGroup']);
+            ->onAdd('neo.blockTypes.{uid}', [$this->blockTypes, 'handleChangedBlockType'])
+            ->onUpdate('neo.blockTypes.{uid}', [$this->blockTypes, 'handleChangedBlockType'])
+            ->onRemove('neo.blockTypes.{uid}', [$this->blockTypes, 'handleDeletedBlockType'])
+            ->onAdd('neo.blockTypeGroups.{uid}', [$this->blockTypes, 'handleChangedBlockTypeGroup'])
+            ->onUpdate('neo.blockTypeGroups.{uid}', [$this->blockTypes, 'handleChangedBlockTypeGroup'])
+            ->onRemove('neo.blockTypeGroups.{uid}', [$this->blockTypes, 'handleDeletedBlockTypeGroup']);
     }
 
     /**
@@ -220,10 +232,10 @@ class Plugin extends BasePlugin
             }
 
             $event->config['neo'] = [
+                'blockTypes' => $blockTypeData,
+                'blockTypeGroups' => $blockTypeGroupData,
                 'orders' => $sortOrderData,
             ];
-            $event->config['neoBlockTypes'] = $blockTypeData;
-            $event->config['neoBlockTypeGroups'] = $blockTypeGroupData;
         });
     }
 
@@ -237,7 +249,6 @@ class Plugin extends BasePlugin
             };
             $gc = Craft::$app->getGc();
             $gc->deletePartialElements(Block::class, '{{%neoblocks}}', 'id');
-            $gc->deletePartialElements(Block::class, Table::CONTENT, 'elementId');
 
             // Delete anything in the structures table that's a Neo block structure, but doesn't exist in the
             // neoblockstructures table
@@ -367,11 +378,11 @@ class Plugin extends BasePlugin
     {
         Event::on(
             BaseCondition::class,
-            BaseCondition::EVENT_REGISTER_CONDITION_RULE_TYPES,
-            function(RegisterConditionRuleTypesEvent $event) {
+            BaseCondition::EVENT_REGISTER_CONDITION_RULES,
+            function(RegisterConditionRulesEvent $event) {
                 if (self::$isGeneratingConditionHtml) {
-                    $event->conditionRuleTypes = array_filter(
-                        $event->conditionRuleTypes,
+                    $event->conditionRules = array_filter(
+                        $event->conditionRules,
                         function($type) use ($event) {
                             // No field value conditions allowed as it may make existing blocks invalid
                             if (isset($type['fieldUid'])) {

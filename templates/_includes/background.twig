@@ -1,7 +1,7 @@
 <div class="background {{ 'slide-bg' }}">
     {% set video = block.backgroundVideo.one() %}
     {% if video %}
-        <video autoplay loop muted preload="metadata" playsinline webkit-playsinline>
+        <video autoplay {{ block.loopVideo ? 'loop' }} muted preload="metadata" playsinline webkit-playsinline>
             <source src="{{ video.url }}" type="video/mp4">
         </video>
     {% elseif block.backgroundImage.one() %}

@@ -25,41 +25,24 @@ class NavigationField extends Field
         return Craft::t('navigation', 'Navigation');
     }
 
+    public static function icon(): string
+    {
+        return '@verbb/navigation/icon-mask.svg';
+    }
+
     public static function defaultSelectionLabel(): string
     {
         return Craft::t('navigation', 'Select a navigation');
     }
 
-
-    // Public Methods
-    // =========================================================================
-
-    public function getContentColumnType(): array|string
+    public static function dbType(): array|string
     {
         return Schema::TYPE_TEXT;
     }
 
-    public function getInputHtml(mixed $value, ?ElementInterface $element = null): string
-    {
-        $navs = Navigation::$plugin->getNavs()->getAllNavs();
 
-        $options = [
-            '' => Craft::t('navigation', 'Select a navigation'),
-        ];
-
-        foreach ($navs as $nav) {
-            $options[$nav->handle] = $nav->name;
-        }
-
-        $id = Html::id($this->handle);
-
-        return Craft::$app->getView()->renderTemplate('navigation/_field/input', [
-            'id' => $id,
-            'name' => $this->handle,
-            'value' => $value,
-            'options' => $options,
-        ]);
-    }
+    // Public Methods
+    // =========================================================================
 
     public function getSettingsHtml(): ?string
     {
@@ -81,6 +64,28 @@ class NavigationField extends Field
 
     // Protected Methods
     // =========================================================================
+
+    protected function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
+    {
+        $navs = Navigation::$plugin->getNavs()->getAllNavs();
+
+        $options = [
+            '' => Craft::t('navigation', 'Select a navigation'),
+        ];
+
+        foreach ($navs as $nav) {
+            $options[$nav->handle] = $nav->name;
+        }
+
+        $id = Html::id($this->handle);
+
+        return Craft::$app->getView()->renderTemplate('navigation/_field/input', [
+            'id' => $id,
+            'name' => $this->handle,
+            'value' => $value,
+            'options' => $options,
+        ]);
+    }
 
     protected function optionsSettingLabel(): string
     {

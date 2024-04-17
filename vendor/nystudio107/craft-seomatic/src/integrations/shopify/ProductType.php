@@ -64,7 +64,7 @@ class ProductType extends Model
     /**
      * Returns the product types's site-specific settings.
      *
-     * @return array
+     * @return Section_SiteSettings[]
      */
     public function getSiteSettings(): array
     {

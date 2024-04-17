@@ -1,6 +1,5 @@
 columnSuffix: tnulewxr
 contentColumnType: string
-fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
 handle: sizes
 instructions: 'What size is the beer available in?'
 name: Sizes

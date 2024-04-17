@@ -1,0 +1,12 @@
+columnSuffix: xbwebvwg
+handle: linkUrl
+instructions: null
+name: 'Social Link - Link - Link URL'
+searchable: false
+settings:
+  maxLength: 255
+  types:
+    - url
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Url

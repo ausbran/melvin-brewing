@@ -1,0 +1,58 @@
+childBlocks: null
+conditions: null
+description: ''
+enabled: true
+field: 537b387e-676e-45bc-8784-94ab111fecb8 # Series Landing Section
+fieldLayouts:
+  211a3dea-c9a3-40fe-b99a-781cbdac6049:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: ad02cc6a-65c1-461f-a44b-2675bdcd2625 # Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 07606620-1042-46d3-88c8-3c3b4947add3
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: f170bac0-3a10-432d-99d3-4c4b01343c98
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 917f53fa-1fa1-47af-8866-5b042d19b183 # Text Alignment
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7ac8bd68-8b70-4a29-a400-9373604a54d9
+            userCondition: null
+            warning: null
+            width: 100
+        name: Settings
+        uid: c1768a8a-d205-4653-84db-9911935623d4
+        userCondition: null
+group: null
+groupChildBlockTypes: true
+handle: description
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 0
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: Description
+topLevel: true

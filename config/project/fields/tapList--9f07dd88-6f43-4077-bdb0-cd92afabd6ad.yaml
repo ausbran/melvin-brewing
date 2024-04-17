@@ -1,6 +1,5 @@
 columnSuffix: zkmhefhc
 contentColumnType: string(255)
-fieldGroup: 33cf5f76-e7a1-4bf0-9540-9df537e093bf # Location Fields
 handle: tapList
 instructions: 'Link to the location''s tappd profile.'
 name: 'Tap List'

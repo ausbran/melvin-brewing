@@ -1,0 +1,18 @@
+columnSuffix: iqcnongx
+handle: awardYear3
+instructions: 'What year was this award won?'
+name: 'Awards - Gold Award - Award Year'
+searchable: false
+settings:
+  decimals: 0
+  defaultValue: null
+  max: null
+  min: null
+  prefix: null
+  previewCurrency: null
+  previewFormat: decimal
+  size: null
+  suffix: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Number

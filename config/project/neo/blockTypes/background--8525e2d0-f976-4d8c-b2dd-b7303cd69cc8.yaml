@@ -1,0 +1,94 @@
+childBlocks: null
+conditions: null
+description: ''
+enabled: true
+field: 10e9a8b2-c801-433b-82f1-4bfddf3231af # Page Sections
+fieldLayouts:
+  1ce8b015-0b50-4b83-9c7a-b5386e08e20f:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: bffc7c3c-02c7-46d1-9835-a9096a16f727 # Background Image
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1be55777-b05a-4b60-afea-a1cf88aa2f46
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: a11615b2-853a-4fe3-9dd7-99901084d23e # Background Video
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c9eab5ea-fc03-419c-ad76-8dde12f85938
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 0446437e-7c98-4974-8103-766d4249c7e3
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 13504266-15af-46cc-abf9-80c9136fa83b # Background Overlay
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7fb59526-1da6-48b0-a301-2943715c0670
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 3c09f8e7-d651-4b43-9478-d543321de483 # Background Size
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 989dca93-f9cd-46b5-ad74-7b75968eb9fe
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: a111ef49-544a-4868-b0aa-c9f69bffffd1 # Height
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ee6be5d0-730b-4d9a-880b-1e45664ff4cb
+            userCondition: null
+            warning: null
+            width: 100
+        name: Settings
+        uid: cc8d9600-d589-4687-bd53-e93f7902d72d
+        userCondition: null
+group: null
+groupChildBlockTypes: true
+handle: background
+icon: null
+iconFilename: ''
+ignorePermissions: true
+maxBlocks: 0
+maxChildBlocks: 0
+maxSiblingBlocks: 0
+minBlocks: 0
+minChildBlocks: 0
+minSiblingBlocks: 0
+name: Background
+topLevel: false

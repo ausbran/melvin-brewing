@@ -7,14 +7,18 @@ use benf\neo\Field;
 use benf\neo\fieldlayoutelements\ChildBlocksUiElement;
 use benf\neo\Plugin as Neo;
 use Craft;
+use craft\base\Colorable;
+use craft\base\FieldLayoutProviderInterface;
 use craft\base\GqlInlineFragmentInterface;
 use craft\base\Model;
 use craft\behaviors\FieldLayoutBehavior;
 use craft\db\Table;
 use craft\elements\Asset;
+use craft\enums\Color;
 use craft\helpers\Db;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
+use craft\models\FieldLayout;
 
 /**
  * Class BlockType
@@ -24,7 +28,10 @@ use craft\helpers\StringHelper;
  * @author Benjamin Fleming
  * @since 2.0.0
  */
-class BlockType extends Model implements GqlInlineFragmentInterface
+class BlockType extends Model implements
+    FieldLayoutProviderInterface,
+    GqlInlineFragmentInterface,
+    Colorable
 {
     /**
      * @var int|null The block type ID.
@@ -74,6 +81,12 @@ class BlockType extends Model implements GqlInlineFragmentInterface
      * @since 3.6.0
      */
     public ?int $iconId = null;
+
+    /**
+     * @var Color|null Color
+     * @since 5.0.0
+     */
+    public ?Color $color = null;
 
     /**
      * @var bool Whether this block type is allowed to be used.
@@ -159,9 +172,9 @@ class BlockType extends Model implements GqlInlineFragmentInterface
     public bool $hasFieldErrors = false;
 
     /**
-     * @var Field|null The Neo field associated with this block type.
+     * @var Field|false|null The Neo field associated with this block type.
      */
-    private ?Field $_field = null;
+    private Field|false|null $_field = null;
 
     /**
      * @var BlockTypeGroup|null The block type group this block type belongs to, if any.
@@ -247,13 +260,13 @@ class BlockType extends Model implements GqlInlineFragmentInterface
      */
     public function getField(): ?Field
     {
-        $fieldsService = Craft::$app->getFields();
-
-        if (!$this->_field && $this->fieldId) {
-            $this->_field = $fieldsService->getFieldById($this->fieldId);
+        if ($this->_field === null && $this->fieldId) {
+            // Ensure the field is still actually a Neo field
+            $field = Craft::$app->getFields()->getFieldById($this->fieldId);
+            $this->_field = $field instanceof Field ? $field : false;
         }
 
-        return $this->_field;
+        return $this->_field ?: null;
     }
 
     /**
@@ -311,6 +324,14 @@ class BlockType extends Model implements GqlInlineFragmentInterface
     /**
      * @inheritdoc
      */
+    public function getColor(): ?Color
+    {
+        return $this->color;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getFieldContext(): string
     {
         return 'global';
@@ -347,7 +368,7 @@ class BlockType extends Model implements GqlInlineFragmentInterface
 
         $config = [
             'childBlocks' => $this->childBlocks,
-            'field' => $this->getField()->uid,
+            'field' => $this->getField()?->uid,
             'group' => $group ? $group->uid : null,
             'groupChildBlockTypes' => (bool)$this->groupChildBlockTypes,
             'handle' => $this->handle,
@@ -355,6 +376,7 @@ class BlockType extends Model implements GqlInlineFragmentInterface
             'enabled' => $this->enabled,
             'iconFilename' => $this->iconFilename ?? '',
             'icon' => $iconData,
+            'color' => $this->color?->value,
             'minBlocks' => (int)$this->minBlocks,
             'maxBlocks' => (int)$this->maxBlocks,
             'minChildBlocks' => (int)$this->minChildBlocks,
@@ -410,5 +432,23 @@ class BlockType extends Model implements GqlInlineFragmentInterface
         }
 
         return $this->_hasChildBlocksUiElement = false;
+    }
+
+    // FieldLayoutProviderInterface methods
+
+    /**
+     * @inheritdoc
+     */
+    public function getHandle(): ?string
+    {
+        return $this->handle;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getFieldLayout(): FieldLayout
+    {
+        return $this->getBehavior('fieldLayout')->getFieldLayout();
     }
 }

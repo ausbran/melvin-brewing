@@ -1,6 +1,5 @@
 columnSuffix: zmdwxbsb
 contentColumnType: datetime
-fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
 handle: releaseDate
 instructions: 'When was the beer released?'
 name: 'Release Date'

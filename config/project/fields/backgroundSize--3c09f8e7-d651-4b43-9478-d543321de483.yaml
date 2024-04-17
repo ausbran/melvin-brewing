@@ -1,6 +1,5 @@
 columnSuffix: izbvksms
 contentColumnType: string(7)
-fieldGroup: 7376a32e-bb38-4467-b1b4-6e6db135167e # CSS Fields
 handle: backgroundSize
 instructions: 'Choose a background-size rule for the image.'
 name: 'Background Size'

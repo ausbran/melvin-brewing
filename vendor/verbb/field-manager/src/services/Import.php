@@ -9,6 +9,12 @@ use craft\helpers\Json;
 
 use yii\base\Component;
 
+use Throwable;
+
+use craft\ckeditor\Plugin as CkEditor;
+use craft\ckeditor\Field as CkEditorField;
+use craft\ckeditor\CkeConfig;
+
 class Import extends Component
 {
     // Public Methods
@@ -19,7 +25,7 @@ class Import extends Component
         $fieldsToImport = [];
 
         foreach ($fields as $key => $field) {
-            if (isset($field['groupId']) && $field['groupId'] != 'noimport') {
+            if (isset($field['import']) && $field['import'] != 'noimport') {
 
                 // Get the field data from our imported JSON data
                 $fieldsToImport[$key] = $data[$key];
@@ -27,14 +33,13 @@ class Import extends Component
                 // Handle overrides
                 $fieldsToImport[$key]['name'] = $field['name'];
                 $fieldsToImport[$key]['handle'] = $field['handle'];
-                $fieldsToImport[$key]['groupId'] = $field['groupId'];
 
                 // Handle Matrix
                 if ($data[$key]['type'] === 'craft\fields\Matrix') {
                     $blockTypes = $field['settings']['blockTypes'] ?? [];
 
                     foreach ($blockTypes as $blockTypeKey => $blockType) {
-                        $blockTypeImport = ArrayHelper::remove($blockType, 'groupId');
+                        $blockTypeImport = ArrayHelper::remove($blockType, 'import');
 
                         // Remove the whole block if not importing
                         if ($blockTypeImport === 'noimport') {
@@ -50,7 +55,7 @@ class Import extends Component
                         $blockTypeFields = $blockType['fields'] ?? [];
 
                         foreach ($blockTypeFields as $blockTypeFieldKey => $blockTypeField) {
-                            $blockTypeFieldImport = ArrayHelper::remove($blockTypeField, 'groupId');
+                            $blockTypeFieldImport = ArrayHelper::remove($blockTypeField, 'import');
 
                             // Remove the whole field if not importing
                             if ($blockTypeFieldImport === 'noimport') {
@@ -74,7 +79,7 @@ class Import extends Component
                         $blockTypeFields = $blockType['fields'] ?? [];
 
                         foreach ($blockTypeFields as $blockTypeFieldKey => $blockTypeField) {
-                            $blockTypeFieldImport = ArrayHelper::remove($blockTypeField, 'groupId');
+                            $blockTypeFieldImport = ArrayHelper::remove($blockTypeField, 'import');
 
                             // Remove the whole field if not importing
                             if ($blockTypeFieldImport === 'noimport') {
@@ -95,7 +100,7 @@ class Import extends Component
                     $blockTypes = $field['settings']['blockTypes'] ?? [];
 
                     foreach ($blockTypes as $blockTypeKey => $blockType) {
-                        $blockTypeImport = ArrayHelper::remove($blockType, 'groupId');
+                        $blockTypeImport = ArrayHelper::remove($blockType, 'import');
 
                         // Remove the whole block if not importing
                         if ($blockTypeImport === 'noimport') {
@@ -112,7 +117,7 @@ class Import extends Component
 
                         foreach ($blockTypeTabs as $blockTypeTabKey => $blockTypeTab) {
                             foreach ($blockTypeTab as $blockTypeFieldKey => $blockTypeField) {
-                                $blockTypeFieldImport = ArrayHelper::remove($blockTypeField, 'groupId');
+                                $blockTypeFieldImport = ArrayHelper::remove($blockTypeField, 'import');
 
                                 // Remove the whole field if not importing
                                 if ($blockTypeFieldImport === 'noimport') {
@@ -157,8 +162,11 @@ class Import extends Component
                     $fieldInfo['settings'] = $this->processPosition($fieldInfo);
                 }
 
+                if ($fieldInfo['type'] === 'craft\ckeditor\Field') {
+                    $fieldInfo['settings'] = $this->processCkEditor($fieldInfo);
+                }
+
                 $field = Craft::$app->getFields()->createField([
-                    'groupId' => $fieldInfo['groupId'],
                     'name' => $fieldInfo['name'],
                     'handle' => $fieldInfo['handle'],
                     'instructions' => $fieldInfo['instructions'],
@@ -184,7 +192,7 @@ class Import extends Component
                             }
                         }
                     } else {
-                        $errors[$fieldInfo['handle']] = $field;
+                        $errors[$fieldInfo['handle']] = $fieldErrors;
                     }
 
                     FieldManager::error('Could not import {name} - {errors}.', [
@@ -277,6 +285,35 @@ class Import extends Component
             foreach ($settings['options'] as $key => $value) {
                 $settings['options'][$key] = (string)$value;
             }
+        }
+
+        return $settings;
+    }
+
+    public function processCkEditor($fieldInfo): array
+    {
+        $settings = $fieldInfo['settings'];
+
+        // Get or create the config from its UID
+        $ckeConfigData = $settings['ckeConfig'] ?? null;
+        $ckeConfigUid = $settings['ckeConfig']['uid'] ?? null;
+
+        if ($ckeConfigUid) {
+            try {
+                $ckeConfig = CkEditor::getInstance()->getCkeConfigs()->getByUid($ckeConfigUid);
+            } catch (Throwable) {
+                $ckeConfig = null;
+            }
+
+            if (!$ckeConfig) {
+                $ckeConfig = new CkeConfig($ckeConfigData);
+
+                CkEditor::getInstance()->getCkeConfigs()->save($ckeConfig);
+
+                $ckeConfigUid = $ckeConfig->uid;
+            }
+
+            $settings['ckeConfig'] = $ckeConfigUid;
         }
 
         return $settings;

@@ -10,11 +10,16 @@ use craft\fields\Matrix;
 
 use yii\base\Component;
 
+use Throwable;
+
 use verbb\supertable\SuperTable;
 use verbb\supertable\fields\SuperTableField;
 
 use benf\neo\Plugin as Neo;
 use benf\neo\Field as NeoField;
+
+use craft\ckeditor\Plugin as CkEditor;
+use craft\ckeditor\Field as CkEditorField;
 
 class Export extends Component
 {
@@ -57,6 +62,12 @@ class Export extends Component
                     }
                 }
 
+                if (Plugin::isPluginInstalledAndEnabled('ckeditor')) {
+                    if ($field instanceof CkEditorField) {
+                        $newField['settings'] = $this->processCkEditor($field);
+                    }
+                }
+
                 $fields[] = $newField;
             }
         }
@@ -68,7 +79,7 @@ class Export extends Component
     {
         $fieldSettings = $field->settings;
 
-        $blockTypes = Craft::$app->getMatrix()->getBlockTypesByFieldId($field->id);
+        $blockTypes =$field->getEntryTypes();
 
         $blockCount = 1;
         foreach ($blockTypes as $blockType) {
@@ -147,8 +158,8 @@ class Export extends Component
                 'ignorePermissions' => (bool)$blockType->ignorePermissions,
                 'enabled' => (bool)$blockType->enabled,
                 'iconId' => $blockType->iconId,
-                'minBlocks' => $blockType->minBlocks,
-                'maxBlocks' => (int)$blockType->maxBlocks,
+                'minEntries' => $blockType->minEntries,
+                'maxEntries' => (int)$blockType->maxEntries,
                 'minSiblingBlocks' => $blockType->minSiblingBlocks,
                 'maxSiblingBlocks' => (int)$blockType->maxSiblingBlocks,
                 'minChildBlocks' => (int)$blockType->minChildBlocks,
@@ -212,6 +223,25 @@ class Export extends Component
             }
 
             $blockCount++;
+        }
+
+        return $fieldSettings;
+    }
+
+    public function processCkEditor($field): array
+    {
+        $fieldSettings = $field->settings;
+        $ckeConfigUid = $fieldSettings['ckeConfig'] ?? null;
+
+        if ($ckeConfigUid) {
+            try {
+                $ckeConfig = CkEditor::getInstance()->getCkeConfigs()->getByUid($ckeConfigUid);
+
+                if ($ckeConfig) {
+                    $fieldSettings['ckeConfig'] = $ckeConfig;
+                }
+            } catch (Throwable) {
+            }
         }
 
         return $fieldSettings;

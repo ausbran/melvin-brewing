@@ -1,0 +1,65 @@
+columnSuffix: sjrgmvbv
+handle: channel
+instructions: null
+name: 'Social Link - Link - Channel'
+searchable: false
+settings:
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Facebook
+        -
+          - value
+          - facebook
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Instagram
+        -
+          - value
+          - instagram
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - LinkedIn
+        -
+          - value
+          - linkedin
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - X
+        -
+          - value
+          - x
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Spotify
+        -
+          - value
+          - spotify
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

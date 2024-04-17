@@ -21,7 +21,7 @@ use craft\events\SectionEvent;
 use craft\gql\interfaces\elements\Entry as EntryInterface;
 use craft\models\Section;
 use craft\models\Site;
-use craft\services\Sections;
+use craft\services\Entries;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\base\SeoElementInterface;
@@ -102,22 +102,22 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
 
         // Install for all requests
         Event::on(
-            Sections::class,
-            Sections::EVENT_AFTER_SAVE_SECTION,
+            Entries::class,
+            Entries::EVENT_AFTER_SAVE_SECTION,
             function(SectionEvent $event) {
                 Craft::debug(
-                    'Sections::EVENT_AFTER_SAVE_SECTION',
+                    'Entries::EVENT_AFTER_SAVE_SECTION',
                     __METHOD__
                 );
                 Seomatic::$plugin->metaBundles->resaveMetaBundles(self::META_BUNDLE_TYPE);
             }
         );
         Event::on(
-            Sections::class,
-            Sections::EVENT_AFTER_DELETE_SECTION,
+            Entries::class,
+            Entries::EVENT_AFTER_DELETE_SECTION,
             function(SectionEvent $event) {
                 Craft::debug(
-                    'Sections::EVENT_AFTER_DELETE_SECTION',
+                    'Entries::EVENT_AFTER_DELETE_SECTION',
                     __METHOD__
                 );
                 Seomatic::$plugin->metaBundles->resaveMetaBundles(self::META_BUNDLE_TYPE);
@@ -126,13 +126,13 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
 
         // Install for all non-console requests
         if (!$request->getIsConsoleRequest()) {
-            // Handler: Sections::EVENT_AFTER_SAVE_SECTION
+            // Handler: Entries::EVENT_AFTER_SAVE_SECTION
             Event::on(
-                Sections::class,
-                Sections::EVENT_AFTER_SAVE_SECTION,
+                Entries::class,
+                Entries::EVENT_AFTER_SAVE_SECTION,
                 function(SectionEvent $event) {
                     Craft::debug(
-                        'Sections::EVENT_AFTER_SAVE_SECTION',
+                        'Entries::EVENT_AFTER_SAVE_SECTION',
                         __METHOD__
                     );
                     if ($event->section !== null && $event->section->id !== null) {
@@ -149,13 +149,13 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
                     }
                 }
             );
-            // Handler: Sections::EVENT_AFTER_DELETE_SECTION
+            // Handler: Entries::EVENT_AFTER_DELETE_SECTION
             Event::on(
-                Sections::class,
-                Sections::EVENT_AFTER_DELETE_SECTION,
+                Entries::class,
+                Entries::EVENT_AFTER_DELETE_SECTION,
                 function(SectionEvent $event) {
                     Craft::debug(
-                        'Sections::EVENT_AFTER_DELETE_SECTION',
+                        'Entries::EVENT_AFTER_DELETE_SECTION',
                         __METHOD__
                     );
                     if ($event->section !== null && $event->section->id !== null) {
@@ -243,8 +243,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    )
-    {
+    ) {
         return Entry::find()
             ->section($metaBundle->sourceHandle)
             ->id($elementId)
@@ -286,7 +285,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
     public static function fieldLayouts(string $sourceHandle): array
     {
         $layouts = [];
-        $section = Craft::$app->getSections()->getSectionByHandle($sourceHandle);
+        $section = Craft::$app->getEntries()->getSectionByHandle($sourceHandle);
         if ($section) {
             $entryTypes = $section->getEntryTypes();
             foreach ($entryTypes as $entryType) {
@@ -333,7 +332,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
      */
     public static function sourceModelFromId(int $sourceId)
     {
-        return Craft::$app->getSections()->getSectionById($sourceId);
+        return Craft::$app->getEntries()->getSectionById($sourceId);
     }
 
     /**
@@ -345,7 +344,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
      */
     public static function sourceModelFromHandle(string $sourceHandle)
     {
-        return Craft::$app->getSections()->getSectionByHandle($sourceHandle);
+        return Craft::$app->getEntries()->getSectionByHandle($sourceHandle);
     }
 
     /**
@@ -436,7 +435,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         $sourceHandle = '';
         /** @var Entry $element */
         try {
-            $sourceHandle = $element->getSection()->handle;
+            $sourceHandle = $element->getSection()?->handle;
         } catch (InvalidConfigException $e) {
         }
 
@@ -466,7 +465,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
     public static function createAllContentMetaBundles()
     {
         // Get all of the sections with URLs
-        $sections = Craft::$app->getSections()->getAllSections();
+        $sections = Craft::$app->getEntries()->getAllSections();
         foreach ($sections as $section) {
             self::createContentMetaBundle($section);
         }

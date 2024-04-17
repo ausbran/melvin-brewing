@@ -1,6 +1,5 @@
 columnSuffix: xcoxbybd
 contentColumnType: char(7)
-fieldGroup: b798574d-735a-46db-ac3d-6297fa12658d # Beer Fields
 handle: lightColor
 instructions: 'This is the light color of the beer can.'
 name: 'Light Color'

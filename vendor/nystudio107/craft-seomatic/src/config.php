@@ -162,7 +162,7 @@ return [
 
     // Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar
     'enableDebugToolbarPanel' => true,
-
+    
     // SeoElementInterface[] The default SeoElement type classes
     'defaultSeoElementTypes' => [
     ],

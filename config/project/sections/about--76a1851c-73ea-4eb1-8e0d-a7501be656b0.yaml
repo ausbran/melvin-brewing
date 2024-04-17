@@ -1,5 +1,10 @@
 defaultPlacement: end
 enableVersioning: true
+entryTypes:
+  - 7b03dfd1-415d-4f52-abcc-c4d80fdf3331 # Our Awards
+  - 31803f1b-64e4-4e43-84c2-e2b426caa398 # Our Approach
+  - f72f22c2-cd1f-412b-8d4c-b83e4514b948 # Our Artists
+  - fdb4b497-cc54-40da-b81e-d107903c5bc6 # Our Story
 handle: about
 name: About
 previewTargets:

@@ -1,0 +1,51 @@
+color: null
+fieldLayouts:
+  a731ed6a-1909-4b32-bf49-cfc189d6b579:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 1f5c806d-338d-4b1f-bf82-3680d1d7fbaf
+            handle: awardYear
+            includeInCards: true
+            instructions: null
+            label: 'Award Year'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2b757a9d-421c-4b2d-8285-f8b129ca8717
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 164cf5ba-20a0-4835-aada-5d84eb1661b8
+            handle: awardName
+            includeInCards: false
+            instructions: null
+            label: 'Award Name'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: a5874737-9f96-4425-a29b-45c42bf89c11
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 0b65d550-c2fa-4cf3-8b2b-740c61b746cb
+        userCondition: null
+handle: bronzeAward
+hasTitleField: false
+icon: null
+name: 'Bronze Award'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

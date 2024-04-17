@@ -15,6 +15,8 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\db\Query;
 use craft\db\Table;
+use craft\elements\ElementCollection;
+use craft\enums\PropagationMethod;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Db;
 use craft\helpers\ElementHelper;
@@ -226,7 +228,7 @@ class Fields extends Component
         $this->_rebuildIfDeleted = false;
         $value = $owner->getFieldValue($field->handle);
 
-        if ($value instanceof Collection) {
+        if ($value instanceof ElementCollection) {
             $blocks = $value->all();
             $saveAll = true;
         } else {
@@ -234,7 +236,12 @@ class Fields extends Component
             if ($blocks !== null) {
                 $saveAll = false;
             } else {
-                $blocks = (clone $value)->status(null)->all();
+                $blocks = (clone $value)
+                    ->drafts(null)
+                    ->savedDraftsOnly()
+                    ->status(null)
+                    ->limit(null)
+                    ->all();
                 $saveAll = true;
             }
         }
@@ -248,9 +255,9 @@ class Fields extends Component
         try {
             foreach ($blocks as $block) {
                 $sortOrder++;
-                if ($saveAll || !$block->id || $block->dirty) {
-                    // Check if the sortOrder has changed and we need to resave the block structure
-                    if ((int)$block->sortOrder !== $sortOrder) {
+                if ($saveAll || !$block->id || $block->forceSave) {
+                    // Check if the sort order has changed and we need to resave the block structure
+                    if ((int)$block->getSortOrder() !== $sortOrder) {
                         $structureModified = true;
                     }
 
@@ -259,7 +266,7 @@ class Fields extends Component
                     if (!$block->id || !$block->primaryOwnerId) {
                         $block->primaryOwnerId = $owner->id;
                     }
-                    $block->sortOrder = $sortOrder;
+                    $block->setSortOrder($sortOrder);
                     $elementsService->saveElement($block, false, true, $this->_hasSearchableBlockType($field, $block));
 
                     if (!$neoSettings->collapseAllBlocks) {
@@ -270,25 +277,25 @@ class Fields extends Component
                     if ($block->getIsDraft()) {
                         $canonicalBlockId = $block->getCanonicalId();
                         $draftsService->removeDraftData($block);
-                        Db::delete('{{%neoblocks_owners}}', [
-                            'blockId' => $canonicalBlockId,
+                        Db::delete(Table::ELEMENTS_OWNERS, [
+                            'elementId' => $canonicalBlockId,
                             'ownerId' => $owner->id,
                         ]);
                     }
-                } elseif ((int)$block->sortOrder !== $sortOrder) {
-                    // Just update its sortOrder
-                    $block->sortOrder = $sortOrder;
-                    Db::update('{{%neoblocks_owners}}', [
+                } elseif ((int)$block->getSortOrder() !== $sortOrder) {
+                    // Just update its sort order
+                    $block->setSortOrder($sortOrder);
+                    Db::update(Table::ELEMENTS_OWNERS, [
                         'sortOrder' => $sortOrder,
                     ], [
-                        'blockId' => $block->id,
+                        'elementId' => $block->id,
                         'ownerId' => $owner->id,
                     ], [], false);
 
                     $structureModified = true;
                 }
 
-                // check if block level has been changed
+                // Check if the block level has changed and we need to resave the block structure
                 if ((!$structureModified && $block->level !== (int)$block->oldLevel) || !$block->structureId || !$block->id) {
                     $structureModified = true;
                 }
@@ -333,7 +340,7 @@ class Fields extends Component
             }
 
             if (
-                $field->propagationMethod !== Field::PROPAGATION_METHOD_ALL &&
+                $field->propagationMethod !== PropagationMethod::All &&
                 ($owner->propagateAll || !empty($owner->newSiteIds))
             ) {
                 $ownerSiteIds = ArrayHelper::getColumn(ElementHelper::supportedSitesForElement($owner), 'siteId');
@@ -395,7 +402,7 @@ class Fields extends Component
                         } else {
                             // Duplicate the blocks, but **don't track** the duplications, so the edit page doesn’t think
                             // its blocks have been replaced by the other sites’ blocks
-                            $this->duplicateBlocks($field, $owner, $localizedOwner, trackDuplications: false);
+                            $this->duplicateBlocks($field, $owner, $localizedOwner, force: true);
                         }
 
                         // Make sure we don't duplicate blocks for any of the sites that were just propagated to
@@ -423,8 +430,7 @@ class Fields extends Component
      * @param ElementInterface $target The target element blocks should be duplicated to
      * @param bool $checkOtherSites Whether to duplicate blocks for the source element's other supported sites
      * @param bool $deleteOtherBlocks Whether to delete any blocks that belong to the element, which weren't included in the duplication
-     * @param bool $trackDuplications whether to keep track of the duplications from [[\craft\services\Elements::$duplicatedElementIds]]
-     * and [[\craft\services\Elements::$duplicatedElementSourceIds]]
+     * @param bool $force Whether to force duplication, even if it looks like only the block ownership was duplicated
      * @throws
      */
     public function duplicateBlocks(
@@ -433,7 +439,7 @@ class Fields extends Component
         ElementInterface $target,
         bool $checkOtherSites = false,
         bool $deleteOtherBlocks = true,
-        bool $trackDuplications = true,
+        bool $force = false,
     ): void {
         $elementsService = Craft::$app->getElements();
         $value = $source->getFieldValue($field->handle);
@@ -448,6 +454,7 @@ class Fields extends Component
         $transaction = Craft::$app->getDb()->beginTransaction();
 
         try {
+            $setCanonicalId = $target->getIsDerivative() && $target->getCanonical()->id !== $target->id;
             $newBlocks = [];
             $newBlocksTaskData = [];
 
@@ -458,12 +465,12 @@ class Fields extends Component
                 $collapsed = $block->getCollapsed();
                 $newBlock = null;
                 $newAttributes = [
-                    'canonicalId' => $target->getIsDerivative() ? $block->id : null,
-                    'primaryOwnerId' => $target->id,
+                    'canonicalId' => $setCanonicalId ? $block->id : null,
+                    'primaryOwner' => $target,
                     'owner' => $target,
                     'siteId' => $target->siteId,
-                    'structureId' => null,
                     'propagating' => false,
+                    'sortOrder' => $block->getSortOrder(),
                 ];
 
                 if ($target->updatingFromDerivative && $block->getIsDerivative()) {
@@ -473,21 +480,13 @@ class Fields extends Component
                         (!$source::trackChanges() || $source->isFieldModified($field->handle, true))
                     ) {
                         $newBlock = $elementsService->updateCanonicalElement($block, $newAttributes);
-                        $alreadyHasOwnerRow = (new Query())
-                            ->from(['{{%neoblocks_owners}}'])
-                            ->where([
-                                'blockId' => $newBlock->id,
-                                'ownerId' => $target->id,
-                            ])
-                            ->exists();
-
-                        if (!$alreadyHasOwnerRow) {
-                            Db::insert('{{%neoblocks_owners}}', [
-                                'blockId' => $newBlock->id,
-                                'ownerId' => $target->id,
-                                'sortOrder' => $newBlock->sortOrder,
-                            ]);
-                        }
+                        Db::upsert(Table::ELEMENTS_OWNERS, [
+                            'elementId' => $newBlock->id,
+                            'ownerId' => $target->id,
+                            'sortOrder' => $block->getSortOrder(),
+                        ], [
+                            'sortOrder' => $block->getSortOrder(),
+                        ], updateTimestamp: false);
                     } else {
                         $newBlock = $block->getCanonical();
 
@@ -497,12 +496,17 @@ class Fields extends Component
                     }
                 } elseif ($block->primaryOwnerId === $target->id && $source->id !== $target->id) {
                     // Only the block ownership was duplicated, so just update its sort order for the target element
-                    Db::update('{{%neoblocks_owners}}', [
-                        'sortOrder' => $block->sortOrder,
-                    ], ['blockId' => $block->id, 'ownerId' => $target->id], updateTimestamp: false);
+                    // (use upsert in case the row doesn’t exist though)
+                    Db::upsert(Table::ELEMENTS_OWNERS, [
+                        'elementId' => $block->id,
+                        'ownerId' => $target->id,
+                        'sortOrder' => $block->getSortOrder(),
+                    ], [
+                        'sortOrder' => $block->getSortOrder(),
+                    ], updateTimestamp: false);
                     $newBlock = $block;
                 } else {
-                    $newBlock = $elementsService->duplicateElement($block, $newAttributes, true, $trackDuplications);
+                    $newBlock = $elementsService->duplicateElement($block, $newAttributes);
                 }
 
                 $newBlockIds[] = $newBlock->id;
@@ -523,6 +527,7 @@ class Fields extends Component
                 ];
                 $newBlocks[] = $newBlock;
             }
+
             // Delete any blocks that shouldn't be there anymore
             if ($deleteOtherBlocks) {
                 $this->_deleteOtherBlocks($field, $target, $newBlockIds);
@@ -535,8 +540,9 @@ class Fields extends Component
             $transaction->rollBack();
             throw $e;
         }
+
         // Duplicate blocks for other sites as well?
-        if ($checkOtherSites && $field->propagationMethod !== Field::PROPAGATION_METHOD_ALL) {
+        if ($checkOtherSites && $field->propagationMethod !== PropagationMethod::All) {
             // Find the target's site IDs that *aren't* supported by this site's Neo blocks
             $targetSiteIds = ArrayHelper::getColumn(ElementHelper::supportedSitesForElement($target), 'siteId');
             $fieldSiteIds = $this->getSupportedSiteIds($field->propagationMethod, $target, $field->propagationKeyFormat);
@@ -608,20 +614,8 @@ class Fields extends Component
             throw new InvalidArgumentException('The target element must be a draft.');
         }
 
-        $blocksTable = '{{%neoblocks}}';
-        $ownersTable = '{{%neoblocks_owners}}';
-
-        // Duplicate into the owners table
-        Craft::$app->getDb()->createCommand(<<<SQL
-INSERT INTO $ownersTable ([[blockId]], [[ownerId]], [[sortOrder]]) 
-SELECT [[o.blockId]], '$draft->id', [[o.sortOrder]] 
-FROM $ownersTable AS [[o]]
-INNER JOIN $blocksTable AS [[b]] ON [[b.id]] = [[o.blockId]] AND [[b.primaryOwnerId]] = '$canonical->id' AND [[b.fieldId]] = '$field->id'
-WHERE [[o.ownerId]] = '$canonical->id'
-SQL
-        )->execute();
-
         // Save the block structures for the draft
+        // Its nested element ownership will be duplicated by Drafts::createDraft()
         foreach (ArrayHelper::getColumn(ElementHelper::supportedSitesForElement($draft), 'siteId') as $siteId) {
             $blocks = Block::find()
                 ->ownerId($canonical->id)
@@ -732,7 +726,7 @@ SQL
             $otherSites[$siteId] = $supportedSites;
         }
 
-        Db::batchInsert('{{%neoblocks_owners}}', ['blockId', 'ownerId', 'sortOrder'], $ownershipData);
+        Db::batchInsert(Table::ELEMENTS_OWNERS, ['elementId', 'ownerId', 'sortOrder'], $ownershipData);
 
         foreach ($jobData as $siteId => $data) {
             $queue->push(new SaveBlockStructures([
@@ -915,14 +909,14 @@ SQL
     /**
      * Returns the site IDs that are supported by Neo blocks for the given propagation method and owner element.
      *
-     * @param string $propagationMethod
+     * @param PropagationMethod $propagationMethod
      * @param ElementInterface $owner
      * @param string|null $propagationKeyFormat
      * @return int[]
      * @throws
      * @since 2.5.10
      */
-    public function getSupportedSiteIds(string $propagationMethod, ElementInterface $owner, ?string $propagationKeyFormat = null): array
+    public function getSupportedSiteIds(PropagationMethod $propagationMethod, ElementInterface $owner, ?string $propagationKeyFormat = null): array
     {
         /** @var Element $owner */
         /** @var Site[] $allSites */
@@ -930,7 +924,7 @@ SQL
         $ownerSiteIds = ArrayHelper::getColumn(ElementHelper::supportedSitesForElement($owner), 'siteId');
         $siteIds = [];
 
-        if ($propagationMethod === Field::PROPAGATION_METHOD_CUSTOM && $propagationKeyFormat !== null) {
+        if ($propagationMethod === PropagationMethod::Custom && $propagationKeyFormat !== null) {
             $view = Craft::$app->getView();
             $elementsService = Craft::$app->getElements();
             $propagationKey = $view->renderObjectTemplate($propagationKeyFormat, $owner);
@@ -938,16 +932,16 @@ SQL
 
         foreach ($ownerSiteIds as $siteId) {
             switch ($propagationMethod) {
-                case Field::PROPAGATION_METHOD_NONE:
+                case PropagationMethod::None:
                     $include = $siteId == $owner->siteId;
                     break;
-                case Field::PROPAGATION_METHOD_SITE_GROUP:
+                case PropagationMethod::SiteGroup:
                     $include = $allSites[$siteId]->groupId == $allSites[$owner->siteId]->groupId;
                     break;
-                case Field::PROPAGATION_METHOD_LANGUAGE:
+                case PropagationMethod::Language:
                     $include = $allSites[$siteId]->language == $allSites[$owner->siteId]->language;
                     break;
-                case Field::PROPAGATION_METHOD_CUSTOM:
+                case PropagationMethod::Custom:
                     if (!isset($propagationKey)) {
                         $include = true;
                     } else {
@@ -1030,7 +1024,7 @@ SQL
         $supportedSites = $this->getSupportedSiteIds($field->propagationMethod, $owner, $field->propagationKeyFormat);
         $supportedSitesCount = count($supportedSites);
 
-        if ($supportedSitesCount > 1 && $field->propagationMethod !== Field::PROPAGATION_METHOD_NONE) {
+        if ($supportedSitesCount > 1 && $field->propagationMethod !== PropagationMethod::None) {
             foreach ($supportedSites as $site) {
                 $this->_deleteNeoBlocksAndStructures($field, $owner, $except, $site);
             }
@@ -1077,8 +1071,8 @@ SQL
         }
 
         if ($deleteOwnership) {
-            Db::delete('{{%neoblocks_owners}}', [
-                'blockId' => $deleteOwnership,
+            Db::delete(Table::ELEMENTS_OWNERS, [
+                'elementId' => $deleteOwnership,
                 'ownerId' => $owner->id,
             ]);
         }

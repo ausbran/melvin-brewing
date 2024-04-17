@@ -1,27 +1,56 @@
 columnSuffix: lcuipune
-contentColumnType: text
-fieldGroup: 2123b6aa-6742-448c-95ac-70a91f1dfcef # General Fields
+contentColumnType: string
 handle: headline
 instructions: 'Write a title for this.'
 name: Headline
 searchable: false
 settings:
-  availableTransforms: '*'
-  availableVolumes: ''
-  columnType: text
-  configSelectionMode: choose
-  defaultTransform: ''
-  manualConfig: ''
-  purifierConfig: null
-  purifyHtml: true
-  redactorConfig: null
-  removeEmptyTags: true
-  removeInlineStyles: false
-  removeNbsp: false
-  showHtmlButtonForNonAdmins: true
-  showUnpermittedFiles: false
-  showUnpermittedVolumes: false
-  uiMode: normal
+  errorMessage: 'Unable to find component class ''craft\redactor\Field''.'
+  expectedType: craft\redactor\Field
+  settings:
+    __assoc__:
+      0:
+        - availableTransforms
+        - '*'
+      1:
+        - availableVolumes
+        - ''
+      2:
+        - columnType
+        - text
+      3:
+        - configSelectionMode
+        - choose
+      4:
+        - defaultTransform
+        - ''
+      5:
+        - manualConfig
+        - ''
+      7:
+        - purifyHtml
+        - true
+      9:
+        - removeEmptyTags
+        - true
+      10:
+        - removeInlineStyles
+        - false
+      11:
+        - removeNbsp
+        - false
+      12:
+        - showHtmlButtonForNonAdmins
+        - true
+      13:
+        - showUnpermittedFiles
+        - false
+      14:
+        - showUnpermittedVolumes
+        - false
+      15:
+        - uiMode
+        - normal
 translationKeyFormat: null
 translationMethod: none
-type: craft\redactor\Field
+type: craft\fields\MissingField

@@ -8,6 +8,18 @@
     { label: 'Navigations' | t('navigation'), url: url('navigation/navs') },
 ] %}
 
+{% if craft.app.getIsMultiSite() %}
+    {% set crumbs = crumbs | unshift({
+        id: 'site-crumb',
+        icon: 'world',
+        label: requestedSite.name | t('site'),
+        menu: {
+            items: siteMenuItems(null, requestedSite),
+            label: 'Select site' | t('site')
+        },
+    }) %}
+{% endif %}
+
 {% set title = nav.name %}
 {% set elementType = 'verbb\\navigation\\elements\\Node' %}
 {% set elementInstance = craft.app.elements.createElement(elementType) %}
@@ -15,6 +27,18 @@
 
 {# Enforce a single source #}
 {% set sources = sources | filter(n => n.key == 'nav:' ~ nav.uid) %}
+
+{% block pageTitle %}
+    <h1 class="screen-title" title="{{ title }}">{{ title }}</h1>
+
+    <div id="toolbar" class="flex">
+        {% include '_elements/toolbar' with {
+            showSiteMenu: false,
+        } %}
+    </div>
+
+    <div id="actions-container" class="flex"></div>
+{% endblock %}
 
 {% block actionButton %}
     {% if editable and currentUser.can('navigation-editNav:' ~ nav.uid) %}
@@ -24,20 +48,6 @@
             </a>
         </div>
     {% endif %}
-{% endblock %}
-
-{% block contextMenu %}
-    <div id="toolbar" class="flex">
-        {% include '_elements/toolbar' with {
-            showSiteMenu: true,
-        } %}
-    </div>
-
-    {# Required to prevent element index errors #}
-    <div class="main"></div>
-
-    <div id="actions-container" class="flex"></div>
-
 {% endblock %}
 
 {% block details %}
